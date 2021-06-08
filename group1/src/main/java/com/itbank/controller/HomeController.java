@@ -12,4 +12,7 @@ public class HomeController {
 	@GetMapping("/test")
 	public void test() {}
 	
+	// 컨트롤러 수정 테스트 
+	// 06-08 bcg 14:42
+	
 }
