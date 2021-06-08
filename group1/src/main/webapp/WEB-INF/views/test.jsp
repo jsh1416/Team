@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${cpath }/resources/bootswatch.css">
-    
+<!--     		KSJ 0608 1453 -->
 </head>
 <body>
 
