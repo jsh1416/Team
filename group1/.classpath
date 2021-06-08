@@ -35,5 +35,25 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/wkdtj/.m2/repository/org/springframework/spring-web/4.3.30.RELEASE/spring-web-4.3.30.RELEASE.jar" sourcepath="C:/Users/wkdtj/.m2/repository/org/springframework/spring-web/4.3.30.RELEASE/spring-web-4.3.30.RELEASE-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.archivename" value="spring-web-4.3.30.RELEASE.jar"/>
+			<attribute name="maven.groupId" value="org.springframework"/>
+			<attribute name="maven.artifactId" value="spring-web"/>
+			<attribute name="maven.version" value="4.3.30.RELEASE"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/wkdtj/.m2/repository/org/springframework/spring-context/4.3.30.RELEASE/spring-context-4.3.30.RELEASE.jar" sourcepath="C:/Users/wkdtj/.m2/repository/org/springframework/spring-context/4.3.30.RELEASE/spring-context-4.3.30.RELEASE-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.archivename" value="spring-context-4.3.30.RELEASE.jar"/>
+			<attribute name="maven.groupId" value="org.springframework"/>
+			<attribute name="maven.artifactId" value="spring-context"/>
+			<attribute name="maven.version" value="4.3.30.RELEASE"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
