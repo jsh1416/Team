@@ -12,7 +12,7 @@ public class HomeController {
 	@GetMapping("/test")
 	public void test() {}
 	
-	// ÄÁÆ®·Ñ·¯ ¼öÁ¤ Å×½ºÆ® 
+	// ë´‰ì°¬ê·  ì¸ì½”ë”© ìˆ˜ì • í…ŒìŠ¤íŠ¸
 	// 06-08 bcg 14:42
 	
 }
