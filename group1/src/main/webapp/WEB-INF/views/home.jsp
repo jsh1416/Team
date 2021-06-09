@@ -34,12 +34,17 @@
 <body>
 
 	<header>
-		<div class="col-lg-8 col-md-7 col-sm-6">
+		<div class="col-lg-8 col-md-7 col-sm-6" style="display: inline-block;">
             <span style="display: inline-block; width: 45px; height: 75px;"><img src="${cpath }/resources/images/icons/premier-league-2-logo.png" style="width: 45px; height: 75px;"></span>
             <span style="display: inline-block;"><h1>EPL Fan Site</h1></span>
             <p class="lead">The medium is the message</p>
          </div>
-	
+		
+			<!-- 06.09 봉찬균 회원 관련 메뉴 -->	        
+         	<div style="float: right; display: inline-block; margin-right: 10px;">
+            	<span><a href="${cpath }/member/login">login</a></span>
+            	<span><a href="${cpath }/member/join">join</a></span>
+            </div>
 		
 	
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">

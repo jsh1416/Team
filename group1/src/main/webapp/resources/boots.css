@@ -218,12 +218,13 @@ sup {
 }
 
 a {
-  color: #4582ec;
-  text-decoration: underline;
+ <!-- 06.09  변경 -봉찬균 -->	
+  color: #37003C;
 }
 
 a:hover {
-  color: #3768bd;
+   <!-- 06.09 색깔 변경 -봉찬균 -->	
+  color: #37003C;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
