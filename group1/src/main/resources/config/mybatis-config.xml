@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC 
+			"-//mybatis.org//DTD Config 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false"/>
+		<setting name="useGeneratedKeys" value="false"/>
+		<setting name="mapUnderscoreToCamelCase" value="false"/>
+		<!-- student-id를 studentId와 같은 형식으로 바꾸어서 처리하는 옵션 -->
+	</settings>
+	
+	
+	<typeAliases>
+		<!-- 06.10 typeAlias 추가 -봉찬균 -->
+		<typeAlias type="com.itbank.member.MemberDTO" alias="member"/>
+	</typeAliases>
+	
+</configuration>
