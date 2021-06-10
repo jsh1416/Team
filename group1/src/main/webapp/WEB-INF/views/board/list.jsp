@@ -13,9 +13,6 @@
 									<th class="cell100 column1">최신</th>
 									<th class="cell100 column2">조회수</th>
 									<th class="cell100 column3">추천수</th>
-<%-- 									<th class="cell100 column4"><a href="${cpath}/board/write">글쓰기</a></th> --%>
-<%-- 									<th class="cell100 column4"><a href="${cpath}/board/write">글쓰기</a></th> --%>
-<!-- 									<th class="cell100 column5">Spots</th> -->
 								</tr>
 							</thead>
 						</table>
@@ -27,18 +24,15 @@
 							<c:forEach var="dto" items="${list }">
 								<tr class="row100 body">
 									<td class="cell100 column1"><a href="${cpath }/board/read/${dto.idxBO}">${dto.title}</a></td>
-									<td class="cell100 column2">${dto.viewCount}</td>
-									<td class="cell100 column3">${dto.likeCount}</td>
-									<td colspan="2 "class="cell100 column4"></td>
-<!-- 									<td class="cell100 column4">Aaron Chapman</td> -->
-<!-- 									<td class="cell100 column5">10</td> -->
+									<td class="cell100 column2">${ dto.viewCount}</td>
+									<td class="cell100 column3">${ dto.likeCount}</td>
 								</tr>
-								
-								<tr class="row100 body">
-								<td class="cell100 column"><a href="${cpath}/board/write">글쓰기</a></td>
-								</tr>
-								</c:forEach>
+							</c:forEach>
 						</table>
+						
+<%-- 						 <c:if test="${sessionScope.sessionID!=null}">  --%>
+								<a style=  "float:right;" href="${cpath}/board/write">글쓰기</a>
+<%-- 						 </c:if>		 --%>
 					</div>
 				</div>
 			</div>
