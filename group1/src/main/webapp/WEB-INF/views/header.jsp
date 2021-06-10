@@ -101,12 +101,14 @@
 		        </li>
 		        
 		        <li class="nav-item">
-		          <a class="MC nav-link">MC</a>
+		          <a class="CHE nav-link">
+					<img src="${cpath }/resources/images/logo/YYkhVbB.png" >
+				  </a>
 		        </li>
 		        
 		        <li class="nav-item">
 		          <a class="CHE nav-link">
-					<img src="${cpath }/resources/images/logo/Chelsea.png" >
+					<img src="${cpath }/resources/images/logo/Chelsea_.png" >
 				  </a>
 		        </li>
 		        
