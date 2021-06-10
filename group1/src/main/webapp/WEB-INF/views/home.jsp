@@ -9,9 +9,7 @@
 	<div class="LIV team hidden">	
 		<div id="fullpage">
         	<div class="section">
-        		<div class="limiter">
-					<div class="container-table100">
-						<div class="wrap-table100">
+        		
 			            	<div class="table100 ver2 m-b-110">
 								<div class="table100-head">
 									<table>
@@ -210,9 +208,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-       	 	</div>
+				
        	 	
         	<div class="section">
             	section 2
