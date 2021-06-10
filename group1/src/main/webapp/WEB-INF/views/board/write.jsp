@@ -1,5 +1,3 @@
-<!-- header.jsp file 생성  06.09 bong-->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,17 +9,6 @@
 	<title>
 		 EPL Fan Site
 	</title>
-	
-	<!-- 0609 jsh -->
-	<style>	
-		a {
-			text-decoration: none;
-			cursor: pointer;
-		}
-		.hidden {
-			display: none;
-		}	
-	</style>
 	
 	
 	<meta charset="UTF-8">
@@ -41,28 +28,17 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" href="${cpath }/resources/css/main.css">
 	<link rel="stylesheet" href="${cpath }/resources/css/util.css">
-<!--=============================================섹션 스크롤 추가 0609 jsh ==================================================-->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css" rel="stylesheet"> 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
-<script src="${cpath }/resources/js/section.js"></script>
+<!--===============================================================================================-->
 	
 </head>
 <body>
 
 	<header>
-		<div class="col-lg-8 col-md-7 col-sm-6" style="display: inline-block;">
+		<div class="col-lg-8 col-md-7 col-sm-6">
             <span style="display: inline-block; width: 45px; height: 75px;"><img src="${cpath }/resources/images/icons/premier-league-2-logo.png" style="width: 45px; height: 75px;"></span>
-            <span style="display: inline-block;"><h1><a href="${cpath}" style="color: #3A0640;">EPL Fan Site</a></h1></span>
-<!--             <p class="lead">The medium is the message</p> -->
-            
+            <span style="display: inline-block;"><h1>EPL Fan Site</h1></span>
+            <p class="lead">The medium is the message</p>
          </div>
-         
- 			<!-- 06.09 봉찬균 회원 관련 메뉴 -->	        
-         <div style="float: right; display: inline-block; margin-right: 10px;">
-            	<span><a href="${cpath }/member/login" style="color: #3A0640;"><img src="${cpath }/resources/images/member/login.png"></a></span>
-<%--             	<span><a href="${cpath }/member/join" style="color: #3A0640;">join</a></span> --%>
-            </div>
 	
 		
 	
@@ -76,36 +52,31 @@
 		    <div class="collapse navbar-collapse" id="navbarColor03">
 		      <ul class="navbar-nav me-auto" style="margin: auto;">
 		        <li class="nav-item">
-		          <a class="LIV nav-link active">Liverpool			<!-- 팀이름 클래스로 삽입  -->
+		          <a class="nav-link active" href="#">Liverpool
 		            <span class="visually-hidden">(current)</span>
 		          </a>
 		        </li>
 		        
 		        <li class="nav-item">
-		          <a class="MU nav-link">MU</a>
+		          <a class="nav-link" href="#">MU</a>
 		        </li>
 		        
 		        <li class="nav-item">
-		          <a class="MC nav-link">MC</a>
+		          <a class="nav-link" href="#">MC</a>
 		        </li>
 		        
 		        <li class="nav-item">
-		          <a class="CHE nav-link">
+		          <a class="nav-link" href="#">
 					<img src="${cpath }/resources/images/logo/Chelsea.png" >
 				  </a>
 		        </li>
 		        
 		        <li class="nav-item">
-		          <a class="ARS nav-link">Arsenal</a>
+		          <a class="nav-link" href="#">Arsenal</a>
 		        </li>
 		        
 		        <li class="nav-item">
-		          <a class="TOT nav-link">Tottenham</a>
-		        </li>
-		        
-		        <!-- 0610ksj test ->
-		        <li class="nav-item">
-		          <a class="nav-link" href="${cpath }/board/">list</a>
+		          <a class="nav-link" href="#">Tottenham</a>
 		        </li>
 		        
 <!-- 		        <li class="nav-item dropdown"> -->
@@ -126,5 +97,60 @@
 		  </div>
 		</nav>
 	</header>
-	
 
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100 ver1 m-b-110">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr>
+									<th>글제목<input type="text" name="title"  placeholder="제목을 입력하세요" required></th>
+									
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+			
+					<div class="table100-body js-pscroll">
+								<textarea style="resize: none;" rows="5" cols="164"   name="content"  placeholder="내용을 입력하세요" required> </textarea>	
+					
+					</div>
+					
+					<div style= padding-bottom: 20px; margin-bottom: 20px;">
+					
+					<td>첨부이미지</td>
+					<input type="file" name="file">
+					
+					</div>
+					<div style=  "float:right;">
+					<input type="submit" value="작성하기">
+					</div>
+						
+<!--===============================================================================================-->	
+	<script src="${cpath }/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${cpath }/resources/vendor/bootstrap/js/popper.js"></script>
+	<script src="${cpath }/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${cpath }/resources/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${cpath }/resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+			
+		
+	</script>
+<!--===============================================================================================-->
+	<script src="${cpath }/resources/js/main.js"></script>
+
+</body>
+</html>
