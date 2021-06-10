@@ -120,10 +120,12 @@
 		          <a class="TOT nav-link">Tottenham</a>
 		        </li>
 		        
-		        <!-- 0610ksj test ->
+		        <!-- 0610ksj test -->
 		        <li class="nav-item">
 		          <a class="nav-link" href="${cpath }/board/">list</a>
 		        </li>
+		        
+		        
 		        
 <!-- 		        <li class="nav-item dropdown"> -->
 <!-- 		          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a> -->
