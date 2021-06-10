@@ -58,10 +58,25 @@
             
          </div>
          
- 			<!-- 06.09 봉찬균 회원 관련 메뉴 -->	        
-         <div style="float: right; display: inline-block; margin-right: 10px;">
-            	<span><a href="${cpath }/member/login" style="color: #3A0640;"><img src="${cpath }/resources/images/member/login.png"></a></span>
-<%--             	<span><a href="${cpath }/member/join" style="color: #3A0640;">join</a></span> --%>
+ 				<!-- 06.09 봉찬균 회원 관련 메뉴 -->	        
+         <div style="float: right; display: inline-block; margin-right: 15px; 
+         	vertical-align:middle; margin-top: 10px;">
+            	
+            	<c:if test="${empty login}">
+	            	<span><a href="${cpath }/member/login" style="color: #3A0640;">
+	            		<img src="${cpath }/resources/images/member/login.png">
+	            	</a></span>
+            	</c:if>
+            	
+            	<c:if test="${!empty login}">
+	            	<div>
+	            		<img src="${cpath }/resources/images/logo/${login.club}.png">
+	            		${login.nickName }
+	            		<div style="margin-top: 15px; text-align: right;">
+	            			<a href="${cpath }/member/logout">로그아웃</a>
+	            		</div>
+	            	</div>
+            	</c:if>
             </div>
 	
 		
