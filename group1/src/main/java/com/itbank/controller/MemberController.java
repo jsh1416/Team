@@ -1,6 +1,7 @@
 package com.itbank.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.member.MemberDTO;
@@ -44,7 +46,8 @@ public class MemberController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.invalidate();
+		/* 06.11 봉찬균 로그아웃 방식 수정 */
+		session.removeAttribute("login");
 		return "redirect:/";
 	}
 	
@@ -68,5 +71,16 @@ public class MemberController {
 		return mav;
 	}
 	
+	@RequestMapping(value="checkEmail/", produces="application/text;charset=utf8")
+	@ResponseBody
+	public String checkEmail(HttpServletRequest request) {
+		return memberSerivce.emailcheck(request);
+	}
+	
+	@RequestMapping(value="checkId/", produces="application/text;charset=utf8")
+	@ResponseBody
+	public String checkId(HttpServletRequest request) {
+		return memberSerivce.checkId(request);
+	}
 	
 }

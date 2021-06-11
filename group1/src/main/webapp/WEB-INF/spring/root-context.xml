@@ -22,7 +22,7 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="user" value="c##itbank" />
+		<property name="user" value="c##itbank2" />
 		<property name="password" value="it" />
 		<property name="maxPoolSize" value="100" />
 		<property name="maxIdleTime" value="600" />

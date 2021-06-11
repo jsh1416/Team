@@ -1,48 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../header.jsp" %>
+<%@ page import="java.io.*" %>
+
+
+<head>
+	<%@ include file="../header.jsp" %>
+	<style type="text/css">
+		input.reborder { border: 1px solid red }		/* 입력조건에 따라 테두리 색 바꾸는 클래스  / submit 할 시 사용됨 */
+	</style>
+	
+	<!-- 06.11 봉찬균  회원가입 axios 처리 관련을 위한 scripts -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript">
+		cpath = '${cpath}';		// js파일에 들어갈 cpath경로 선언
+	</script>
+	<script type="text/javascript" src="${cpath }/resources/js/joinFunction.js"></script>
+		
+</head>
+
+
+
+
 <!-- 06.10 봉찬균 join 작업 -->
 
-<form method="POST">
+<form method="POST" id="joinForm">
   <fieldset>
     <legend>회원가입</legend>
     
     <div class="form-group">
       <label for="inputName" class="form-label mt-4">Name</label>
-      <input type="text" class="form-control" id="inputName" placeholder="Input your name" name="name" autofocus>
+      <input type="text" class="form-control" id="inputName" placeholder="Input your name" name="name" autofocus required>
     </div>
     
     <div class="form-group">
-      <label for="exampleInputID" class="form-label mt-4">ID</label>
-      <input type="text" class="form-control" id="exampleInputID" placeholder="Input ID" name="id">
+      <label for="inputID" class="form-label mt-4">ID</label>
+      <div>
+      	<input type="text" class="form-control" id="inputId" placeholder="inputID" name="id" required style="width: 50%;">
+      	<p class="google-font checkmsg" id="idMsg"></p>
+      </div>
+	  <button type="button" class="btn-EPL btn btn-primary google-font" onclick="checkId()">아이디 중복확인</button>
     </div>
     
     <div class="form-group">
       <label for="inputNickName" class="form-label mt-4">Nick Name</label>
-      <input type="text" class="form-control" id="inputNickName" placeholder="Input nick-name" name="nickName">
+      <input type="text" class="form-control" id="inputNickName" placeholder="Input nick-name" name="nickName" required>
     </div>
     
     
     <div class="form-group">
-      <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <label for="inputEmail" class="form-label mt-4">Email address</label>
+      <input type="email" class="form-control" id="inputEmail" 
+       	aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
+      <p class="google-font checkmsg" id="emailMsg"></p>
+      <button type="button" class="btn-EPL btn btn-primary google-font" onclick="checkEmail()">이메일 확인</button>
     </div>
     
     <div class="form-group">
-      <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
-      <input type="password" name="pw" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <label for="inputPassword" class="form-label mt-4">Password</label>
+      <input type="password" name="pw" class="form-control" id="inputPassword" placeholder="Password" required>
+      <p id="pwMsg"></p>
     </div>
     
     <div class="form-group">
       <label for="checkPassword" class="form-label mt-4">Check Password</label>
-      <input type="password" class="form-control" id="checkPassword" placeholder="Check Password">
+      <input type="password" class="form-control" id="checkPassword" placeholder="Check Password" required>
+      <p id="cfpwMsg"></p>
     </div>
     
     <div class="form-group">
-      <label for="selectClub" class="form-label mt-4">Team</label>
+      <label for="selectClub" class="form-label mt-4" >Team</label>
 <!--       club in ('Liverpool','Manchester United','Manchester City','Arsenal','Chelsea') -->
-      <select class="form-select" id="selectClub" name="club">
+      <select class="form-select" id="selectClub" name="club" required>
         <option value="Liverpool">Liverpool</option>
         <option value="Manchester United">Manchester United</option>
         <option value="Manchester City">Manchester City</option>
@@ -52,85 +80,12 @@
     </div>
     
     
-    
-<!--     <div class="form-group"> -->
-<!--       <label for="exampleSelect2" class="form-label mt-4">Example multiple select</label> -->
-<!--       <select multiple="" class="form-select" id="exampleSelect2"> -->
-<!--         <option>1</option> -->
-<!--         <option>2</option> -->
-<!--         <option>3</option> -->
-<!--         <option>4</option> -->
-<!--         <option>5</option> -->
-<!--       </select> -->
-<!--     </div> -->
-    
-<!--     <div class="form-group"> -->
-<!--       <label for="exampleTextarea" class="form-label mt-4">Example textarea</label> -->
-<!--       <textarea class="form-control" id="exampleTextarea" rows="3"></textarea> -->
-<!--     </div> -->
-<!--     <div class="form-group"> -->
-<!--       <label for="formFile" class="form-label mt-4">Default file input example</label> -->
-<!--       <input class="form-control" type="file" id="formFile"> -->
-<!--     </div> -->
-<!--     <fieldset class="form-group"> -->
-<!--       <legend class="mt-4">Radio buttons</legend> -->
-<!--       <div class="form-check"> -->
-<!--         <label class="form-check-label"> -->
-<!--           <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked=""> -->
-<!--           Option one is this and that—be sure to include why it's great -->
-<!--         </label> -->
-<!--       </div> -->
-<!--       <div class="form-check"> -->
-<!--         <label class="form-check-label"> -->
-<!--           <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2"> -->
-<!--           Option two can be something else and selecting it will deselect option one -->
-<!--         </label> -->
-<!--       </div> -->
-<!--       <div class="form-check disabled"> -->
-<!--         <label class="form-check-label"> -->
-<!--           <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled=""> -->
-<!--           Option three is disabled -->
-<!--         </label> -->
-<!--       </div> -->
-<!--     </fieldset> -->
-<!--     <fieldset class="form-group"> -->
-<!--       <legend class="mt-4">Checkboxes</legend> -->
-<!--       <div class="form-check"> -->
-<!--         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> -->
-<!--         <label class="form-check-label" for="flexCheckDefault"> -->
-<!--           Default checkbox -->
-<!--         </label> -->
-<!--       </div> -->
-<!--       <div class="form-check"> -->
-<!--         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked=""> -->
-<!--         <label class="form-check-label" for="flexCheckChecked"> -->
-<!--           Checked checkbox -->
-<!--         </label> -->
-<!--       </div> -->
-<!--     </fieldset> -->
-<!--     <fieldset> -->
-<!--       <legend class="mt-4">Switches</legend> -->
-<!--       <div class="form-check form-switch"> -->
-<!--         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"> -->
-<!--         <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label> -->
-<!--       </div> -->
-<!--       <div class="form-check form-switch"> -->
-<!--         <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked=""> -->
-<!--         <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> -->
-<!--       </div> -->
-<!--     </fieldset> -->
-<!--     <fieldset class="form-group"> -->
-<!--       <legend class="mt-4">Ranges</legend> -->
-<!--         <label for="customRange1" class="form-label">Example range</label> -->
-<!--         <input type="range" class="form-range" id="customRange1"> -->
-<!--         <label for="disabledRange" class="form-label">Disabled range</label> -->
-<!--         <input type="range" class="form-range" id="disabledRange" disabled=""> -->
-<!--         <label for="customRange3" class="form-label">Example range</label> -->
-<!--         <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3"> -->
-<!--     </fieldset> -->
-    <button type="submit" class="btn btn-primary">Join</button>
+
+    <button type="button" class="btn btn-primary" onclick="join()">Join</button>
   </fieldset>
 </form>
+
+<script type="text/javascript" src="${cpath }/resources/js/joinEvent.js"></script>
 
 </body>
 </html>
