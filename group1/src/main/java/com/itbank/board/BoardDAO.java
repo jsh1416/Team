@@ -13,16 +13,21 @@ public interface BoardDAO {
 	@Select("select * from EPLBoard where idxBO = #{idxBO}") //READ 글 클릭시 읽기모드
 	BoardDTO select(int idxBO);
 
-	@Insert("insert into EPLBoard values "
+	@Insert("insert into EPLBoard (idxBo, title, writer,content ,uploadFile )"
+			+ "values "
 			+ "(board_seq.nextval, "
 			+ "#{title}, "
 			+ "#{writer}, "
-			+ "#{viewCount},"
-			+ "#{likeCount},"
 			+ "#{content},"
-			+ "to_char(sysdate, 'yyyy-MM-dd'))"
+			+ "${uploadFile})"
 			)
-	int insert(BoardDTO dto);
+	int insert(BoardDTO dto)
+	
+//	int withoutFileInsert() 업로드파일이 없을경우
+
+	@Select("select max(idxBo) from EPLBoard") 
+	int selectMaxIdxBo();
+
 
 	
 }

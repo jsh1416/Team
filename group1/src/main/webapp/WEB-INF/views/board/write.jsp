@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@include file="../header.jsp" %>
-
+<!-- 611 김선진 -->
 	<div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
@@ -14,9 +14,8 @@
 								<tr>
 									<th>글제목</th>
 									<th><input type="text" name="title"  placeholder="제목을 입력하세요" required></th>
-									<th>작성자</th>
-									<th><input type="text" name="writer"  placeholder="작성자" required></th>
-<%--             						<th>${sessionScope.sessionID}</th> --%>
+<%-- 									<th>작성자:${login.nickName}</th> --%>
+									<th><input type="text" name="writer"  value="${login.nickName }" readonly required></th>
 								</tr>
 							</thead>
 						</table>

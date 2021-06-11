@@ -23,6 +23,7 @@
 							<tbody>
 							<c:forEach var="dto" items="${list }">
 								<tr class="row100 body">
+<!-- 																	611 리드페이지 이동 -->
 									<td class="cell100 column1"><a href="${cpath }/board/read/${dto.idxBO}">${dto.title}</a></td>
 									<td class="cell100 column2">${ dto.viewCount}</td>
 									<td class="cell100 column3">${ dto.likeCount}</td>
@@ -31,6 +32,7 @@
 						</table>
 						
 <%-- 						 <c:if test="${sessionScope.sessionID!=null}">  --%>
+<!-- 									글쓰기 이동 -->
 								<a style=  "float:right;" href="${cpath}/board/write">글쓰기</a>
 <%-- 						 </c:if>		 --%>
 					</div>

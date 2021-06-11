@@ -26,8 +26,8 @@
 							</tr>
 
 							<tr>
-								<td>첨부이미지</td>
-								<%-- <td><img src="${cpath }/upload/${dto.uploadFile}" width="200px"></td> --%>
+<!-- 								<td>첨부이미지</td> -->
+								<td><img src="${cpath }/uploadPath/${dto.uploadFile}" width="200px"></td>
 							</tr>
 					</table>
 				</div>

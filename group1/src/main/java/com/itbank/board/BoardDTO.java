@@ -8,6 +8,8 @@ public class BoardDTO {
 	private MultipartFile file;
 	
 	
+	
+	
 	public MultipartFile getFile() {
 		return file;
 	}

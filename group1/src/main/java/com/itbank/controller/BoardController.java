@@ -2,6 +2,8 @@ package com.itbank.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,12 +39,29 @@ public class BoardController {
 	
 	@GetMapping("/write")
 	public void write() {
-		
+		System.out.println("write GET");
 	}
 	
 	@PostMapping("/write")
-	public String write(BoardDTO dto) {
+	public String write(BoardDTO dto) {//HttpSession session 
+//		String writer = (String)session.getAttribute("nickName");
+//		dto.setWriter(writer);
+		System.out.println("write Post");
+		
+		dto.toString();
+		
+		System.out.println("writer : " + dto.getWriter());
+		
 		int row = bs.insert(dto);
-		return "redirect:/board/";
+		int idxBo = bs.selectMaxIdxBo();
+		
+		
+		if(row==1) {
+			return "redirect:/board/read/" + idxBo;
+		}else {
+			return "redirect:/board/";
+		
+		}
+		
 	}
 }
