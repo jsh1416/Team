@@ -14,13 +14,39 @@
 	
 	<!-- 0609 jsh -->
 	<style>	
-		a {
+			a {
 			text-decoration: none;
 			cursor: pointer;
+			/* 06.11 봉찬균 a tag color 변경 */
+			color: #3A0640;
+			font-size: 13pt;
 		}
 		.hidden {
 			display: none;
 		}	
+		
+		<!-- 06.11 봉찬균 한글폰트-->
+		@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR&display=swap');
+
+		
+		.google-font{
+/* 			font-family: 'Black Han Sans', sans-serif; */
+			font-family: 'Noto Sans KR', sans-serif;
+		}
+		
+		.checkmsg{
+			font-family: cursive;
+		}
+		
+		/* 6.11 봉찬균 */
+		/* 입력조건에 따라 테두리 색 바꾸는 클래스  / join에서 사용*/
+		input.reborder { border: 1px solid red }		
+		
+		.btn-EPL{
+			background-color: #3A066B !important;
+			border-color: #37003C !important;
+		}
+		
 	</style>
 	
 	
@@ -53,7 +79,7 @@
 	<header>
 		<div class="col-lg-8 col-md-7 col-sm-6" style="display: inline-block;">
             <span style="display: inline-block; width: 45px; height: 75px;"><img src="${cpath }/resources/images/icons/premier-league-2-logo.png" style="width: 45px; height: 75px;"></span>
-            <span style="display: inline-block;"><h1><a href="${cpath}" style="color: #3A0640;">EPL Fan Site</a></h1></span>
+            <span style="display: inline-block;"><h1><a href="${cpath}" style="color: #3A0640; font-size: 22pt;">EPL Fan Site</a></h1></span>
 <!--             <p class="lead">The medium is the message</p> -->
             
          </div>

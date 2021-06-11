@@ -11,5 +11,11 @@ public interface MemberDAO {
 
 	int join(MemberDTO dto);
 	
+	@Select("select email from EPLmember where email = #{email}")
+	String emailcheck(String email);
+
+	@Select("select email from EPLmember where id = #{id}")
+	String checkId(String id);
+
 	
 }
