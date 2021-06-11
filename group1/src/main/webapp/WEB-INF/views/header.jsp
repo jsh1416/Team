@@ -68,12 +68,13 @@
 	            	</a></span>
             	</c:if>
             	
+            	<!-- 06.10 11:34 봉찬균 -->
             	<c:if test="${!empty login}">
 	            	<div>
 	            		<img src="${cpath }/resources/images/logo/${login.club}.png">
 	            		${login.nickName }
-	            		<div style="margin-top: 15px; text-align: right;">
-	            			<a href="${cpath }/member/logout">로그아웃</a>
+	            		<div style="margin-top: 15px; text-align: right; display: inline-block; margin-left: 30px;">
+	            			<a href="${cpath }/member/logout" style="color: #E94235; font-weight: bold;">Logout</a>
 	            		</div>
 	            	</div>
             	</c:if>
