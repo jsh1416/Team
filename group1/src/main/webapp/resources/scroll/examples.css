@@ -1,0 +1,62 @@
+/* @CHARSET "ISO-8859-1";
+Reset CSS
+ * ---------------------------------------
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form,
+	fieldset, input, textarea, p, blockquote, th, td {
+	padding: 0;
+	margin: 0;
+}
+
+main {
+	text-align: center;
+	width: 80%;
+}
+
+a {
+	cursor: pointer;
+	text-decoration: none;
+}
+
+
+Custom CSS
+ * ---------------------------------------
+.hidden {
+	display: none;
+}
+
+header {
+	position: fixed;
+	height: 80px;
+	display: block;
+	width: 100%;
+	background-color: white;
+	z-index: 9;
+	text-align: center;
+	padding: 0 0 0 0;
+	top: 0px;
+
+}
+
+footer {
+	position: fixed;
+	height: 45px;
+	display: block;
+	width: 100%;
+	background: #333;
+	z-index: 9;
+	text-align: center;
+	color: #f2f2f2;
+	padding: 0 0 0 0;
+	bottom: 0px;
+}
+
+body {
+	font-family: arial, helvetica;
+	color: #333;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+
+.section {
+	text-align: center;
+} */

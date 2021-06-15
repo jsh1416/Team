@@ -21,7 +21,7 @@ public interface BoardDAO {
 			+ "#{content},"
 			+ "${uploadFile})"
 			)
-	int insert(BoardDTO dto)
+	int insert(BoardDTO dto);
 	
 //	int withoutFileInsert() 업로드파일이 없을경우
 
