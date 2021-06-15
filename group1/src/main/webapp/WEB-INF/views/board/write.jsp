@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@include file="../header.jsp" %>
+ <% 	request.setCharacterEncoding("UTF-8"); %>
 <!-- 611 김선진 -->
 	<div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
 				<div class="table100 ver1 m-b-110">
 					
-					<form method="POST" enctype="multipart/form-data">
+					<form method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
 					<div class="table100-head">
 						<table>
 							<thead>
 								<tr>
 									<th>글제목</th>
 									<th><input type="text" name="title"  placeholder="제목을 입력하세요" required></th>
-<%-- 									<th>작성자:${login.nickName}</th> --%>
+		<%-- 									<th>작성자:${login.nickName}</th> --%>
 									<th><input type="text" name="writer"  value="${login.nickName }" readonly required></th>
 								</tr>
 							</thead>
@@ -28,8 +29,9 @@
 					</div>
 					
 					<div>
+					
 					<input type="file" name="file">
-			
+				
 					<input style=  "float:right;" type="submit" value="작성하기">
 					</div>
 						

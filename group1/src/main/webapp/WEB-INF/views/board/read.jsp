@@ -21,22 +21,34 @@
 				<div class="table100-body js-pscroll">
 					<table>
 						<tbody>
+<!-- 						업로드 -->
 							<tr class="row100 body">
-								<td>${dto.content }</td>
+								<c:if test="${not empty dto.uploadFile }">
+								<div><img src="${cpath }/upload/${dto.uploadFile }" width="100%" height="250px"></div>
+								</c:if>
+								<pre>${dto.content }</pre>
 							</tr>
-
-							<tr>
-<!-- 								<td>첨부이미지</td> -->
-								<td><img src="${cpath }/uploadPath/${dto.uploadFile}" width="200px"></td>
-							</tr>
+							
+							
+<!-- 							자신이 작성한것만 수정 삭제 가능 -->
+							<c:if test="${login.nickName == dto.writer}"> 
+							<button style=  "float:right;" id="updateBtn">수정</button>
+							<button style=  "float:right;" id="deleteBtn">삭제 </button>
+							</c:if>
 					</table>
 				</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
+					
+				<script>
+				document.getElementById('deleteBtn').onclick = function(event) {
+				if(confirm('게시글을 삭제하시겠습니까?')) {
+				location.href = '${cpath }/board/delete?idxBO=${dto.idxBO}'
+				}
+				}
+				</script>
 				<!--===============================================================================================-->
 				<script src="${cpath }/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 				<!--===============================================================================================-->

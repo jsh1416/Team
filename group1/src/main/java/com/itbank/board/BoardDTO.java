@@ -8,7 +8,11 @@ public class BoardDTO {
 	private MultipartFile file;
 	
 	
-	
+	@Override
+	public String toString() { //0615 파일 이름
+		return String.format("%s, %s, %s, %s, %s, %s, %s, %s", 
+				  idxBO, title, writer, content, uploadFile, wdate, viewCount,likeCount );
+	}
 	
 	public MultipartFile getFile() {
 		return file;

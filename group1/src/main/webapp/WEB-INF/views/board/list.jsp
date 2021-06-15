@@ -24,7 +24,7 @@
 							<c:forEach var="dto" items="${list }">
 								<tr class="row100 body">
 <!-- 																	611 리드페이지 이동 -->
-									<td class="cell100 column1"><a href="${cpath }/board/read/${dto.idxBO}">${dto.title}</a></td>
+									<td class="cell100 column1"><a href="${cpath }/board/read/${dto.idxBO}?type=${param.type }&search=${param.search }&vc=true">${dto.title}</a></td>
 									<td class="cell100 column2">${ dto.viewCount}</td>
 									<td class="cell100 column3">${ dto.likeCount}</td>
 								</tr>

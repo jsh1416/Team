@@ -45,11 +45,11 @@ public class BoardService {
 			} catch (IllegalStateException | IOException e) {
 				System.out.println("업로드 문제 발생 : " + e);
 			}
-			dto.setUploadFile(dto.getFile().getOriginalFilename());
+//			dto.setUploadFile(dto.getFile().getOriginalFilename());
+			dto.setUploadFile(fileName);
 			row = dao.insert(dto);
 			
-			dto.setUploadFile(fileName);
-			
+			//파일이름 삭제 수정 
 		}else {
 			row = dao.insert(dto);
 		}
@@ -64,6 +64,16 @@ public class BoardService {
 	public int selectMaxIdxBo() {
 		System.out.println("select Max IDX " + dao.selectMaxIdxBo());
 		return dao.selectMaxIdxBo();
+	}
+
+	public int updateViewCount(int idxBO) {
+		return dao.updateViewCount(idxBO);
+	}
+
+	public int delete(int idxBO) throws Exception{
+		
+		int row = dao.delete(idxBO);
+		return row;
 	}
 
 }
