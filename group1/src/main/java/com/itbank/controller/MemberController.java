@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.member.MemberDTO;
 import com.itbank.service.MemberService;
 
@@ -22,27 +24,23 @@ import com.itbank.service.MemberService;
 public class MemberController {
 	
 	@Autowired private MemberService memberSerivce;
+	private ObjectMapper mapper = new ObjectMapper();
 
-	@GetMapping("/login")
-	public String login() {
-		return "/member/login";
-	}
 	
-	@PostMapping("/login")
-	public ModelAndView login(MemberDTO dto, HttpSession session) {
-		ModelAndView mav = new ModelAndView("redirect:/");
-		MemberDTO login = memberSerivce.login(dto);
-		if(login!=null) {
-			session.setAttribute("login", login);
-			session.setMaxInactiveInterval(900);
-			
-		}else {
-			mav.setViewName("msg");
-			mav.addObject("msg", "로그인 실패...");
+	// ajax 방식 결합 로그인 06.14 bcg
+		@PostMapping("/login")
+		@ResponseBody
+		public String login(MemberDTO dto, HttpSession session) throws JsonProcessingException {
+			MemberDTO login = memberSerivce.login(dto);
+			System.out.println("login: "+login);
+			if(login!=null) {
+				session.setAttribute("login", login);
+				session.setMaxInactiveInterval(900);
+			}
+			String json = mapper.writeValueAsString(login);
+			System.out.println(json);
+			return json;
 		}
-		
-		return mav;
-	}
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {

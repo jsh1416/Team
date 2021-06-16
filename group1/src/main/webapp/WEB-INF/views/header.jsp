@@ -7,6 +7,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<!-- 06.14 bcg -->
+<script type="text/javascript">
+	const cpath = '${cpath}';
+</script>
+
+
 <!-- 풀페이지 스크롤 링크 jsh 06.14  -->
 	<link rel="stylesheet" type="text/css" href="resources/scroll/jquery.fullPage.css" />
 	<link rel="stylesheet" type="text/css" href="resources/scroll/examples.css" />
@@ -82,6 +89,15 @@
 			border-color: #37003C !important;
 		}
 		
+		/*06.14 bcg*/
+		.hide{
+			display: none;
+		}
+		
+		.show{
+			display: block;
+		}
+		
 	</style>
 	
 	
@@ -104,6 +120,12 @@
 	<link rel="stylesheet" href="${cpath }/resources/css/util.css">
 
 <!--=============================================섹션 스크롤 추가 0610 jsh ==================================================-->
+
+<!--=============================================alertCss 06.14봉찬균 ==================================================-->
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="resources/scroll/scrolloverflow.js"></script>
@@ -137,23 +159,31 @@
          <div style="float: right; display: inline-block; margin-right: 15px; 
          	vertical-align:middle; margin-top: 10px;">
             	
-            	<c:if test="${empty login}">
-	            	<span><a href="${cpath }/member/login" style="color: #3A0640;">
-	            		<img src="${cpath }/resources/images/member/login.png">
-	            	</a></span>
-            	</c:if>
+            	<!-- 06.14 로그인 파트 변경 bcg -->            		
+            	<span class="${empty login ? 'show' : 'hide' }">
+	            		<button id="btn-modal"><img src="${cpath }/resources/images/member/login.png"></button>
+	            </span>
             	
-            	<!-- 06.10 11:34 봉찬균 -->
-            	<c:if test="${!empty login}">
-	            	<div>
-	            		<img src="${cpath }/resources/images/logo/${login.club}.png">
-	            		${login.nickName }
+            	<div class="${!empty login ? 'show' : 'hide'}">
+						<!-- 로그인 안되어있을시 error 방지 위함 -->
+						<c:if test="${!empty login }">
+	            			<img src="${cpath }/resources/images/logo/${login.club}.png">
+	            		</c:if>
+	            		Hi, <font style="color: #3A0640; font-weight: bold;">${login.nickName }</font>
 	            		<div style="margin-top: 15px; text-align: right; display: inline-block; margin-left: 30px;">
 	            			<a href="${cpath }/member/logout" style="color: #E94235; font-weight: bold;">Logout</a>
 	            		</div>
-	            	</div>
-            	</c:if>
+	            </div>
+			
+            	
             </div>
+            
+            <!-- 06.14로그인 클릭 시 모달화면출력 start point -->
+			<%@include file="member/loginModal.jsp" %>
+			<script src="${cpath }/resources/js/login.js"></script>
+			<!-- 06.14 Login modal end point -->
+			
+			
 	
 		
 		<!-- img에 팀이름 클래스 삽입 jsh 06.14  -->
