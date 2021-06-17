@@ -1,60 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@include file="../header.jsp" %>
- <% 	request.setCharacterEncoding("UTF-8"); %>
-<style>
-.sb {
-		max-width: 1300px;
-		padding: 10px 0px;
-		display: flex;
-		justify-content: space-between;
-		background-color: #6c7ae0;
-}
+    <%@ include file="../header.jsp" %>
 
-
-.sb > input {
-		background-color: #6c7ae0;
-		color: #FFFFFF;
-}
-	
-
-</style>
-
-
-<!-- 611 김선진 -->
 	<div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
 				<div class="table100 ver1 m-b-110">
-					
-					<form method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
 					<div class="table100-head">
 						<table>
 							<thead>
-								<tr>
-									<th>글제목</th>
-									<th>글제목<input type="text" name="title"  placeholder="제목을 입력하세요" required></th>
-		<%-- 									<th>작성자:${login.nickName}</th> --%>
-									<th><input type="hidden" name="writer"  value="${login.nickName }"></th>
+								<tr class="row100 head">
+									<th class="cell100 column1">내 글 목록</th>
+									<th class="cell100 column2">조회수</th>
+									<th class="cell100 column3">추천수</th>
 								</tr>
 							</thead>
 						</table>
 					</div>
 
-			
-					<div class="table100-body js-pscroll">
-								<textarea style="resize: none;" rows="5" cols="164" name="content"  placeholder="내용을 입력하세요" required> </textarea>	
-					
-					</div>
-					
-					<div class='sb'>
-					
-					<input type="file" name="file">
-				
-					<input style=  "float:right;" type="submit" value="작성하기">
-					</div>
-						
+					<form method="POST"  accept-charset="UTF-8">
+							
+							<input type="hidden" name="writer"  value="${login.nickName }">
 					</form>
+					
+					
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+							
+							
+							
+							<c:forEach var="dto" items="${mylist }">
+								<tr class="row100 body">
+								
+								<c:if test="${login.nickName == dto.writer}"> 
+<!-- 																	611 리드페이지 이동 -->
+									<td class="cell100 column1"><a href="${cpath }/board/read/${dto.idxBO}?type=${param.type }&search=${param.search }&vc=true">${dto.title}</a></td>
+									<td class="cell100 column2">${ dto.viewCount}</td>
+									<td class="cell100 column3">${ dto.likeCount}</td>
+								</c:if>
+								</tr>
+							</c:forEach>
+						</table>
+						
+<%-- 						 <c:if test="${sessionScope.sessionID!=null}">  --%>
+<!-- 									글쓰기 이동 -->
+								
+								<a style=  "float:right;" href="${cpath}/board/write">글쓰기</a>
+<%-- 						 </c:if>		 --%>
+					</div>
 				</div>
 			</div>
 		</div>

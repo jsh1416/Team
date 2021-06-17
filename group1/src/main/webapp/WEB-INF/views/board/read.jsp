@@ -11,8 +11,8 @@
 						<thead>
 							<tr class="row100 head">
 								<th class="cell100 column1">${dto.title}</th> <!-- 글제목 -->
-								<th class="cell100 column4">조회${dto.viewCount} 추천${dto.likeCount} 댓글</th>
-								<th class="cell100 column5">${dto.wdate }</th> <!-- 날짜 -->
+								<th class="cell100 column4">조회:${dto.viewCount} 추천:${dto.likeCount} 댓글:  ${dto.wdate }</th> 
+								<th class="cell100 column5">글쓴이:${dto.writer }</th> <!-- 글쓴이 -->
 							</tr>
 						</thead>
 					</table>
@@ -30,9 +30,10 @@
 							</tr>
 							
 							
+							
 <!-- 							자신이 작성한것만 수정 삭제 가능 -->
 							<c:if test="${login.nickName == dto.writer}"> 
-							<button style=  "float:right;" id="updateBtn">수정</button>
+							<button style=  "float:right;" id="modifyBtn">수정</button>
 							<button style=  "float:right;" id="deleteBtn">삭제 </button>
 							</c:if>
 					</table>
@@ -41,6 +42,13 @@
 			</div>
 		</div>
 	</div>
+				<script>
+				document.getElementById('modifyBtn').onclick = function(event) {
+				if(confirm('게시글을 수정하시겠습니까?')) {
+				location.href = '${cpath }/board/modify/${dto.idxBO}'
+				}
+				}
+				</script>
 					
 				<script>
 				document.getElementById('deleteBtn').onclick = function(event) {

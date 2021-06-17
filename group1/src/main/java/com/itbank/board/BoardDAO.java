@@ -1,5 +1,6 @@
 package com.itbank.board;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -13,7 +14,7 @@ public interface BoardDAO {
 	@Select("select * from EPLBoard order by idxBO desc") //리스트(팀) 클릭시 리스트
 	List<BoardDTO> selectAll();
 
-	@Select("select * from EPLBoard where idxBO = #{idxBO}") //READ 글 클릭시 읽기모드
+	@Select("select * from EPLBoard where idxBO = #{idxBO} ") //READ 글 클릭시 읽기모드
 	BoardDTO select(int idxBO);
 	
 	@Insert("insert into EPLBoard (idxBo, title, writer,content ,uploadFile) values "
@@ -40,7 +41,19 @@ public interface BoardDAO {
 	@Delete("delete from EPLBoard where idxBO = #{idxBO}")
 	int delete(int idxBO);
 	
+	@Select("select * from EPLBoard where idxBO = #{idxBO}")
+	BoardDTO selectOne(int idxBO);
+
+	@Update("update EPLBoard set title = #{title}, content=#{content},uploadFile='${uploadFile}' where idxBO=#{idxBO}")
+	int modify(BoardDTO dto);
 	
+	
+	@Select("select * from EPLBoard where writer = #{writer} order by idxBO desc")
+	List<BoardDTO> selectWriter(String writer);
+
+	@Select("select * from EPLBoard where ${type} like '%${search}%' order by idxBO desc")
+	List<BoardDTO> selectSearch(HashMap<String, String> param);
+
 
 	
 }

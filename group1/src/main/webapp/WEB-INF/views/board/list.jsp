@@ -1,7 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="../header.jsp" %>
+<style>
+.sb {
+		max-width: 1300px;
+		padding: 10px 0px;
+		display: flex;
+		justify-content: space-between;
+		background-color: #6c7ae0;
+}
+.sb > form >span{
+		display: inline-block;
 
+}
+
+.sb > form >span >select {
+		border:none;
+		border-radius:0;
+		display: inline-block;
+		background-color: #6c7ae0;
+		color: #FFFFFF;
+}
+
+
+.sb > form> span >input {
+		background-color: #6c7ae0;
+		color: #FFFFFF;
+}
+
+.sb > form> span >input::placeholder {
+		background-color: #6c7ae0;
+		color: #FFFFFF;
+}
+
+.sb >span > a {
+		color: #FFFFFF;
+}
+		
+	
+
+</style>
 	<div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
@@ -31,10 +69,25 @@
 							</c:forEach>
 						</table>
 						
+						
+					<div class= "sb">
+							<form>
+								<span >
+								<select  name="type">
+									<option ${param.type == 'title' ? 'selected' : '' } value="title">제목</option>
+									<option ${param.type == 'writer' ? 'selected' : '' } value="writer">글쓴이</option>
+									<option ${param.type == 'content' ? 'selected' : '' } value="content">내용</option>
+								</select>
+								</span>
+								<span><input type="text" name="search" value="${param.search }" placeholder="검색어를 입력하세요"></span>
+                        		<span><input type="submit" value="검색"></span>
+                    			 </form>
 <%-- 						 <c:if test="${sessionScope.sessionID!=null}">  --%>
 <!-- 									글쓰기 이동 -->
-								<a style=  "float:right;" href="${cpath}/board/write">글쓰기</a>
+								<span style=  "justify-content: space-between; "><a href="${cpath}/board/mylist/${login.nickName}">나의 글/</a>  <a href="${cpath}/board/write"> 글쓰기</a></span>
+					</div>			
 <%-- 						 </c:if>		 --%>
+						
 					</div>
 				</div>
 			</div>

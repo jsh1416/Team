@@ -2,6 +2,7 @@ package com.itbank.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -24,11 +25,19 @@ public class BoardController {
 
 	@Autowired private BoardService bs;
 	
-	@GetMapping("/")
-	public ModelAndView list() {
+	@GetMapping("/") // 전체 글 목록
+	public ModelAndView list(@RequestParam HashMap<String, String> param) {
 		ModelAndView mav = new ModelAndView("/board/list");
-		List<BoardDTO> list = bs.selectAll();
+		List<BoardDTO> list = bs.selectAll(param);
 		mav.addObject("list",list);
+		return mav;
+	}
+	
+	@GetMapping("/mylist/{writer}") //내 글 목록
+	public ModelAndView mylist(@PathVariable String writer) {
+		ModelAndView mav = new ModelAndView("/board/mylist");
+		List<BoardDTO> mylist = bs.selectWriter(writer);
+		mav.addObject("mylist",mylist);
 		return mav;
 	}
 	
@@ -56,12 +65,11 @@ public class BoardController {
 		return mav;
 	}
 	
-	@GetMapping("/write")
+	@GetMapping("/write") //글쓰기
 	public void write() {
-		System.out.println("write GET");
 	}
 	
-	@PostMapping("/write")
+	@PostMapping("/write") //글쓰기
 	public String write(BoardDTO dto) {//HttpSession session 
 //		String writer = (String)session.getAttribute("nickName");
 //		dto.setWriter(writer);
@@ -91,4 +99,22 @@ public class BoardController {
 		return mav;
 		
 	}
+	
+	@GetMapping("/modify/{idxBO}") //글 수정
+	public ModelAndView modify(@PathVariable int idxBO) {
+		ModelAndView mav = new ModelAndView("board/modify");
+		BoardDTO dto = bs.selectOne(idxBO);
+		mav.addObject("dto",dto);
+		return mav;
+	}
+	
+	@PostMapping("/modify/{idxBO}") //글 수정
+	public String modify(BoardDTO dto) {
+		
+		int row = bs.modify(dto);
+		
+		return "redirect:/board/read/" + dto.getIdxBO();
+	}
+	
+	
 }

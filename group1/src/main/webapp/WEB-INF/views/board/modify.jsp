@@ -2,25 +2,6 @@
     pageEncoding="UTF-8"%>
  <%@include file="../header.jsp" %>
  <% 	request.setCharacterEncoding("UTF-8"); %>
-<style>
-.sb {
-		max-width: 1300px;
-		padding: 10px 0px;
-		display: flex;
-		justify-content: space-between;
-		background-color: #6c7ae0;
-}
-
-
-.sb > input {
-		background-color: #6c7ae0;
-		color: #FFFFFF;
-}
-	
-
-</style>
-
-
 <!-- 611 김선진 -->
 	<div class="limiter">
 		<div class="container-table100">
@@ -33,7 +14,7 @@
 							<thead>
 								<tr>
 									<th>글제목</th>
-									<th>글제목<input type="text" name="title"  placeholder="제목을 입력하세요" required></th>
+									<th><input type="text" name="title"  placeholder="${dto.title }" required></th>
 		<%-- 									<th>작성자:${login.nickName}</th> --%>
 									<th><input type="hidden" name="writer"  value="${login.nickName }"></th>
 								</tr>
@@ -43,15 +24,18 @@
 
 			
 					<div class="table100-body js-pscroll">
-								<textarea style="resize: none;" rows="5" cols="164" name="content"  placeholder="내용을 입력하세요" required> </textarea>	
+								<textarea style="resize: none;" rows="5" cols="164" name="content"  placeholder="${dto.content }"  required> </textarea>	
 					
 					</div>
 					
-					<div class='sb'>
+					<div>
 					
 					<input type="file" name="file">
+					<c:if test="${not empty dto.uploadFile }">
+					현재 파일 : ${dto.uploadFile }
+					</c:if>
 				
-					<input style=  "float:right;" type="submit" value="작성하기">
+					<input style=  "float:right;" type="submit" value="수정하기">
 					</div>
 						
 					</form>
@@ -59,6 +43,10 @@
 			</div>
 		</div>
 	</div>
+	
+				
+	
+	
 <!--===============================================================================================-->	
 	<script src="${cpath }/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
