@@ -32,17 +32,17 @@
 							<span class="text-danger">*</span>
 						</label> 
 							<input id="searchForName" class="form-control" type="text"
-								   name="name" placeholder="'이름'을 입력해주세요." maxlength="10" required>
+								   name="name" placeholder="'이름'을 입력해주세요." required>
 					</div>
 				</div>
 				<!-- 이메일 -->
 				<div class="form-group row" style="margin: auto;">
 					<div class="col-md-12 mt-2">
-						<label for="searchForEmail" class="text-black mb-0 pb-0">전화번호 <span
-							class="text-danger">*</span>
+						<label for="searchForEmail" class="text-black mb-0 pb-0">이메일 
+						<span class="text-danger">*</span>
 						</label>
-							<input id="searchForEmail" class="form-control" type="text" 
-								   name="email" placeholder="'이메일'을 입력해주세요." maxlength="18" required>
+							<input id="searchForEmail" class="form-control" type="email" 
+								   name="email" placeholder="'이메일'을 입력해주세요." required>
 					</div>
 				</div>
 
@@ -74,28 +74,28 @@
 							class="text-danger">*</span>
 						</label>
 							<input id="nameForPw" class="form-control" type="text"
-								   name="name" placeholder="'이름'을 입력해주세요." maxlength="18" required>
+								   name="name" placeholder="'이름'을 입력해주세요." required>
 					</div>
 				</div>
 				
-				<!-- 아이디 -->
+				
 				<div class="form-group row" style="margin: auto;">
 					<div class="col-md-12 mt-2">
-						<label for="idForPw" class="text-black mb-0 pb-0">이메일 
+						<label for="idForPw" class="text-black mb-0 pb-0">아이디
 							<span class="text-danger">*</span>
 						</label> 
-						<input id="idForPw" class="form-control" type="text" name="email" 
-							   placeholder="이메일'을 입력해주세요." maxlength="20" required>
+						<input id="idForPw" class="form-control" type="text" name="id" 
+							   placeholder="아이디를 입력해주세요." required>
 					</div>
 				</div>
-				<!-- 이메일 -->
+				
 				<div class="form-group row" style="margin: auto;">
 					<div class="col-md-12 mt-2">
-						<label for="emailForPw" class="text-black mb-0 pb-0">전화번호<span
+						<label for="emailForPw" class="text-black mb-0 pb-0">이메일<span
 							class="text-danger">*</span>
 						</label>
-							<input id="emailForPw" class="form-control" type="text"
-								   name="email" placeholder="'이메일'을 입력해주세요." maxlength="18" required>
+							<input id="emailForPw" class="form-control" type="email"
+								   name="email" placeholder="'이메일'을 입력해주세요." required>
 					</div>
 				</div>
 				
@@ -158,8 +158,8 @@
 
 
 
-
-
+<script type="text/javascript" src="${cpath }/resources/js/searchId.js"></script>
+<script type="text/javascript" src="${cpath }/resources/js/searchPw.js"></script>
 
 
 
