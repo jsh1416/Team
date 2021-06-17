@@ -89,28 +89,27 @@ public class MemberController {
 	
 	
 	// 이름과 이메일을 통한 id찾기
-	@RequestMapping(value="helpId/{name}/{email}")
-	@ResponseBody
-	public String helpId(HttpServletResponse responese, @PathVariable("name") String name, @PathVariable("email") String email) throws IOException {
-		MemberDTO member = new MemberDTO();
-		member.setName(name);
-		member.setEmail(email);
-		return memberSerivce.helpId(member, responese);
-	}
-	
+		@RequestMapping(value="helpId/{name}/{email:.+}")
+		@ResponseBody
+		public String helpId(HttpServletResponse responese, @PathVariable("name") String name, @PathVariable("email") String email) throws IOException {
+			MemberDTO member = new MemberDTO();
+			member.setName(name);
+			member.setEmail(email);
+			return memberSerivce.helpId(member, responese);
+		}
+		
 	// 아이디와 이메일을 통한 임시 비밀번호 발급
-	@RequestMapping(value="helpPw/{name}/{id}/{email}")
+	@RequestMapping(value="helpPw/{name}/{id}/{email:.+}")
 	@ResponseBody
 	public String helpPw(HttpServletResponse response, @PathVariable("name")String name, @PathVariable("id")String id, @PathVariable("email")String email) throws Exception {
 		MemberDTO member = new MemberDTO();
 		member.setId(id);
 		member.setName(name);
 		member.setEmail(email);
-		
+			
 		return memberSerivce.helpPw(member,response);
 		
 	}
-	
 	
 	
 }
