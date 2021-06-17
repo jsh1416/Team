@@ -11,6 +11,7 @@
 	<context:component-scan base-package="com.itbank.service" />
 	<mybatis-spring:scan base-package="com.itbank.member" />
 	<mybatis-spring:scan base-package="com.itbank.board" />	
+			<mybatis-spring:scan base-package="com.itbank.reply" />	
 	
 	<bean id="multipartResolver" 
 		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -37,6 +38,8 @@
 			<list>
 				<!-- 06.10 봉찬균 sqlmap-member.xml 추가 -->
 				<value>classpath:/config/sqlmap-member.xml</value>
+								<!-- 06.14 전창우 sqlmap-reply.xml 추가 -->
+				<value>classpath:/config/sqlmap-reply.xml</value>	
 			</list>
 		</property>
 	</bean>
