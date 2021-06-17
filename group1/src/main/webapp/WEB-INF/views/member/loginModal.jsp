@@ -39,7 +39,7 @@
 									<a href="${cpath }/member/join">회원가입</a>
 								</div>
 								<div class="google-font" style="margin: 10px 0px 0px 0px; display: inline-block; flex: 1; text-align: center;">
-									<a id="search_account" href="${cpath }/member/searchID">아이디 찾기</a>
+									<a id="search_account">아이디 찾기</a>
 								</div>
 								<div class="google-font" style="margin: 10px 0px 0px 0px; display: inline-block; flex: 1; text-align: center;">
 									<a id="" href="${cpath }/member/searchPW">비밀번호 찾기</a>
@@ -60,3 +60,4 @@
 			</div>
 			
 <%@include file="accountSearchForm.jsp" %>
+<script src="${cpath }/resources/js/loginModal.js"></script>

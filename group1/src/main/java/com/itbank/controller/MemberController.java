@@ -1,12 +1,16 @@
 package com.itbank.controller;
 
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -69,16 +73,68 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="checkEmail/", produces="application/text;charset=utf8")
+	// 회원가입시 이메일 형식, 이미 있는 이메일인지 체크
+	@RequestMapping(value="/checkEmail", produces="application/text;charset=utf8")
 	@ResponseBody
 	public String checkEmail(HttpServletRequest request) {
 		return memberSerivce.emailcheck(request);
 	}
 	
-	@RequestMapping(value="checkId/", produces="application/text;charset=utf8")
+	// 회원가입시 이미 있는 ID인지 체크
+	@RequestMapping(value="/checkId", produces="application/text;charset=utf8")
 	@ResponseBody
 	public String checkId(HttpServletRequest request) {
 		return memberSerivce.checkId(request);
 	}
 	
+	
+	// 이름과 이메일을 통한 id찾기
+	@RequestMapping(value="helpId/{name}/{email}")
+	@ResponseBody
+	public String helpId(HttpServletResponse responese, @PathVariable("name") String name, @PathVariable("email") String email) throws IOException {
+		MemberDTO member = new MemberDTO();
+		member.setName(name);
+		member.setEmail(email);
+		return memberSerivce.helpId(member, responese);
+	}
+	
+	// 아이디와 이메일을 통한 임시 비밀번호 발급
+	@RequestMapping(value="helpPw/{name}/{id}/{email}")
+	@ResponseBody
+	public String helpPw(HttpServletResponse response, @PathVariable("name")String name, @PathVariable("id")String id, @PathVariable("email")String email) throws Exception {
+		MemberDTO member = new MemberDTO();
+		member.setId(id);
+		member.setName(name);
+		member.setEmail(email);
+		
+		return memberSerivce.helpPw(member,response);
+		
+	}
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

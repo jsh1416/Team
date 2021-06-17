@@ -2,6 +2,7 @@ package com.itbank.member;
 
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 	// 06. 10 봉찬균 MemberDAO 생성
 //
@@ -17,6 +18,12 @@ public interface MemberDAO {
 
 	@Select("select email from EPLmember where id = #{id}")
 	String checkId(String id);
+
+	@Select("select ID from EPLMEMBER where name = #{name} and email = #{email}")
+	String helpId(MemberDTO member);
+
+	@Update("update pw from EPLmember where name = #{name} and email = #{email}")
+	int updatePw(MemberDTO member);
 
 	
 }
