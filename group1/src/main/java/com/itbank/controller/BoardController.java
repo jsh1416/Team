@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.board.BoardDTO;
@@ -42,26 +43,28 @@ public class BoardController {
 	}
 	
 	
-	@GetMapping("/read/{idxBO}")
-	public ModelAndView read(@PathVariable int idxBO,boolean vc,String type,String search) {
+	@GetMapping("/read/{idxBo}")
+	public ModelAndView read(@PathVariable int idxBo,boolean vc,String type,String search) {
 		
-		System.out.println("vc :" + vc);
+//		System.out.println("read controller : " + idxBo);
+		
+//		System.out.println("vc :" + vc);
 		if(vc) { //조회수 안들어먹음 같은 아이디로 로그인시 조회수 막아야함
-			bs.updateViewCount(idxBO);
+			bs.updateViewCount(idxBo);
 			try {
 				search = URLEncoder.encode(search, "UTF-8");	
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-			String location = "redirect:/board/read/" + idxBO + "/?type=" + type + "&search=" + search;
-			System.out.println("location : " + location);
+			String location = "redirect:/board/read/" + idxBo + "?type=" + type + "&search=" + search;
+//			System.out.println("location : " + location);
 			return new ModelAndView(location);
 		}
 		
-		BoardDTO dto = bs.select(idxBO);
+		BoardDTO dto = bs.select(idxBo);
 		ModelAndView mav = new ModelAndView("board/read");
 		mav.addObject("dto",dto);
-		System.out.println("uploadFile :"+ dto.getUploadFile());
+//		System.out.println("uploadFile :"+ dto.getUploadFile());
 		return mav;
 	}
 	
@@ -100,21 +103,36 @@ public class BoardController {
 		
 	}
 	
-	@GetMapping("/modify/{idxBO}") //글 수정
-	public ModelAndView modify(@PathVariable int idxBO) {
+	@GetMapping("/modify/{idxBo}") //글 수정
+	public ModelAndView modify(@PathVariable int idxBo) {
 		ModelAndView mav = new ModelAndView("board/modify");
-		BoardDTO dto = bs.selectOne(idxBO);
+		BoardDTO dto = bs.selectOne(idxBo);
 		mav.addObject("dto",dto);
 		return mav;
 	}
 	
-	@PostMapping("/modify/{idxBO}") //글 수정
+	@PostMapping("/modify/{idxBo}") //글 수정
 	public String modify(BoardDTO dto) {
 		
 		int row = bs.modify(dto);
 		
-		return "redirect:/board/read/" + dto.getIdxBO();
+		return "redirect:/board/read/" + dto.getIdxBo();
 	}
 	
+	@PostMapping("/read/boardLike/{idxBo}/") //좋아요
+	@ResponseBody
+	public String likeboard(@PathVariable String idxBo) {
+//		System.out.println("Like : " + idxBo);
+		int row = bs.likeUp(idxBo);
+//		System.out.println("controller Like : " + row);
+		return Integer.toString(row);
+	}
+	
+//	@PostMapping("/read/boardhate/{idxBo}/") //싫어요
+//	@ResponseBody
+//	public String hateboard(@PathVariable String idxBo) {
+//		int row = bs.likedown(idxBo);
+//		return "redirect:/board/read/" + Integer.toString(row);
+//	}
 	
 }

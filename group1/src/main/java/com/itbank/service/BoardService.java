@@ -29,8 +29,8 @@ public class BoardService {
 		return (flag1 && param.get("search").equals("") == false) ? dao.selectSearch(param) : dao.selectAll();
 	}
 
-	public BoardDTO select(int idxBO) { // 글 읽기
-		return dao.select(idxBO);
+	public BoardDTO select(int idxBo) { // 글 읽기
+		return dao.select(idxBo);
 	}
 
 	public int insert(BoardDTO dto) { // 글 삽입
@@ -71,19 +71,19 @@ public class BoardService {
 		return dao.selectMaxIdxBo();
 	}
 
-	public int updateViewCount(int idxBO) {
-		return dao.updateViewCount(idxBO);
+	public int updateViewCount(int idxBo) {
+		return dao.updateViewCount(idxBo);
 	}
 
-	public int delete(int idxBO) throws Exception{
+	public int delete(int idxBo) throws Exception{
 		
-		int row = dao.delete(idxBO);
+		int row = dao.delete(idxBo);
 		return row;
 	}
 
 	
-	public BoardDTO selectOne(int idxBO) {
-		return dao.selectOne(idxBO);
+	public BoardDTO selectOne(int idxBo) {
+		return dao.selectOne(idxBo);
 	}
 
 	public int modify(BoardDTO dto) {
@@ -124,6 +124,39 @@ public class BoardService {
 	public List<BoardDTO> selectWriter(String writer) { // 내 글목록
 		return dao.selectWriter(writer);
 	}
+
+	public int likeUp(String idxBo) {
+		
+		
+		int row = dao.likeUp(idxBo);
+		
+		System.out.println("row : " + row);
+		
+		return row;
+	}
+
+//	public int likedown(String idxBo) {
+//	int row = dao.likedown(idxBo);
+//	
+//	System.out.println("row : " + row);
+//	
+//	return row;
+//}
+//
+//public int likecheck(String likeCheck) {
+//	
+//	int row1= dao.likeCheck(likeCheck);
+//	if(row1==0) {
+//		likeUp(likeCheck);
+//	}
+//	else {
+//		
+//	}
+//	
+//	return row1;
+//		
+//}
+//	
 
 	
 	

@@ -2,8 +2,33 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
 
-<div class="limiter">
-	<div class="container-table100">
+<script>
+	const cpath= '${cpath}';
+	const idxBo = '${dto.idxBo}';
+</script>
+
+<style>
+.sb {
+
+		max-width: 100%;
+		display: flex;
+		background-color: #6c7ae0;
+		justify-content: flex-end ;
+
+		
+}
+
+
+.sb >button {
+		color: #FFFFFF;
+		margin:10px;
+}
+
+
+</style>
+
+<div class="limiter" style="padding-top: 75px; width:1000px; height:800px;">
+	<div class="container-table100" style="width:1000px; height:705px;">
 		<div class="wrap-table100">
 			<div class="table100 ver1 m-b-110">
 				<div class="table100-head">
@@ -18,60 +43,72 @@
 					</table>
 				</div>
 
-				<div class="table100-body js-pscroll">
+				<div class="table100-body"   style="width:1000px; height:800px; overflow:scroll; overflow:hidden;">
 					<table>
 						<tbody>
 <!-- 						업로드 -->
-							<tr class="row100 body">
+							<tr class="row100 body ">
 								<c:if test="${not empty dto.uploadFile }">
 								<div><img src="${cpath }/upload/${dto.uploadFile }" width="100%" height="250px"></div>
+								<pre style="width:1000px; height:280px;">${dto.content }</pre>
 								</c:if>
-								<pre>${dto.content }</pre>
+								
+								<c:if test="${empty dto.uploadFile }">
+								<pre style="width:1000px; height:530px;">${dto.content }</pre>
+								</c:if>
+								
+								
 							</tr>
 							
-							
+							<c:if test="${not empty login.nickName && login.nickName != dto.writer}">
+								<div class="sb">
+									<button id="likeBtn">호</button>
+									<button id="hateBtn">불</button>
+								</div>
+							</c:if>
+					
 							
 <!-- 							자신이 작성한것만 수정 삭제 가능 -->
-							<c:if test="${login.nickName == dto.writer}"> 
-							<button style=  "float:right;" id="modifyBtn">수정</button>
-							<button style=  "float:right;" id="deleteBtn">삭제 </button>
-							</c:if>
+<%-- 							<c:if test="${login.nickName == dto.writer}">  --%>
+								<div class="sb ${login.nickName == dto.writer ? '' : 'hidden'}">
+									<button style= "float:right;" id="modifyBtn" onclick="modify()">수정</button>
+									<button style= "float:right;" id="deleteBtn" onclick="delete()">삭제</button>
+								</div>
+<%-- 							</c:if> --%>
 					</table>
 				</div>
-				<div class="inputReply" style="justify-content: center; width: 900px; border: 2px solid #dadada;">
-						<form id="replyInputForm" style="width: 800px;">
-							<input type="hidden" name="idxBo" value="${dto.idxBO }">
-        				    <input type="hidden" name="writer" value="${login.id }">
-    				        <input type="hidden" name="idxParent" value="0">
-							<p>${login.nickName }</p>
-							<p>
-								<textarea class="reply-area" name="content" placeholder="바른말 고운말을 사용합시다." required></textarea>
-								<input type="submit" value="댓글 작성">
-							</p>
-						</form>
-					</div>
-					<p id ="cnt"></p>
-					<div id="inputReply"></div>
-				
 				</div>
 			</div>
 		</div>
 	</div>
+	
 				<script>
-				document.getElementById('modifyBtn').onclick = function(event) {
-				if(confirm('게시글을 수정하시겠습니까?')) {
-				location.href = '${cpath }/board/modify/${dto.idxBO}'
-				}
-				}
+					
+					function modify(){
+						if(confirm('게시글을 수정하시겠습니까?')) {
+							location.href = '${cpath }/board/modify/${dto.idxBo}'
+						}
+						
+					}
 				</script>
 					
+<!-- 					window.onload = function(){ -->
+<!-- 						document.getElementById('deleteBtn').onclick = function(event) { -->
+<!-- 							if(confirm('게시글을 삭제하시겠습니까?')) { -->
+<%-- 								location.href = '${cpath }/board/delete?idxBo=${dto.idxBo}' --%>
+<!-- 							} -->
+<!-- 						}	 -->
+<!-- 					} -->
 				<script>
-				document.getElementById('deleteBtn').onclick = function(event) {
-				if(confirm('게시글을 삭제하시겠습니까?')) {
-				location.href = '${cpath }/board/delete?idxBO=${dto.idxBO}'
-				}
-				}
+					function delete(){
+							console.log("delete버튼작동")
+							if(confirm('게시글을 삭제하시겠습니까?')) {
+								location.href = '${cpath }/board/delete?idxBo=${dto.idxBo}'
+							}
+						}	
+					}
 				</script>
+				
 				<!--===============================================================================================-->
 				<script src="${cpath }/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 				<!--===============================================================================================-->
@@ -94,7 +131,10 @@
 				</script>
 				<!--===============================================================================================-->
 				<script src="${cpath }/resources/js/main.js"></script>
-
+				
+				<script src="${cpath }/resources/js/board/like.js"></script>
+				
+<%-- 				<script src="${cpath }/resources/js/board/hate.js"></script> --%>
 
 <script>
 	//  jcw 210616 페이지 로드시 실행될 함수
