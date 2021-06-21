@@ -35,12 +35,13 @@
 
 .sb >span > a {
 		color: #FFFFFF;
+		margin: 10px;
 }
 		
 	
 
 </style>
-	<div class="limiter">
+	<div class="limiter" style="padding-top: 75px; width:1000px; height:800px;">
 		<div class="container-table100">
 			<div class="wrap-table100">
 				<div class="table100 ver1 m-b-110">
@@ -62,7 +63,7 @@
 							<c:forEach var="dto" items="${list }">
 								<tr class="row100 body">
 <!-- 																	611 리드페이지 이동 -->
-									<td class="cell100 column1"><a href="${cpath }/board/read/${dto.idxBO}?type=${param.type }&search=${param.search }&vc=true">${dto.title}</a></td>
+									<td class="cell100 column1"><a href="${cpath }/board/read/${dto.idxBo}?type=${param.type }&search=${param.search }&vc=true">${dto.title}</a></td>
 									<td class="cell100 column2">${ dto.viewCount}</td>
 									<td class="cell100 column3">${ dto.likeCount}</td>
 								</tr>
@@ -84,7 +85,7 @@
                     			 </form>
 <%-- 						 <c:if test="${sessionScope.sessionID!=null}">  --%>
 <!-- 									글쓰기 이동 -->
-								<span style=  "justify-content: space-between; "><a href="${cpath}/board/mylist/${login.nickName}">나의 글/</a>  <a href="${cpath}/board/write"> 글쓰기</a></span>
+								<span style=  "justify-content: space-between; "><a href="${cpath}/board/mylist/${login.nickName}">나의 글</a><a href="${cpath}/board/write">글쓰기</a></span>
 					</div>			
 <%-- 						 </c:if>		 --%>
 						
@@ -93,6 +94,9 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
 <!--===============================================================================================-->	
 	<script src="${cpath }/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
