@@ -17,14 +17,14 @@
       </div>
       <div class="modal-body">
         
-        <div class="form-control mt-2">
-				<a data-toggle="collapse" href="#id_search" role="search"
+        <div class="form-control mt-2 btn-EPL">
+				<a data-toggle="collapse" role="search"
 					aria-expanded="false" aria-controls="id_search" onclick="showIdForm()">
-					<div>아이디 찾기</div>
+					<div class="google-font" style="color:#FFFFFF;">아이디 찾기</div>
 				</a>
 		</div>
 
-			<form id="id_search" class="hide">
+			<form id="id_search" class="hide" accept-charset="utf-8">
 				<!-- 아이디 -->
 				<div class="form-group row" style="margin: auto;">
 					<div class="col-md-12 mt-2">
@@ -52,7 +52,7 @@
 				<!-- Submit -->
 				<div class="form-group row" style="margin: auto;">
 					<div class="col-lg-12 mt-4 mb-4">
-						<input id="id_search_input" type="button" class="btn btn-primary btn-lg btn-block"
+						<input id="id_search_input" type="button" class="btn btn-primary btn-lg btn-block btn-info"
 							value="찾기" onclick="searchEmail()">
 					</div>
 				</div>
@@ -60,13 +60,14 @@
 
 
 			<!-- 비밀번호 찾기 선택 -->
-			<div class="form-control mt-2">
-				<a data-toggle="collapse" href="#pw_search" role="search"
-					aria-expanded="false" aria-controls="pw_search" onclick="showPwForm()">
-					<div>비밀번호 찾기</div>
+			<div class="form-control mt-2 btn-EPL">
+				<a data-toggle="collapse" role="search"
+					aria-expanded="false" aria-controls="id_search" onclick="showPwForm()">
+					<div class="google-font" style="color:#FFFFFF;">비밀번호 찾기</div>
 				</a>
-			</div>
-			<form id="pw_search" class="hide" method="POST" >
+		</div>
+		
+			<form id="pw_search" class="hide" method="POST" accept-charset="utf-8">
 				<!-- 이름 -->
 				<div class="form-group row" style="margin: auto;">
 					<div class="col-md-12 mt-2">
@@ -105,7 +106,7 @@
 				<!-- Submit -->
 				<div class="form-group row" style="margin: auto;">
 					<div class="col-lg-12 mt-4 mb-4">
-						<input id="pw_search_input" type="button" class="btn btn-primary btn-lg btn-block" 
+						<input id="pw_search_input" type="button" class="btn btn-primary btn-lg btn-block btn-info"
 							   value="찾기" onclick="searchPw()">
 					</div>
 				</div>
