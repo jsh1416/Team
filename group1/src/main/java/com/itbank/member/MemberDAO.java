@@ -22,7 +22,7 @@ public interface MemberDAO {
 	@Select("select ID from EPLMEMBER where name = #{name} and email = #{email}")
 	String helpId(MemberDTO member);
 
-	@Update("update pw from EPLmember where name = #{name} and email = #{email}")
+	@Update("update EPLmember set pw=#{pw} where name = #{name} and email = #{email}")
 	int updatePw(MemberDTO member);
 
 	

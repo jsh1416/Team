@@ -123,7 +123,9 @@
 
 <!--=============================================alertCss 06.14봉찬균 ==================================================-->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<!--=============================================alertCss 06.17봉찬균 ==================================================-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -169,7 +171,8 @@
 						<c:if test="${!empty login }">
 	            			<img src="${cpath }/resources/images/logo/${login.club}.png">
 	            		</c:if>
-	            		Hi, <font style="color: #3A0640; font-weight: bold;">${login.nickName }</font>
+	            		<!-- 06.18 bcg 마이페이지 링크 -->
+	            		Hi, <a href="${cpath }/member/myInfo" style="color: #3A0640; font-weight: bold;">${login.nickName }</a>
 	            		<div style="margin-top: 15px; text-align: right; display: inline-block; margin-left: 30px;">
 	            			<a href="${cpath }/member/logout" style="color: #E94235; font-weight: bold;">Logout</a>
 	            		</div>
