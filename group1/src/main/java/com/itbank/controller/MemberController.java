@@ -65,7 +65,9 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView("msg");
 		int row = memberSerivce.join(dto);
 		// 06.17 bcg
-		mav.addObject("url", "redirect:/");
+		mav.addObject("url", "EPL/");
+		mav.addObject("row", row);
+
 		if(row == 1) {
 			mav.addObject("msg", "join success");
 		}
