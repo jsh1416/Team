@@ -73,8 +73,40 @@
 					</table>
 				</div>
 				</div>
+					<div class="container-table100">
+						<div class="wrap-table100">
+							<div class="table100 ver1 m-b-110">
+									<div id="replyDiv">
+									<form id="replyInputForm" 
+										style="display:flex; background-color: #dadada;
+										width:1170px; height : 70px;">
+										<input type = "hidden" name="idxBo" value = ${dto.idxBo } >
+										<input type = "hidden" name="writer" value = ${login.id } >
+										<input type = "hidden" name="idxParent" value="0" >
+										<textarea name = "content" placeholder="바른말 고운말을 사용합시다."
+											required style="width:1070px; height:70px;"></textarea>
+										<input type="submit" value="등록" 
+											style="font-size: 20px; background-color: #6c7ae0;
+											 width : 100px; height: 70px;">	
+								
+									</form>
+								</div>
+								<h6 id = "cnt"></h6>
+								<div id = "likeContent" style="display:none; background-color: #dadada;
+										width:1170px; height : 100px;"></div>
+								<div id="mainReplyMain" style="background-color: #4e81c0;"></div>
+							</div>
+						</div>
+					</div>
+				
+					
+				
+				
+				
 		</div>
 	</div>
+	
+	
 	
 				<!--===============================================================================================-->
 				<script src="${cpath }/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -106,15 +138,19 @@
 <!-- 				수정 -->
 				<script src="${cpath }/resources/js/board/modify.js"></script>
 				<!--===============================================================================================-->
-							<script>
-// 				 jcw 210620 페이지 로드시 실행될 함수
+				
+				</script>
+				<!--===============================================================================================-->
+				<script src="${cpath }/resources/js/main.js"></script>
+
+				<script>
+				//  jcw 210620 페이지 로드시 실행될 함수
 				$(document).ready(function(){
 					showReplyList();
 
 				});
 
 				//jcw 210620 필요 인자 불러오기
-// 				const idxBo = '${dto.idxBo }'
 				const writer = '${login.id }'
 
 				// jcw 210614 ajax list로 호출 >>>> 수정 할 것
@@ -137,6 +173,7 @@
 				
 				// jcw 210616 댓글창 생성
 				function drawReply(replys) {
+					$("#cnt").text("등록된 댓글 - " + replys.length)
 					// 부모 댓글 번호를 받아서 댓글 입력창을 만든다.
 					replys.forEach(function(reply){ 
 						if (reply.idxParent == 0) {
@@ -144,7 +181,7 @@
 							replys.forEach(function(i){
 								if (reply.idxRe == i.idxParent) rc++;
 							})
-							replyWindow(reply)				
+							replyWindow(reply, rc)				
 						}
 					})					
 						replys.forEach(function(reply){ 
@@ -153,13 +190,13 @@
 							replys.forEach(function(i){
 								if (reply.idxRe == i.idxParent) rc++;
 							})
-							replyWindow(reply)	
+							replyWindow(reply, rc)	
 							}
 						})
 					}
 				
 				// jcw 210614 댓글 출력부분 스크립트
-				function replyWindow(reply){
+				function replyWindow(reply, rc){
 					const replyMainDiv = document.createElement('div')
 					replyMainDiv.setAttribute("id", "replyMainDiv" + reply.idxRe)
 
@@ -206,7 +243,12 @@
 					replyListContentDiv.style = "display:flex; line-height :58px;"
 						const replyContentPtag =  document.createElement('div')
 						replyContentPtag.style = "valign:middle;"
+						if(rc != 0){						
+						replyContentPtag.innerHTML = reply.content + "(" + rc + ")"
+						} else {
 						replyContentPtag.innerHTML = reply.content
+						}
+						
 						replyListContentDiv.appendChild(replyContentPtag)
 										
 					//대댓글, 수정, 삭제 버튼
@@ -306,15 +348,15 @@
 					replyMainDiv.appendChild(replySubListDiv)
 					
 					// 댓글 분배 디브
-					if(reply.idxParent == 0){
-					mainReplyMain.appendChild(replyMainDiv)
+					if(reply.idxParent == 0 || document.getElementById("replySubListDiv" + reply.idxParent) == null){
+						mainReplyMain.appendChild(replyMainDiv)
+					
 					}else{
 					document.getElementById("replySubListDiv" + reply.idxParent).appendChild(replyMainDiv)
-			
 					}
 					
+				}
 					
-					}
 				
 			// 대댓글 버튼을 누르면 입력 폼을 생성한다.	
 		 	function replyReplyBTN(idx, writer, idxBo){
@@ -416,7 +458,7 @@
 								const submit = document.createElement('input')
 								submit.style = "font-size:20px; width : 100px; height : 70px; "
 								submit.type = 'submit'
-								submit.value = '입력'
+								submit.value = '등록'
 								testForm.appendChild(submit)
 							
 							
@@ -460,7 +502,7 @@
 					}
 						
 					}	
-// 			수정 버튼을 누르면 replySecondDiv를 숨기고 수정 폼을 생성한다.
+			// 수정 버튼을 누르면 replySecondDiv를 숨기고 수정 폼을 생성한다.
 			function updateReplyBTN(idx, content, idxParent){
  					$(".replySelectSubDiv").empty();
  					$(".replySelectSubDiv").hide();
@@ -501,6 +543,7 @@
 						replyInputUserDiv.appendChild(replyInputNameMainDiv)
 						replyInputMainStyleDiv.appendChild(replyInputUserDiv)
 						
+
 						
 						//댓글 리스트, 수정, 삭제 관련 div//
 						const replyInputMainDiv = document.createElement('div')
@@ -569,11 +612,9 @@
 					
 					document.getElementById("replySelectSubDiv" + idx).appendChild(replyReplyMainDiv)
 					
-					
-					//취소버튼 임시
-		
+
 			
-					
+					///// 오류
 					document.getElementById('updateForm').onsubmit = function(event) {
 						event.preventDefault();						
 						const formData = new FormData(event.target)	// formData는 내부 속성이 없다.
@@ -590,13 +631,14 @@
 								'Content-Type' : 'application/json; charset=utf-8',	
 							}
 						}
+					
 						fetch(url, opt)
 						.then(resp => resp.text())
 						.then(text => {
 							if(+text == 1) {
 								event.target.reset();
 								showReplyList();
-								alert('댓글 수정 성공')
+								
 							} 
 							else {
 								alert('댓글 수정 실패')
@@ -604,17 +646,22 @@
 						})
 					}
 					
-						const updateReplyCancleBtn = document.createElement('button')
-						updateReplyCancleBtn.setAttribute("idx", idx)
-						updateReplyCancleBtn.addEventListener ("click", function() {
-						const idx = $(this).attr("idx");
-						$(".replySelectSubDiv").empty()
-		 				$(".replySelectSubDiv").hide()
-		 				$(".replySecondDiv").show()
-						})
-						updateReplyCancleBtn.innerText="↘취소"
-						replyInputNameMainDiv.appendChild(updateReplyCancleBtn)
-					}
+							
+						
+						//취소버튼
+							const updateReplyCancleBtn = document.createElement('button')
+							updateReplyCancleBtn.setAttribute("idx", idx)
+							updateReplyCancleBtn.addEventListener ("click", function() {
+								event.preventDefault();	
+							const idx = $(this).attr("idx");
+							$(".replySelectSubDiv").empty()
+			 				$(".replySelectSubDiv").hide()
+			 				$(".replySecondDiv").show()
+							})
+							updateReplyCancleBtn.innerText="↘취소"
+							replyInputNameMainDiv.appendChild(updateReplyCancleBtn)
+						}
+					
 			</script>
 			
 			<script>
@@ -637,6 +684,34 @@
 
 	          	}
 
+			</script>
+			
+			<script>
+			// 메인 댓글 입력
+			document.getElementById('replyInputForm').onsubmit = function(event) {
+				event.preventDefault();						
+				const formData = new FormData(event.target)	
+				const url = '${cpath}/board/read/' + idxBo
+				const opt = {
+					method: 'POST',
+					body: formData,
+
+				}
+				console.log(formData)
+				fetch(url, opt)
+				.then(resp => resp.text())
+				.then(text => {
+					if(+text == 1) {
+						event.target.reset();
+						showReplyList();
+					} 
+					else {
+						alert('댓글 입력 실패')
+					}
+				})
+
+			}
+			
 			</script>
 
 
