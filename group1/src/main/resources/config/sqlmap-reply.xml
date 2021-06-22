@@ -18,6 +18,18 @@
 			(EPLreply_seq.nextval, #{content}, #{writer}, #{idxBo}, #{idxParent})
 	</insert>
 
+	<delete id="deleteReply" parameterType="int">
+	delete EplReply where idxRe = #{idx}
+	
+	</delete>
+	
+	<update id="updateReply" parameterType="EplReply" >
+		update EplReply
+			set content = #{content}
+			where
+				idxRe = #{idxRe}
+	</update>
+	
 </mapper>
 
 

@@ -11,5 +11,11 @@ public interface EplReplyDAO {
 
 	int insertReply(EplReplyDTO dto);
 
+	int deleteReply(int idx);
+	
+	int replyUpdate(EplReplyDTO dto);
+
+	int updateReply(EplReplyDTO dto);
+
 
 }

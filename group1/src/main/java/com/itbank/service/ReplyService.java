@@ -23,6 +23,22 @@ public class ReplyService {
 		// TODO Auto-generated method stub
 		return ERdao.insertReply(dto);
 	}
+
+	public int deleteReply(int idx) {
+		// TODO Auto-generated method stub
+		return ERdao.deleteReply(idx);
+	}
+
+
+
+	public int replyUpdate(EplReplyDTO dto) {
+		return ERdao.replyUpdate(dto);
+	}
+
+	public int updateReply(EplReplyDTO dto) {
+		// TODO Auto-generated method stub
+		return ERdao.updateReply(dto);
+	}
 	
 
 }
