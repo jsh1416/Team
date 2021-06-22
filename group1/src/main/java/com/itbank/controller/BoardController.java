@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.itbank.board.BoardDTO;
+import com.itbank.member.MemberDTO;
 import com.itbank.service.BoardService;
 
 @Controller
@@ -42,6 +44,22 @@ public class BoardController {
 		return mav;
 	}
 	
+//	@GetMapping(value="/{idxBo}", produces="application/json; charset=utf-8")//최신순 
+//	public ModelAndView newNumber(@RequestParam HashMap<String, String> param) throws JsonProcessingException {
+//		// 전달받은 userid를 이용하여 service -> dao 형식으로 객체를 하나 불러온다
+//		ModelAndView mav = new ModelAndView("/board/list");
+//		List<BoardDTO> list = bs.selectAll(param);
+//		return mav;
+//	}
+	
+//	@GetMapping(value="/{viewCount}", produces="application/json; charset=utf-8")//조회순
+//	public ModelAndView viewNumber(@RequestParam HashMap<String, String> param) throws JsonProcessingException {
+//		// 전달받은 userid를 이용하여 service -> dao 형식으로 객체를 하나 불러온다
+//		ModelAndView mav = new ModelAndView("/board/list");
+//		List<BoardDTO> list = bs.selectView(param);
+//		return mav;
+//	}
+//	
 	
 	@GetMapping("/read/{idxBo}")
 	public ModelAndView read(@PathVariable int idxBo,boolean vc,String type,String search) {
@@ -64,6 +82,7 @@ public class BoardController {
 		BoardDTO dto = bs.select(idxBo);
 		ModelAndView mav = new ModelAndView("board/read");
 		mav.addObject("dto",dto);
+//		System.err.println("content : " + dto.getContent());
 //		System.out.println("uploadFile :"+ dto.getUploadFile());
 		return mav;
 	}
@@ -91,10 +110,10 @@ public class BoardController {
 	}
 	
 	@GetMapping("/delete") // 리스트페이지 EPL말고 뭐라고 해야할지 모르겠음 
-	public ModelAndView delete(int idxBO)  throws Exception{
+	public ModelAndView delete(int idxBo)  throws Exception{
 		ModelAndView mav = new ModelAndView("msg");
 		int row = 0;
-		row = bs.delete(idxBO);
+		row = bs.delete(idxBo);
 		System.out.println("row="+row);
 		mav.addObject("msg",row ==1 ? "게시글이 삭제되었습니다" : "게시글이 삭제되지않았습니다");
 		mav.addObject("url", row == 1 ? "/EPL/board/" : "");
@@ -128,11 +147,5 @@ public class BoardController {
 		return Integer.toString(row);
 	}
 	
-//	@PostMapping("/read/boardhate/{idxBo}/") //싫어요
-//	@ResponseBody
-//	public String hateboard(@PathVariable String idxBo) {
-//		int row = bs.likedown(idxBo);
-//		return "redirect:/board/read/" + Integer.toString(row);
-//	}
 	
 }

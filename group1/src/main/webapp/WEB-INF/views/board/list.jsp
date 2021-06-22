@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="../header.jsp" %>
+<script>
+// 	const cpath= '${cpath}';
+	const idxBo = '${dto.idxBo}';
+	const viewCount = '${dto.viewCount}';
+	console.log('idxBo : ' + idxBo)
+</script>
+
+
+
 <style>
 .sb {
 		max-width: 1300px;
@@ -49,8 +58,8 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column1">최신</th>
-									<th class="cell100 column2">조회수</th>
+									<th class="cell100 column1"><button style="color: #FFFFFF;" id="newNumber" >최신</button></th>
+									<th class="cell100 column2"><button style="color: #FFFFFF;" id="viewNumber" >조회수</button></th>
 									<th class="cell100 column3">추천수</th>
 								</tr>
 							</thead>
@@ -80,14 +89,16 @@
 									<option ${param.type == 'content' ? 'selected' : '' } value="content">내용</option>
 								</select>
 								</span>
+								
 								<span><input type="text" name="search" value="${param.search }" placeholder="검색어를 입력하세요"></span>
                         		<span><input type="submit" value="검색"></span>
                     			 </form>
-<%-- 						 <c:if test="${sessionScope.sessionID!=null}">  --%>
-<!-- 									글쓰기 이동 -->
+                    			 
+								<c:if test="${not empty login.nickName }">
 								<span style=  "justify-content: space-between; "><a href="${cpath}/board/mylist/${login.nickName}">나의 글</a><a href="${cpath}/board/write">글쓰기</a></span>
-					</div>			
-<%-- 						 </c:if>		 --%>
+								</c:if>
+					</div>		
+									
 						
 					</div>
 				</div>
@@ -119,6 +130,8 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="${cpath }/resources/js/main.js"></script>
+	<script src="${cpath }/resources/js/board/newNumber.js"></script>
+	<script src="${cpath }/resources/js/board/viewNumber.js"></script>
 
 </body>
 </html>

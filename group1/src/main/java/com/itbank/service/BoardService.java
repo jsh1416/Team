@@ -28,6 +28,9 @@ public class BoardService {
 		}
 		return (flag1 && param.get("search").equals("") == false) ? dao.selectSearch(param) : dao.selectAll();
 	}
+	public List<BoardDTO> selectView(HashMap<String, String> param) {
+		return dao.selectView();
+	}
 
 	public BoardDTO select(int idxBo) { // 글 읽기
 		return dao.select(idxBo);
@@ -134,6 +137,8 @@ public class BoardService {
 		
 		return row;
 	}
+
+	
 
 //	public int likedown(String idxBo) {
 //	int row = dao.likedown(idxBo);

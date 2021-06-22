@@ -8,6 +8,7 @@ window.onload = function(){
 							.then(resp=> resp.text())
 							.then(text => { 
 								if(text=='1') { 
+									alert("좋아용");
 		  							console.log('I Like That! : ' + text)
 	  							} else{
 	  								console.log('I hate that : ' + text)
