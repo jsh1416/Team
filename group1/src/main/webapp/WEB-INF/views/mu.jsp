@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
+<%@ include file="scroll.jsp" %>
 
 	<div id="fullpage">
 		<div class="section" id="MU1">
@@ -44,7 +45,7 @@
 					const child = document.createElement('div')		// 제목
 					const child2 = document.createElement('div')	// 내용
 					const newstitle = '<a href=' + newslist.items[i].link + ' target="_blank" style="color:#C70101; font-weight:bold; cursor: pointer;">' 
-					+ '<span style="color:#E31B23; font-weight:bold;">' + (i+1) + '</span>' + '&nbsp&nbsp&nbsp[' + newslist.items[i].title + ']</a>'
+					+ '<span style="color:#C70101; font-weight:bold;">' + (i+1) + '</span>' + '&nbsp&nbsp&nbsp[' + newslist.items[i].title + ']</a>'
 					const content = newslist.items[i].description  + 
 					'(' + newslist.items[i].pubDate.slice(0, -5) + ')' + '<br>' +  '<br>'
 					child.innerHTML = newstitle
@@ -77,7 +78,7 @@
 						const child = document.createElement('div')	
 						const child2 = document.createElement('div')
 						const newstitle = '<a href=' + newslist.items[i].link + ' target="_blank" style="color:#C70101; font-weight:bold; cursor: pointer;">' 
-						+ '<span style="color:#E31B23; font-weight:bold;">' + (i+1) + '</span>' + '&nbsp&nbsp&nbsp[' + newslist.items[i].title + ']</a>'
+						+ '<span style="color:#C70101; font-weight:bold;">' + (i+1) + '</span>' + '&nbsp&nbsp&nbsp[' + newslist.items[i].title + ']</a>'
 						const content = newslist.items[i].description  + 
 						'(' + newslist.items[i].pubDate.slice(0, -5) + ')' + '<br>' +  '<br>'
 						child.innerHTML = newstitle

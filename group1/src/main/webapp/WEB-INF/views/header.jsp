@@ -14,9 +14,6 @@
 </script>
 
 
-<!-- 풀페이지 스크롤 링크 jsh 06.14  -->
-	<link rel="stylesheet" type="text/css" href="resources/scroll/jquery.fullPage.css" />
-	<link rel="stylesheet" type="text/css" href="resources/scroll/examples.css" />
 	<link rel="icon" type="image/png" href="${cpath }/resources/images/icons/favicon.ico"/> 
 	<title>
 		 EPL Fan Site
@@ -119,7 +116,6 @@
 	<link rel="stylesheet" href="${cpath }/resources/css/main.css">
 	<link rel="stylesheet" href="${cpath }/resources/css/util.css">
 
-<!--=============================================섹션 스크롤 추가 0610 jsh ==================================================-->
 
 <!--=============================================alertCss 06.14봉찬균 ==================================================-->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -130,20 +126,7 @@
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="resources/scroll/scrolloverflow.js"></script>
-	<script type="text/javascript" src="resources/scroll/jquery.fullPage.js"></script>
-	<script type="text/javascript" src="resources/scroll/examples.js"></script>
-	<!-- 스크롤 기능 jsh 06.14  -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#fullpage').fullpage({
-				anchors: ['firstPage', 'secondPage', 'thirdPage'],
-				navigation: true,
-				css3: true,
-				keyboardScrolling: true
-			});
-		});
-	</script>
+	
 	
 </head>
 <body>
@@ -257,9 +240,9 @@
 	</header>
 
 <!-- footer 추가  -->	
-<footer>
+<!-- <footer>
  	footer 
- </footer>
+ </footer> -->
 
 <!-- 팀 로고 클릭 시 해당 페이지로 이동 jsh 06.14 -->
 <script>	
