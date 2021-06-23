@@ -72,6 +72,14 @@ public interface BoardDAO {
     @Update("update EPLBoard set likeidx =likeidx+1 and likecheck = 1 where boardidx=#{boardidx} and likemember = #{likemember}") 
    	int likeCheckUp(String idxBo);
 
+    @Select("select * from EPLBoard order by likeCount desc")
+	List<BoardDTO> selectLike();
+
+    @Select("select * from EPLBoard order by wdate desc")
+	List<BoardDTO> selectNew();
+
+	
+
     
 
 

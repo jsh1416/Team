@@ -4,8 +4,10 @@
 <script>
 // 	const cpath= '${cpath}';
 	const idxBo = '${dto.idxBo}';
-	const viewCount = '${dto.viewCount}';
+	
 	console.log('idxBo : ' + idxBo)
+	
+	
 </script>
 
 
@@ -60,25 +62,23 @@
 								<tr class="row100 head">
 									<th class="cell100 column1"><button style="color: #FFFFFF;" id="newNumber" >최신</button></th>
 									<th class="cell100 column2"><button style="color: #FFFFFF;" id="viewNumber" >조회수</button></th>
-									<th class="cell100 column3">추천수</th>
+									<th class="cell100 column3"><button style="color: #FFFFFF;" id="likeNumber">추천수</button></th>
 								</tr>
 							</thead>
 						</table>
 					</div>
 
 					<div class="table100-body js-pscroll">
-						<table>
+							<table>
 							<tbody>
 							<c:forEach var="dto" items="${list }">
 								<tr class="row100 body">
-<!-- 																	611 리드페이지 이동 -->
-									<td class="cell100 column1"><a href="${cpath }/board/read/${dto.idxBo}?type=${param.type }&search=${param.search }&vc=true">${dto.title}</a></td>
-									<td class="cell100 column2">${ dto.viewCount}</td>
-									<td class="cell100 column3">${ dto.likeCount}</td>
+									<td class="cell100 column1 titleArea"><a href="${cpath }/board/read/${dto.idxBo}?type=${param.type }&search=${param.search }&vc=true">${dto.title}</a></td>
+									<td class="cell100 column2 viewCountArea">${ dto.viewCount}</td>
+									<td class="cell100 column3 likeCountArea">${ dto.likeCount}</td>
 								</tr>
 							</c:forEach>
 						</table>
-						
 						
 					<div class= "sb">
 							<form>
@@ -130,8 +130,7 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="${cpath }/resources/js/main.js"></script>
-	<script src="${cpath }/resources/js/board/newNumber.js"></script>
-	<script src="${cpath }/resources/js/board/viewNumber.js"></script>
-
+	<script src="${cpath }/resources/js/board/sortList.js"></script>
+	
 </body>
 </html>

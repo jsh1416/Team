@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.board.BoardDTO;
 import com.itbank.member.MemberDTO;
 import com.itbank.service.BoardService;
@@ -27,6 +28,8 @@ import com.itbank.service.BoardService;
 public class BoardController {
 
 	@Autowired private BoardService bs;
+	
+	private ObjectMapper mapper = new ObjectMapper();
 	
 	@GetMapping("/") // 전체 글 목록
 	public ModelAndView list(@RequestParam HashMap<String, String> param) {
@@ -44,22 +47,34 @@ public class BoardController {
 		return mav;
 	}
 	
-//	@GetMapping(value="/{idxBo}", produces="application/json; charset=utf-8")//최신순 
-//	public ModelAndView newNumber(@RequestParam HashMap<String, String> param) throws JsonProcessingException {
-//		// 전달받은 userid를 이용하여 service -> dao 형식으로 객체를 하나 불러온다
-//		ModelAndView mav = new ModelAndView("/board/list");
-//		List<BoardDTO> list = bs.selectAll(param);
-//		return mav;
-//	}
+	@ResponseBody
+	@GetMapping(value="/orderByNew/", produces="application/json; charset=utf-8")//최신순 
+	public String newNumber(@RequestParam HashMap<String, String> param) throws JsonProcessingException {
+		List<BoardDTO> list = bs.selectNew();
+		System.out.println("view LIst  : " + list.size());
+		System.out.println("컨트롤러진입");
+		String json = mapper.writeValueAsString(list);
+		return json;
+	}
 	
-//	@GetMapping(value="/{viewCount}", produces="application/json; charset=utf-8")//조회순
-//	public ModelAndView viewNumber(@RequestParam HashMap<String, String> param) throws JsonProcessingException {
-//		// 전달받은 userid를 이용하여 service -> dao 형식으로 객체를 하나 불러온다
-//		ModelAndView mav = new ModelAndView("/board/list");
-//		List<BoardDTO> list = bs.selectView(param);
-//		return mav;
-//	}
-//	
+	
+	@ResponseBody //ajax는 이거 붙여야함
+	@GetMapping(value="/orderByView/" ,produces="application/json; charset=utf-8")//조회순
+	public String viewNumber(@RequestParam HashMap<String, String> param) throws JsonProcessingException {
+		List<BoardDTO> list = bs.selectView();
+		System.out.println("view LIst  : " + list.size());
+		String json = mapper.writeValueAsString(list);
+		return json;
+	}
+	
+	@ResponseBody
+	@GetMapping(value="/orderByLike/" ,produces = "application/json; charset=utf-8")//좋아요순
+	public String likeNumber(@RequestParam HashMap<String, String> param) throws JsonProcessingException {
+		List<BoardDTO> list = bs.selectLike();
+		System.out.println("view LIst  : " + list.size());
+		String json = mapper.writeValueAsString(list);
+		return json;
+	}
 	
 	@GetMapping("/read/{idxBo}")
 	public ModelAndView read(@PathVariable int idxBo,boolean vc,String type,String search) {

@@ -28,8 +28,13 @@ public class BoardService {
 		}
 		return (flag1 && param.get("search").equals("") == false) ? dao.selectSearch(param) : dao.selectAll();
 	}
-	public List<BoardDTO> selectView(HashMap<String, String> param) {
+	
+	public List<BoardDTO> selectView() {
 		return dao.selectView();
+	}
+
+	public List<BoardDTO> selectNew() {
+		return dao.selectNew();
 	}
 
 	public BoardDTO select(int idxBo) { // 글 읽기
@@ -137,6 +142,14 @@ public class BoardService {
 		
 		return row;
 	}
+
+	public List<BoardDTO> selectLike() {
+		return dao.selectLike();
+	}
+
+	
+
+
 
 	
 
