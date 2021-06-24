@@ -73,33 +73,33 @@
 					</table>
 				</div>
 				</div>
+					
+				<!-- 06 24 jcw insertform start  -->
 					<div class="container-table100">
 						<div class="wrap-table100">
 							<div class="table100 ver1 m-b-110">
 									<div id="replyDiv">
-									<form id="replyInputForm" 
-										style="display:flex; background-color: #dadada;
-										width:1170px; height : 70px;">
-										<input type = "hidden" name="idxBo" value = ${dto.idxBo } >
-										<input type = "hidden" name="writer" value = ${login.id } >
-										<input type = "hidden" name="idxParent" value="0" >
-										<textarea name = "content" placeholder="바른말 고운말을 사용합시다."
-											required style="width:1070px; height:70px;"></textarea>
-										<input type="submit" value="등록" 
-											style="font-size: 20px; background-color: #6c7ae0;
-											 width : 100px; height: 70px;">	
+										<form id="replyInputForm" 
+											style="display:flex; background-color: #dadada;
+											width:1170px; height : 70px;">
+											<input type = "hidden" name="idxBo" value = ${dto.idxBo } >
+											<input type = "hidden" name="writer" value = ${login.id } >
+											<input type = "hidden" name="idxParent" value="0" >
+											<textarea name = "content" placeholder="바른말 고운말을 사용합시다."
+												required style="width:1070px; height:70px;"></textarea>
+											<input type="submit" value="등록" 
+												style="font-size: 20px; background-color: #6c7ae0;
+												 width : 100px; height: 70px;">	
 								
-									</form>
-								</div>
-								<h6 id = "cnt"></h6>
-								<div id = "likeContent" style="display:none; background-color: #dadada;
-										width:1170px; height : 100px;"></div>
-								<div id="mainReplyMain" style="background-color: #4e81c0;"></div>
+										</form>
+									</div>
+								<div id = "likeReplyList"></div>
+								<h6 id = "cnt" style="text-align: left;"></h6>
+								<div id="mainReplyMain"></div>
 							</div>
 						</div>
 					</div>
-				
-					
+					<!-- 06 24 jcw insertform end  -->
 				
 				
 				
@@ -144,6 +144,7 @@
 				<script src="${cpath }/resources/js/main.js"></script>
 
 				<script>
+				
 				//  jcw 210620 페이지 로드시 실행될 함수
 				$(document).ready(function(){
 					showReplyList();
@@ -157,14 +158,14 @@
 				function showReplyList(){
 							$("#mainReplyMain").empty();		// reply div의 내용을 초기화
 					const url = "${cpath}/board/read/replyList/"
-					const paramData = {"idx" : "${dto.idxBo}"};
+					const paramData = {"idx" : "${dto.idxBo}", "likeId" : "${login.id }"};
 					$.ajax({
 				      type: 'GET',
 				      url: url,
 				      data: paramData,
 				      dataType: 'json',
 						success : function(replys){
-						drawReply(replys)
+							drawReply(replys)
 						}, error : function(replys){
 
 						}
@@ -173,6 +174,18 @@
 				
 				// jcw 210616 댓글창 생성
 				function drawReply(replys) {
+										 
+					let replyCountData = replys.map(function(rc){return rc.replyCount})
+					replyCountData = Math.max.apply(null, replyCountData)
+					
+//					replys.forEach(function(reply, replyCountData){ 
+//						if (reply.replyCount == replyCountData) {
+							
+//						}
+//					})	
+
+					
+	//				$("#likeReplyList").appendChild()
 					$("#cnt").text("등록된 댓글 - " + replys.length)
 					// 부모 댓글 번호를 받아서 댓글 입력창을 만든다.
 					replys.forEach(function(reply){ 
@@ -199,7 +212,12 @@
 				function replyWindow(reply, rc){
 					const replyMainDiv = document.createElement('div')
 					replyMainDiv.setAttribute("id", "replyMainDiv" + reply.idxRe)
-
+					if(reply.idxParent == 0){					
+					replyMainDiv.style = "background-color: #4e81c0;"
+					} else {
+					replyMainDiv.style = "background-color: #2d5986;"
+					}
+					
 					const replySecondDiv = document.createElement('div')
 					replySecondDiv.setAttribute("id", "replySecondDiv" + reply.idxRe)
 					replySecondDiv.setAttribute("class", "replySecondDiv")
@@ -216,8 +234,8 @@
 						const replyNameMainDiv = document.createElement('div')
 						replyNameMainDiv.style = " line-height :58px;"
 							const replyNameDiv = document.createElement('div')
-							replyNameDiv.style = "font-weight: 700; text-align: "
-							replyNameDiv.innerHTML = reply.writer
+							replyNameDiv.style = "font-weight: 700; text-align: left; "
+							replyNameDiv.innerHTML = reply.nickName
 							replyNameMainDiv.appendChild(replyNameDiv)
 							replyUserDiv.appendChild(replyNameMainDiv)
 
@@ -240,14 +258,23 @@
 					replyListListDiv.style = "width:990px; border: 1px solid #dadada;  height :85px;"
 					
 					const replyListContentDiv = document.createElement('div')
-					replyListContentDiv.style = "display:flex; line-height :58px;"
+					replyListContentDiv.style = "line-height :18px; font-size: 100%; height :53px;"
 						const replyContentPtag =  document.createElement('div')
-						replyContentPtag.style = "valign:middle;"
-						if(rc != 0){						
+						replyContentPtag.style = "margin : 0.7%; text-align:left; valign:middle;white-space: pre-wrap; word-wrap: break-word; margin-right: 5px; word-break: break-word;"
+						
+						// 삭제된 댓글의 댓글을 찾아서 표시한다.
+						let orphanReply = (document.getElementById("replySubListDiv" + reply.idxParent) == null)
+						
+						if(rc != 0){
 						replyContentPtag.innerHTML = reply.content + "(" + rc + ")"
 						} else {
-						replyContentPtag.innerHTML = reply.content
+							(orphanReply == 1 && reply.idxParent != 0) ?
+									replyContentPtag.innerHTML = "[삭제된 댓글의 댓글입니다.] <br>" + reply.content
+										:
+									replyContentPtag.innerHTML = reply.content
+										;
 						}
+						
 						
 						replyListContentDiv.appendChild(replyContentPtag)
 										
@@ -270,7 +297,7 @@
 						const idxBo = $(this).attr("idxbo");
 						replyReplyBTN(idx, writer, idxBo)	//댓글창 form 생성을 구현할 것. class 초기화후 id생성.	
 						})
-						replyReplyBtn.innerText="↘답글"
+						replyReplyBtn.innerText="↘댓글"
 						replyListSelectBtnDiv.appendChild(replyReplyBtn)
 						}
 						
@@ -316,8 +343,48 @@
 					
 					// 좋아요 구현할 버튼 부분
 					const replyListMainBtnDiv = document.createElement('div')
+					if(reply.replyCheck == 0){
 					replyListMainBtnDiv.style = "background-color:#dadada; width:100px;"
+					} else {
+					replyListMainBtnDiv.style = "background-color:#ff0000; width:100px;"
+					}
 					replyListInnerDiv.appendChild(replyListMainBtnDiv)
+					
+					const likeBtnDiv = document.createElement('div')
+					replyListMainBtnDiv.appendChild(likeBtnDiv)
+					
+					const likeBtnTagA = document.createElement('button')
+					likeBtnTagA.style = "width : 85px; height : 85px; font-size :70%;"
+					likeBtnTagA.setAttribute("id", "likeBtnTagA" + reply.idxRe)
+					likeBtnTagA.setAttribute("idxre", reply.idxRe)
+					likeBtnTagA.setAttribute("userid", writer)
+					
+					if (reply.replyCount == 0){
+					likeBtnTagA.innerText= "좋아요"				
+					} else {
+					likeBtnTagA.innerText= "좋아요👍" + reply.replyCount
+					}
+							// ajax 좋아요 리스트 받는 부분
+					likeBtnTagA.addEventListener ("click", function() {
+						const likeIdxRe = $(this).attr("idxre");
+						const likeId = $(this).attr("userid");
+					if(reply.replyCheck == 0){		
+						replyLikeDo(likeIdxRe, likeId)
+					} else {
+						replyLikeUndo(likeIdxRe, likeId)
+					}
+					         	
+					})
+					likeBtnDiv.appendChild(likeBtnTagA)
+					
+					
+					
+					
+					
+					
+					
+					
+					
 										
 					// 버튼으로 생성된 form이 붙을 위치
 					const replySelectSubDiv = document.createElement('div')
@@ -344,13 +411,12 @@
 					//대댓글이 보일 위치
 					const replySubListDiv = document.createElement('div')
 					replySubListDiv.setAttribute("id", "replySubListDiv" + reply.idxRe)
-					replySubListDiv.style = "background-color: #2d5986; width:1170px;"
+					replySubListDiv.style = "width:1170px;"
 					replyMainDiv.appendChild(replySubListDiv)
 					
 					// 댓글 분배 디브
 					if(reply.idxParent == 0 || document.getElementById("replySubListDiv" + reply.idxParent) == null){
 						mainReplyMain.appendChild(replyMainDiv)
-					
 					}else{
 					document.getElementById("replySubListDiv" + reply.idxParent).appendChild(replyMainDiv)
 					}
@@ -614,7 +680,7 @@
 					
 
 			
-					///// 오류
+					///// 
 					document.getElementById('updateForm').onsubmit = function(event) {
 						event.preventDefault();						
 						const formData = new FormData(event.target)	// formData는 내부 속성이 없다.
@@ -691,6 +757,7 @@
 			document.getElementById('replyInputForm').onsubmit = function(event) {
 				event.preventDefault();						
 				const formData = new FormData(event.target)	
+				console.log(formData)
 				const url = '${cpath}/board/read/' + idxBo
 				const opt = {
 					method: 'POST',
@@ -711,6 +778,56 @@
 				})
 
 			}
+			
+			</script>
+			<script>
+			// 좋아요 버튼 실행 insert
+			function replyLikeDo(likeIdxRe, likeId){
+				const ob = {"likeIdxRe" : likeIdxRe, "likeId" : likeId}
+				const url = '${cpath}/board/read/replyLikeDo/'
+				const opt = {
+					method: 'POST',
+					body: JSON.stringify(ob),
+					headers: {
+						'Content-Type' : 'application/json; charset=utf-8',	
+					}
+				}
+				fetch(url, opt).then(resp => resp.text())
+				.then(text => {
+					if(text == 1) {
+						showReplyList()
+					} else {
+						alert("좋아요 실패")
+					}
+				})
+				
+			}
+			// 좋아요 버튼 취소 delete
+			
+			function replyLikeUndo(likeIdxRe, likeId){
+				
+				const ob = {"likeIdxRe" : likeIdxRe, "likeId" : likeId}
+				console.log(JSON.stringify(ob))
+				const url = '${cpath}/board/read/replyLikeUndo/'
+				const opt = {
+					method: 'POST',
+					body: JSON.stringify(ob),
+					headers: {
+						'Content-Type' : 'application/json; charset=utf-8',	
+					}
+				}
+				fetch(url, opt).then(resp => resp.text())
+				.then(text => {
+					if(text == 1) {
+						showReplyList()
+					} else {
+						alert("취소 실패")
+					}
+				})
+				
+			}
+			
+			
 			
 			</script>
 

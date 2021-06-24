@@ -9,13 +9,21 @@ public class EplReplyDTO {
 //			idxBo          number          not null,
 //			wdate			varchar2(50)	default to_char(sysdate, 'yyyy-MM-dd hh24:mi'),
 //			likeCount		number		    default 0,
-//		    idxParent       number          default 0
-//		    );
+//		    idxParent       number          default 0,
+//
+//			  constraints EPLreply_fk1 
+//			        FOREIGN key(writer) 
+//			        references EPLMember(id) 
+//			        on delete cascade,
+//			    
+//			    constraints EPLreply_fk2 
+//			    FOREIGN key(idxBO) 
+//			    references EPLBoard(idxBO) 
+//			    on delete cascade     
+//			    );
 	
-	int idxRe, idxBo, idxParent, likeCount;
-	String content, writer, wdate;
-	
-
+	int idxRe, idxBo, idxParent, likeCount, replyCount, replyCheck;
+	String content, writer, wdate, nickName;
 	public int getIdxRe() {
 		return idxRe;
 	}
@@ -40,6 +48,18 @@ public class EplReplyDTO {
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
 	}
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+	public int getReplyCheck() {
+		return replyCheck;
+	}
+	public void setReplyCheck(int replyCheck) {
+		this.replyCheck = replyCheck;
+	}
 	public String getContent() {
 		return content;
 	}
@@ -58,6 +78,15 @@ public class EplReplyDTO {
 	public void setWdate(String wdate) {
 		this.wdate = wdate;
 	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	
+	
+	
 	
 	
 	

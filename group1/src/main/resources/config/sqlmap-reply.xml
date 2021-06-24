@@ -5,10 +5,36 @@
 			
 <mapper namespace="com.itbank.reply.EplReplyDAO">
 
-	<select id="replyList" parameterType="int" resultType="EplReply">
-		select * from EplReply
-			where idxBo = #{idx}
-			order by idxRe
+	<select id="replyList" parameterType="hashmap" resultType="EplReply">
+				select
+				distinct EPLreply.idxRe,
+				EPLreply.content,
+                EPLreply.writer,
+                EPLreply.idxBo,
+                EPLreply.wdate,
+                EPLreply.likeCount,
+                EPLreply.idxParent,
+				EPLmember.nickName	as	nickName,
+                (select count(*) from EPLreplyLike where EPLreply.idxRe = EPLreplyLike.likeIdxRe) as replyCount,
+				(select count(*) from
+				 EPLreplyLike where EPLreply.idxRe = EPLreplyLike.likeIdxRe and EPLreplyLike.likeId = #{likeId})
+				 as replyCheck
+				
+				from
+				EPLreply
+				
+                inner join
+				EPLmember
+				on
+				EPLreply.writer = EPLmember.id
+                
+                full outer join
+                EPLreplyLike
+                on
+                EPLreply.idxRe = EPLreplyLike.likeIdxRe
+				
+				where idxBo = #{idx}
+				order by idxRe
 	</select>
 	
 	<insert id="insertReply" parameterType="EplReply">
@@ -29,6 +55,20 @@
 			where
 				idxRe = #{idxRe}
 	</update>
+	
+	<insert id="replyLikeDo" parameterType="EplReplyLike">
+	insert into EPLreplyLike
+			(likeIdxRe, likeId) 
+				values 
+			(#{likeIdxRe}, #{likeId})
+	
+	</insert>
+	
+	<delete id="replyLikeUndo" parameterType="EplReplyLike">
+	delete EPLreplyLike where likeIdxRe = #{likeIdxRe} and  likeId = #{likeId}
+	
+	</delete>
+	
 	
 </mapper>
 

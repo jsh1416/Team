@@ -16,7 +16,9 @@
 		<!-- 06.10 typeAlias 추가 -봉찬균 -->
 		<typeAlias type="com.itbank.member.MemberDTO" alias="member"/>
 		<!-- 06.14 typeAlias 추가 -전창우 -->
-		<typeAlias type="com.itbank.reply.EplReplyDTO" alias="EplReply"/>		
+		<typeAlias type="com.itbank.reply.EplReplyDTO" alias="EplReply"/>
+				<!-- 06.22 typeAlias 추가 -전창우 -->
+		<typeAlias type="com.itbank.reply.EplReplyLikeDTO" alias="EplReplyLike"/>			
 	</typeAliases>
 	
 </configuration>
