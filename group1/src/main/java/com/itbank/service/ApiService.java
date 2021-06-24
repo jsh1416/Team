@@ -42,6 +42,9 @@ public class ApiService {
             case "ars" :
             	search_team = "아스널";
             	break;
+            case "euro" :
+            	search_team = "유로 2020";
+            	break;
         }
 	    
 	        try {

@@ -24,7 +24,6 @@ public class ApiController {
 	public String newsList(@PathVariable String team, @PathVariable String type) throws IOException {
 		String news = as.getNews(team, type); 		
 		String json = mapper.writeValueAsString(news);
-		System.out.println(json);
 		return json; // json 변환 x
 		
 	}
