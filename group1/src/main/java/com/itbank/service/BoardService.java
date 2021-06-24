@@ -138,6 +138,7 @@ public class BoardService {
 		
 		int row = dao.likeUp(idxBo);
 		
+		
 		System.out.println("row : " + row);
 		
 		return row;
@@ -146,6 +147,28 @@ public class BoardService {
 	public List<BoardDTO> selectLike() {
 		return dao.selectLike();
 	}
+
+	public List<BoardDTO> selectliv(HashMap<String, String> param) {
+		
+		return dao.selectLiv();
+	}
+
+	public List<BoardDTO> selectMu(HashMap<String, String> param) {
+		return dao.selectMu();
+	}
+	
+	public List<BoardDTO> selectMc(HashMap<String, String> param) {
+		return dao.selectMc();
+	}
+	
+	public List<BoardDTO> selectChelsea(HashMap<String, String> param) {
+		return dao.selectChelsea();
+	}
+	
+	public List<BoardDTO> selectArsenal(HashMap<String, String> param) {
+		return dao.selectArsenal();
+	}
+
 
 	
 

@@ -8,7 +8,7 @@ public class BoardDTO {
 	private MultipartFile file;
 	private int likeidx,boardidx,likeCheck;
 	private String likeMember;
-	
+	private String clubName;
 	
 	@Override
 	public String toString() { //0615 파일 이름
@@ -105,6 +105,14 @@ public class BoardDTO {
 
 	public void setIdxBo(int idxBo) {
 		this.idxBo = idxBo;
+	}
+
+	public String getClubName() {
+		return clubName;
+	}
+
+	public void setClubName(String clubName) {
+		this.clubName = clubName;
 	}
 
 	

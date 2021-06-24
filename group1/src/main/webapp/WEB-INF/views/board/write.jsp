@@ -36,6 +36,7 @@
 									<th>글제목<input type="text" name="title"  placeholder="제목을 입력하세요" required></th>
 		<%-- 									<th>작성자:${login.nickName}</th> --%>
 									<th><input type="hidden" name="writer"  value="${login.nickName }"></th>
+									<th><input type="hidden" name="clubName"  value="${login.club }"></th>
 								</tr>
 							</thead>
 						</table>

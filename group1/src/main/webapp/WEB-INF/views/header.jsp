@@ -95,6 +95,43 @@
 			display: block;
 		}
 		
+/* 		06.24 ksj 스타일 */
+		.sb {
+		max-width: 1300px;
+		padding: 10px 0px;
+		display: flex;
+		justify-content: space-between;
+		background-color: #6c7ae0;
+}
+.sb > form >span{
+		display: inline-block;
+
+}
+
+.sb > form >span >select {
+		border:none;
+		border-radius:0;
+		display: inline-block;
+		background-color: #6c7ae0;
+		color: #FFFFFF;
+}
+
+
+.sb > form> span >input {
+		background-color: #6c7ae0;
+		color: #FFFFFF;
+}
+
+.sb > form> span >input::placeholder {
+		background-color: #6c7ae0;
+		color: #FFFFFF;
+}
+
+.sb >span > a {
+		color: #FFFFFF;
+		margin: 10px;
+}
+				
 	</style>
 	
 	

@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Update;
 public interface BoardDAO {
 
 	
-	@Select("select * from EPLBoard order by idxBo desc") //리스트(팀) 클릭시 리스트
+	@Select("select * from EPLBoard order by idxBo desc") // 전체 글
 	List<BoardDTO> selectAll();
 
 	@Select("select * from EPLBoard where idxBo = #{idxBo} ") //READ 글 클릭시 읽기모드
@@ -20,19 +20,37 @@ public interface BoardDAO {
 	@Select("select * from EPLBoard order by viewCount desc") //조회수순으로 정렬 
 	List<BoardDTO> selectView(); 
 	
-	@Insert("insert into EPLBoard (idxBo, title, writer,content ,uploadFile) values "
+	@Select("select * from EPLBoard where clubName='Liverpool' order by idxBo desc")//리버풀 페이지
+	List<BoardDTO> selectLiv();
+	
+	@Select("select * from EPLBoard where clubName='Manchester United' order by idxBo desc")
+	List<BoardDTO> selectMu();
+	
+	@Select("select * from EPLBoard where clubName='Manchester City' order by idxBo desc")
+	List<BoardDTO> selectMc();
+	
+	@Select("select * from EPLBoard where clubName='Chelsea' order by idxBo desc")
+	List<BoardDTO> selectChelsea();
+	
+	@Select("select * from EPLBoard where clubName='Arsenal' order by idxBo desc")
+	List<BoardDTO> selectArsenal();
+	
+	
+	@Insert("insert into EPLBoard (idxBo, title, writer,content,clubName ,uploadFile) values "
 			+"(board_seq.nextval, "
 			+"#{title}, "
 			+"#{writer}, "
 			+"#{content}, "
+			+"#{clubName}, "
 			+"'${uploadFile}' )")//#{uploadFile}
 	int insert(BoardDTO dto);
 	
-	@Insert("insert into EPLBoard (idxBo, title, writer,content ) values"
+	@Insert("insert into EPLBoard (idxBo, title, writer,content,clubName ) values"
 			+ "(board_seq.nextval, "
 			+ "#{title}, "
 			+ "#{writer}, "
-			+ "#{content})")
+			+ "#{content},"
+			+"#{clubName})")
 	int withoutFileInsert(BoardDTO dto); //업로드파일이 없을경우
 
 	@Select("select max(idxBo) from EPLBoard") //게시글 
@@ -77,6 +95,10 @@ public interface BoardDAO {
 
     @Select("select * from EPLBoard order by wdate desc")
 	List<BoardDTO> selectNew();
+
+	
+
+    
 
 	
 
