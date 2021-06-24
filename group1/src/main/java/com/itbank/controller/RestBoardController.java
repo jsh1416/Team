@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itbank.reply.EplReplyDTO;
+import com.itbank.reply.EplReplyLikeDTO;
 import com.itbank.service.ReplyService;
 
 @RestController
@@ -21,12 +22,15 @@ public class RestBoardController {
 	@Autowired private ReplyService rs;
 
 	@RequestMapping(value = "/board/read/replyList", method = RequestMethod.GET)
-	public List<EplReplyDTO> replyList(@RequestParam("idx") int idx) throws Exception {
-		return rs.replyList(idx);
+	public List<EplReplyDTO> replyList(@RequestParam("idx") int idx,
+										@RequestParam("likeId") String likeId) {
+		return rs.replyList(idx, likeId);
 	}
 
 	@PostMapping("/board/read/{idx}")
 	public String insertReply(EplReplyDTO dto) {
+		System.out.println(dto);
+		System.out.println(dto.getContent());
 		int row = rs.insertReply(dto);
 		return row + "";
 	}
@@ -42,4 +46,14 @@ public class RestBoardController {
 		return rs.updateReply(dto);
 	}
 
+	@RequestMapping(value="/board/read/replyLikeDo/", method = RequestMethod.POST, consumes="application/json; charset=utf-8")
+	public int replyLikeDo(@RequestBody EplReplyLikeDTO dto) {
+		return rs.replyLikeDo(dto);
+	}
+	
+	@RequestMapping(value="/board/read/replyLikeUndo/", method = RequestMethod.POST, consumes="application/json; charset=utf-8")
+	public int replyLikeUndo(@RequestBody EplReplyLikeDTO dto) {
+		return rs.replyLikeUndo(dto);
+	}
+	
 }
