@@ -10,7 +10,8 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:component-scan base-package="com.itbank.service" />
 	<mybatis-spring:scan base-package="com.itbank.member" />
-	<mybatis-spring:scan base-package="com.itbank.board" />	
+	<mybatis-spring:scan base-package="com.itbank.board" />
+	<mybatis-spring:scan base-package="com.itbank.club" />	
 			<mybatis-spring:scan base-package="com.itbank.reply" />	
 	
 	<bean id="multipartResolver" 
