@@ -26,7 +26,7 @@
 		    	
 		    	<div class="secondLineInfo" style="width:70%; height: 30px; margin-bottom: 20px; margin-left: 219.5px; text-align: left;">
 		    		<div style="display: inline-block; margin-right: 40px;">
-		    			<span style="font-size: 14px;">게시글 수</span> <span style="font-size: 14px; font-weight: bold;">0</span>
+		    			<span style="font-size: 14px;">게시글 수</span> <span style="font-size: 14px; font-weight: bold;">${myBoardCount }</span>
 		    		</div>
 		    		
 		    		<div style="display: inline-block;">

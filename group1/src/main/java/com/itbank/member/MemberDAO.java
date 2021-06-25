@@ -25,5 +25,8 @@ public interface MemberDAO {
 	@Update("update EPLmember set pw=#{pw} where name = #{name} and email = #{email}")
 	int updatePw(MemberDTO member);
 
+	@Select("select count(*) from EPLBOARD where writer = #{nickName}")
+	int myBoardCount(MemberDTO login);
+
 	
 }

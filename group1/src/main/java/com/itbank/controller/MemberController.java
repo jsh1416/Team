@@ -137,8 +137,12 @@ public class MemberController {
 	
 	// 06.18 myInfo
 	@GetMapping("/myInfo")
-	public void myInfo(HttpSession session) {
-		
+	public ModelAndView myInfo(HttpSession session) {
+		ModelAndView mav = new ModelAndView("/member/myInfo");
+		MemberDTO login = (MemberDTO) session.getAttribute("login");
+		mav.addObject("clubList", clubService.selectClubList());
+		mav.addObject("myBoardCount", memberSerivce.myBoardCount(login));
+		return mav;
 	}
 	
 	// 06.21 bcg 비밀번호 변경
