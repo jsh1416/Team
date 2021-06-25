@@ -28,5 +28,8 @@ public interface MemberDAO {
 	@Select("select count(*) from EPLBOARD where writer = #{nickName}")
 	int myBoardCount(MemberDTO login);
 
+	@Select("select count(*) from EPLmember where pw = #{pw} and name = #{name} and email = #{email}")
+	int currentPwCheck(MemberDTO member);
+
 	
 }

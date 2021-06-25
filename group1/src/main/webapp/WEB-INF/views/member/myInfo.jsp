@@ -55,27 +55,32 @@
 		
 		<div id="passwordChange" class="hide">
 			<form method="POST" id="passwordChangeForm" style="margin-top: 30px;" accept-charset="utf-8">
-				<input type="hidden" name="email" value="${login.email }">
-				<input type="hidden" name="name" value="${login.name }">
+				<input type="hidden" name="email" value="${login.email }" id="hiddenEmail">
+				<input type="hidden" name="name" value="${login.name }" id="hiddenName">
 						  <fieldset>
 						     <div class="form-group row" style="width: 80%; left: 50%; margin: auto; /*border: 3px solid #FA2781;*/ border-radius: 30px; text-align: left;">
 								<div class="form-group" style="width: 80%; margin-left: 16px;">
 							      <label for="currentPw" class="form-label mt-4">현재 비밀번호</label>
-							      <input type="password" class="form-control" id="currentPw" placeholder="Input current PW" name="currentPw" >
+							      <input type="password" class="form-control showInput" id="currentPw" placeholder="Input current PW" name="currentPw" >
+							      
+							      <button type="button" class="btn-EPL btn btn-primary" onclick="currentPasswordCheck()">현재 비밀번호 확인</button>
+							      
 							    </div>
 						    
 							    <div class="form-group" style="width: 80%; margin-left: 16px;">
-							      <label for="changePassword" class="form-label mt-4">변경할 비밀번호</label>
-							      <input type="password" name="pw" class="form-control" id="changePassword" placeholder="Password">
+							      <label for="inputPassword" class="form-label mt-4">변경할 비밀번호</label>
+							      <input type="password" name="pw" class="form-control showInput" id="inputPassword" placeholder="Password">
+							      <p id="pwMsg" class="changePwP"></p>
 							    </div>
 							    
 							    <div class="form-group" style="width: 80%; margin-left: 16px;">
 							      <label for="checkPw" class="form-label mt-4">비밀번호 확인</label>
-							      <input type="password" name="checkPw" class="form-control" id="checkPw" placeholder="Confirm Password">
+							      <input type="password" name="checkPw" class="form-control showInput" id="checkPw" placeholder="Confirm Password">
+							      <p id="cfpwMsg" class="changePwP"></p>
 							    </div>
 							    
 							    <div class="form-group" style="width: 80%; margin-left: 16px;">
-									<button type="submit" id="changePwConfirm" class="btn-EPL btn btn-primary" style="margin-top: 15px;">비밀번호 변경</button>
+									<button type="button" id="changePwConfirm" class="btn-EPL btn btn-primary hide" style="margin-top: 15px;" onclick="chageCheck()">비밀번호 변경</button>
 								</div>
 						  	</div>
 						  </fieldset>
@@ -88,50 +93,38 @@
 
 <script>
 	// 비밀번호 변경창 조절
-	window.onload=function(){
-			const passwordChangeForm = document.getElementById('passwordChange')
-			const changePwBtn = document.getElementById('changePwBtn')
+// 	window.onload=function(){
+// 			const passwordChangeForm = document.getElementById('passwordChange')
+// 			const changePwBtn = document.getElementById('changePwBtn')
 			
-			changePwBtn.addEventListener("click", e => {
-				showPasswordChange();
-			})
+// 			changePwBtn.addEventListener("click", e => {
+// 				showPasswordChange();
+// 			})
 			
-			function showPasswordChange(){
-				if(passwordChangeForm.classList.contains('hide')){
-					passwordChangeForm.classList.remove('hide');
-				}else{
-					passwordChangeForm.classList.add('hide');
-				}
-			}
-	}
+// 			function showPasswordChange(){
+// 				inputs = document.querySelectorAll('.showInput');
+// 				p = document.querySelectorAll('.changePwP')
+// 				for(i=0; i<inputs.length; i++){
+// 					inputs[i].value="";
+// 					p[i].innerHTML = "";
+// 				}
+				
+// 				if(passwordChangeForm.classList.contains('hide')){
+// 					passwordChangeForm.classList.remove('hide');
+// 				}else{
+// 					passwordChangeForm.classList.add('hide');
+// 				}
+// 			}
+// 	}
 	
 </script>
 
 
 
 </body>
+<script src="${cpath }/resources/js/member/passwordChange.js" ></script>
 
-<script>
-	document.getElementById('passwordChangeForm').onsubmit = function(event) {
-		event.preventDefault();
-		const formData = new FormData(event.target)
-		const url = cpath + '/member/changePw' 
-		
-		const opt = {
-			method: 'POST',
-			body: formData,
-		}
-		fetch(url, opt)
-		.then(resp => resp.text())
-		.then(text => {
-			if(+text == 1){
-				swal('비밀번호 변경 완료!','','success');
-			}else{
-				swal('비밀번호 변경 실패!','','error');
-			}
-		})
-	}
-</script>
+
 
 </html>
 

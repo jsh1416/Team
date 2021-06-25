@@ -143,8 +143,14 @@ public class MemberService {
 		public int changePw(MemberDTO member) {
 			return memberDAO.updatePw(member);
 		}
+		
 		public int myBoardCount(MemberDTO login) {
-			return memberDAO.myBoardCount(login);		}
+			return memberDAO.myBoardCount(login);		
+		}
+		
+		public int currentPwCheck(MemberDTO member) {
+			return memberDAO.currentPwCheck(member);
+		}
 			
 			
 			
