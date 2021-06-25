@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
-
+<%@ include file="scroll.jsp" %>
 	<div id="fullpage">
 		<div class="section" id="MC1">
 			<div style="position: absolute; top: 100px;">
