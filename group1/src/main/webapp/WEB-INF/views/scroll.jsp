@@ -18,7 +18,18 @@
 			anchors: ['firstPage', 'secondPage', 'thirdPage'],
 			navigation: true,
 			css3: true,
-			keyboardScrolling: true
+			keyboardScrolling: true,
+			// 06.23 bcg
+			slidesNavigation : true,
+			autoScrolling: true,
+			keyboardScrolling: true,
+		
+			afterRender: function () {
+	            setInterval(function () {
+	                $.fn.fullpage.moveSlideRight();
+	            }, 3000);
+	        }
+			// 06.23 bcg end
 		});
 	});
 </script>

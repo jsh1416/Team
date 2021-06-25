@@ -84,9 +84,20 @@ nav>ul>li {
 	</div>
 
 
-	<div class="section" id="MAIN2">
-		<h2>HOME 2</h2>
-	</div>
+	<div class="section active" id="MAIN1" style="padding-left: 50px;">
+			<div class="slide" id="slide1" data-anchor="slide1" style="text-align: center;">
+				<div class="intro">
+					<img src="${cpath }/resources/images/background/1.jpg" style="width: 80%; height: 500px;">
+				</div>
+			</div>
+			<div class="slide active" id="slide2" data-anchor="slide2">
+				<h1>Slide 2</h1>
+			</div>
+			<div class="slide" id="slide3" data-anchor="slide3">
+				<h1>Slide 3</h1>
+			</div>
+
+		</div>
 
 	<div class="section" id="MAIN3">
 		<h2>HOME 3</h2>

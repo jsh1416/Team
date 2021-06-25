@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
-<%@ include file="scroll.jsp" %>
 <!-- 개jjj -->
 
 	<div id="fullpage">
@@ -17,61 +16,6 @@
 
 		<div class="section" id="ARS2">
 			<h2>ARS 2</h2>
-			
-				<div class="limiter" style="padding-top: 75px; width:1000px; height:800px;">
-		<div class="container-table100">
-			<div class="wrap-table100">
-				<div class="table100 ver1 m-b-110">
-					<div class="table100-head">
-						<table>
-							<thead>
-								<tr class="row100 head">
-									<th class="cell100 column1"><button style="color: #FFFFFF;" id="newNumber" >최신</button></th>
-									<th class="cell100 column2"><button style="color: #FFFFFF;" id="viewNumber" >조회수</button></th>
-									<th class="cell100 column3"><button style="color: #FFFFFF;" id="likeNumber">추천수</button></th>
-								</tr>
-							</thead>
-						</table>
-					</div>
-
-					<div class="table100-body js-pscroll">
-							<table>
-							<tbody>
-							<c:forEach var="dto" items="${list }">
-								<tr class="row100 body">
-									<td class="cell100 column1 titleArea"><a href="${cpath }/board/read/${dto.idxBo}?type=${param.type }&search=${param.search }&vc=true">${dto.title}</a></td>
-									<td class="cell100 column2 viewCountArea">${ dto.viewCount}</td>
-									<td class="cell100 column3 likeCountArea">${ dto.likeCount}</td>
-								</tr>
-							</c:forEach>
-							</table>
-						
-					<div class= "sb">
-							<form>
-								<span >
-								<select  name="type">
-									<option ${param.type == 'title' ? 'selected' : '' } value="title">제목</option>
-									<option ${param.type == 'writer' ? 'selected' : '' } value="writer">글쓴이</option>
-									<option ${param.type == 'content' ? 'selected' : '' } value="content">내용</option>
-								</select>
-								</span>
-								
-								<span><input type="text" name="search" value="${param.search }" placeholder="검색어를 입력하세요"></span>
-                        		<span><input type="submit" value="검색"></span>
-                    			 </form>
-                    			 
-								<c:if test="${login.club == 'Arsenal'}">
-								<span style=  "justify-content: space-between; "><a href="${cpath}/board/mylist/${login.nickName}">나의 글</a><a href="${cpath}/board/write">글쓰기</a></span>
-								</c:if>
-					</div>		
-									
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-		</div>
 		</div>
 
 		<div class="section" id="ARS3">
@@ -100,7 +44,7 @@
 					const child = document.createElement('div')		// 제목
 					const child2 = document.createElement('div')	// 내용
 					const newstitle = '<a href=' + newslist.items[i].link + ' target="_blank" style="color:#F00000; font-weight:bold; cursor: pointer;">' 
-					+ '<span style="color:#F00000; font-weight:bold;">' + (i+1) + '</span>' + '&nbsp&nbsp&nbsp[' + newslist.items[i].title + ']</a>'
+					+ '<span style="color:#E31B23; font-weight:bold;">' + (i+1) + '</span>' + '&nbsp&nbsp&nbsp[' + newslist.items[i].title + ']</a>'
 					const content = newslist.items[i].description  + 
 					'(' + newslist.items[i].pubDate.slice(0, -5) + ')' + '<br>' +  '<br>'
 					child.innerHTML = newstitle
@@ -133,7 +77,7 @@
 						const child = document.createElement('div')	
 						const child2 = document.createElement('div')
 						const newstitle = '<a href=' + newslist.items[i].link + ' target="_blank" style="color:#F00000; font-weight:bold; cursor: pointer;">' 
-						+ '<span style="color:#F00000; font-weight:bold;">' + (i+1) + '</span>' + '&nbsp&nbsp&nbsp[' + newslist.items[i].title + ']</a>'
+						+ '<span style="color:#E31B23; font-weight:bold;">' + (i+1) + '</span>' + '&nbsp&nbsp&nbsp[' + newslist.items[i].title + ']</a>'
 						const content = newslist.items[i].description  + 
 						'(' + newslist.items[i].pubDate.slice(0, -5) + ')' + '<br>' +  '<br>'
 						child.innerHTML = newstitle

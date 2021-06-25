@@ -219,35 +219,14 @@
 		
 		    <div class="collapse navbar-collapse" id="navbarColor03">
 		      <ul class="navbar-nav me-auto" style="margin: auto;">
-		        <li class="nav-item">
-		          <a>	<!-- nav-link 클래스 제거  -->
-					<img class="liv" src="${cpath }/resources/images/logo/Liverpool.png" >
-				  </a>
-		        </li>
-		        
-		        <li class="nav-item">
-		          <a>
-					<img class="mu" src="${cpath }/resources/images/logo/Manchester United.png" >
-				  </a>
-		        </li>
-		        
-		        <li class="nav-item">
-		          <a>
-					<img class="mc" src="${cpath }/resources/images/logo/Manchester City.png" >
-				  </a>
-		        </li>
-		        
-		        <li class="nav-item">
-		          <a>
-					<img class="che" src="${cpath }/resources/images/logo/Chelsea.png" >
-				  </a>
-		        </li>
-		        
-		        <li class="nav-item">
-		          <a>
-					<img class="ars" src="${cpath }/resources/images/logo/Arsenal.png" >
-				  </a>
-		        </li>
+		        <!-- 06.23 bcg 클럽 상단 아이콘 -->
+		      	<c:forEach items="${clubList }" var="clubList">
+		      	<li class="nav-item">
+			    	<a>	
+						<img class="${clubList.clubIdx }" src="${cpath }/resources/images/logo/${clubList.clubName }.png" >
+				  	</a>
+		        	</li>
+		      	</c:forEach>
 		        
 		        
 		        <!-- 0610ksj test -->

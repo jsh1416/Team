@@ -71,11 +71,9 @@
       <label for="selectClub" class="form-label mt-4" >Team</label>
 <!--       club in ('Liverpool','Manchester United','Manchester City','Arsenal','Chelsea') -->
       <select class="form-select" id="selectClub" name="club" required>
-        <option value="Liverpool">Liverpool</option>
-        <option value="Manchester United">Manchester United</option>
-        <option value="Manchester City">Manchester City</option>
-        <option value="Arsenal">Arsenal</option>
-        <option value="Chelsea">Chelsea</option>
+        <c:forEach items="${clubList }" var="clubList">
+        	<option value="${clubList.clubName }">${clubList.clubName }</option>
+        </c:forEach>
       </select>
     </div>
     

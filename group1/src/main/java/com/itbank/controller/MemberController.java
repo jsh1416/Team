@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.member.MemberDTO;
+import com.itbank.service.ClubService;
 import com.itbank.service.MemberService;
 
 //06.09 bong 
@@ -30,6 +31,7 @@ import com.itbank.service.MemberService;
 public class MemberController {
 	
 	@Autowired private MemberService memberSerivce;
+	@Autowired private ClubService clubService;
 	private ObjectMapper mapper = new ObjectMapper();
 
 	
@@ -56,8 +58,10 @@ public class MemberController {
 	}
 	
 	@GetMapping("/join")
-	public String join() {
-		return "/member/join";
+	public ModelAndView join() {
+		ModelAndView mav = new ModelAndView("/member/join");
+		mav.addObject("clubList", clubService.selectClubList());
+		return mav;
 	}
 	
 	@PostMapping("/join")
