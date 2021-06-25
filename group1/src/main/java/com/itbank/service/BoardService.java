@@ -11,12 +11,20 @@ import org.springframework.stereotype.Service;
 
 import com.itbank.board.BoardDAO;
 import com.itbank.board.BoardDTO;
+import com.itbank.board.BoardLikeDTO;
 import com.itbank.member.MemberDTO;
+import com.jcraft.jsch.ChannelSftp;
 
 @Service
 public class BoardService {
 
 	@Autowired private BoardDAO dao;
+	
+	private final String serverIP = "192.168.0.85";
+	private final int serverPort = 22;
+	private final String serverUser = "root";
+	private final String serverPass = "1";
+	private ChannelSftp chSftp = null;
 
 	private final String uploadPath = "C:\\upload";
 	
@@ -24,7 +32,6 @@ public class BoardService {
 		boolean flag1 = false, flag2 = false;
 		if(param != null) {
 			flag1 = param.size() == 2;
-//			flag2 = param.get("search").equals("") == false;
 		}
 		return (flag1 && param.get("search").equals("") == false) ? dao.selectSearch(param) : dao.selectAll();
 	}
@@ -59,7 +66,6 @@ public class BoardService {
 			} catch (IllegalStateException | IOException e) {
 				System.out.println("업로드 문제 발생 : " + e);
 			}
-//			dto.setUploadFile(dto.getFile().getOriginalFilename());
 			dto.setUploadFile(fileName);
 			row = dao.insert(dto);
 			
@@ -170,35 +176,26 @@ public class BoardService {
 	}
 
 
-	
+	public int likeInsert(BoardLikeDTO Ldto) {
+		System.out.println("nickName : " + Ldto.getLikeMember() + " / " );
+		
+		return dao.likeInsert(Ldto);
+	}
 
+	public BoardLikeDTO selectLikeMember(BoardLikeDTO boardLike) {
+		System.out.println("selectLikeMember");
+		
+		return dao.selectLikeMember(boardLike);
+	}
 
+	public int likeDelete(BoardLikeDTO Ldto) {
+		return dao.likeDelte(Ldto);
+	}
 
-	
+	public int likeDown(String idxBo) {
+		return dao.likeDown(idxBo);
+		
+	}
 
-//	public int likedown(String idxBo) {
-//	int row = dao.likedown(idxBo);
-//	
-//	System.out.println("row : " + row);
-//	
-//	return row;
-//}
-//
-//public int likecheck(String likeCheck) {
-//	
-//	int row1= dao.likeCheck(likeCheck);
-//	if(row1==0) {
-//		likeUp(likeCheck);
-//	}
-//	else {
-//		
-//	}
-//	
-//	return row1;
-//		
-//}
-//	
-
-	
 	
 }

@@ -9,6 +9,7 @@ public class BoardDTO {
 	private int likeidx,boardidx,likeCheck;
 	private String likeMember;
 	private String clubName;
+	private int BLikeCount,BLikeCheck;
 	
 	@Override
 	public String toString() { //0615 파일 이름
@@ -113,6 +114,22 @@ public class BoardDTO {
 
 	public void setClubName(String clubName) {
 		this.clubName = clubName;
+	}
+
+	public int getBLikeCount() {
+		return BLikeCount;
+	}
+
+	public void setBLikeCount(int bLikeCount) {
+		BLikeCount = bLikeCount;
+	}
+
+	public int getBLikeCheck() {
+		return BLikeCheck;
+	}
+
+	public void setBLikeCheck(int bLikeCheck) {
+		BLikeCheck = bLikeCheck;
 	}
 
 	

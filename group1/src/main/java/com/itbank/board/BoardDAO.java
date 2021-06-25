@@ -10,8 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 public interface BoardDAO {
 
-	
-	@Select("select * from EPLBoard order by idxBo desc") // 전체 글
+	@Select("select * from EPLBoard order by idxBo desc")
 	List<BoardDTO> selectAll();
 
 	@Select("select * from EPLBoard where idxBo = #{idxBo} ") //READ 글 클릭시 읽기모드
@@ -76,31 +75,32 @@ public interface BoardDAO {
 	List<BoardDTO> selectSearch(HashMap<String, String> param);
 
 
-    @Update("update EPLBoard set likeCount = likeCount+1 where idxBo=#{idxBo}") //좋아요
-	int likeUp(String idxBo);
     
     
-
-//    @Update("update EPLBoard set likeCount = likeCount-1 where idxBo=#{idxBo}") //싫어요
-//	int likedown(String idxBo);
-
-    @Select("select * from EPLlike where boardidx = #{boardidx} and likemember = #{likemember} and likecheck = 0 ")
-	int likeCheck(String likeCheck);
     
-    @Update("update EPLBoard set likeidx =likeidx+1 and likecheck = 1 where boardidx=#{boardidx} and likemember = #{likemember}") 
-   	int likeCheckUp(String idxBo);
-
     @Select("select * from EPLBoard order by likeCount desc")
 	List<BoardDTO> selectLike();
+
+
+
+    @Select("select * from EPLBoardLike where BoardIdx=#{boardIdx} and  LikeMember=#{likeMember}")
+	BoardLikeDTO selectLikeMember(BoardLikeDTO boardLike);
 
     @Select("select * from EPLBoard order by wdate desc")
 	List<BoardDTO> selectNew();
 
-	
+    @Insert("insert into eplboardlike (boardidx,likemember) values (#{boardIdx}, #{likeMember})")
+	int likeInsert(BoardLikeDTO ldto);
 
+    @Delete("delete EPLboardLike where boardidx = #{boardIdx} and  likemember = #{likeMember}")
+	int likeDelte(BoardLikeDTO ldto);
+
+    @Update("update EPLBoard set likeCount = likeCount+1 where idxBo=#{idxBo}") //좋아요
+	int likeUp(String idxBo);
     
+    @Update("update EPLBoard set likeCount = likeCount-1 where idxBo=#{idxBo}")
+	int likeDown(String idxBo);
 
-	
 
     
 

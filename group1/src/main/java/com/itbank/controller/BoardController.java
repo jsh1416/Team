@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,7 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.board.BoardDTO;
+import com.itbank.board.BoardLikeDTO;
 import com.itbank.member.MemberDTO;
+import com.itbank.reply.EplReplyLikeDTO;
 import com.itbank.service.BoardService;
 
 @Controller
@@ -62,7 +66,6 @@ public class BoardController {
 	@GetMapping(value="/orderByView/" ,produces="application/json; charset=utf-8")//조회순
 	public String viewNumber(@RequestParam HashMap<String, String> param) throws JsonProcessingException {
 		List<BoardDTO> list = bs.selectView();
-		System.out.println("view LIst  : " + list.size());
 		String json = mapper.writeValueAsString(list);
 		return json;
 	}
@@ -71,7 +74,6 @@ public class BoardController {
 	@GetMapping(value="/orderByLike/" ,produces = "application/json; charset=utf-8")//좋아요순
 	public String likeNumber(@RequestParam HashMap<String, String> param) throws JsonProcessingException {
 		List<BoardDTO> list = bs.selectLike();
-		System.out.println("view LIst  : " + list.size());
 		String json = mapper.writeValueAsString(list);
 		return json;
 	}
@@ -79,10 +81,7 @@ public class BoardController {
 	@GetMapping("/read/{idxBo}")
 	public ModelAndView read(@PathVariable int idxBo,boolean vc,String type,String search) {
 		
-//		System.out.println("read controller : " + idxBo);
-		
-//		System.out.println("vc :" + vc);
-		if(vc) { //조회수 안들어먹음 같은 아이디로 로그인시 조회수 막아야함
+		if(vc) { //조회수 
 			bs.updateViewCount(idxBo);
 			try {
 				search = URLEncoder.encode(search, "UTF-8");	
@@ -90,15 +89,11 @@ public class BoardController {
 				e.printStackTrace();
 			}
 			String location = "redirect:/board/read/" + idxBo + "?type=" + type + "&search=" + search;
-//			System.out.println("location : " + location);
 			return new ModelAndView(location);
 		}
-		
 		BoardDTO dto = bs.select(idxBo);
 		ModelAndView mav = new ModelAndView("board/read");
 		mav.addObject("dto",dto);
-//		System.err.println("content : " + dto.getContent());
-//		System.out.println("uploadFile :"+ dto.getUploadFile());
 		return mav;
 	}
 	
@@ -113,7 +108,6 @@ public class BoardController {
 		
 		int row = bs.insert(dto);
 		int idxBo = bs.selectMaxIdxBo();
-		System.out.println("writer"+dto.getWriter());
 		
 		if(row==1) {
 			return "redirect:/board/read/" + idxBo;
@@ -132,7 +126,6 @@ public class BoardController {
 		System.out.println("row="+row);
 		mav.addObject("msg",row ==1 ? "게시글이 삭제되었습니다" : "게시글이 삭제되지않았습니다");
 		mav.addObject("url", row == 1 ? "/EPL/board/" : "");
-		System.out.println("mav-"+mav);
 		return mav;
 		
 	}
@@ -154,13 +147,40 @@ public class BoardController {
 	}
 	
 	@PostMapping("/read/boardLike/{idxBo}/") //좋아요
-	@ResponseBody
-	public String likeboard(@PathVariable String idxBo) {
-//		System.out.println("Like : " + idxBo);
-		int row = bs.likeUp(idxBo);
-//		System.out.println("controller Like : " + row);
-		return Integer.toString(row);
+	@ResponseBody   //버튼을 누르면 로그인 닉네임과 게시글 번호를 받은뒤 
+	public int likeboard(@PathVariable String idxBo ,HttpSession session) {
+		System.out.println("idx : " +idxBo);
+		int row = 0;
+		int row2 = 0 ;
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		
+		System.out.println("login : " + login.getNickName());
+		
+		
+		BoardLikeDTO boardLike = new BoardLikeDTO();
+		boardLike.setBoardIdx(Integer.parseInt(idxBo));
+		boardLike.setLikeMember(login.getNickName());
+		
+		BoardLikeDTO Ldto = bs.selectLikeMember(boardLike);
+		
+		if(Ldto == null) {
+			System.out.println("Ldto : " + Ldto);
+			row2= bs.likeInsert(boardLike); // 인설트를 했을때
+			System.out.println("row2 : " + row2);
+			
+			if(row2 !=0) {
+				row = bs.likeUp(idxBo);
+				System.out.println("row : " + row);
+			}
+			
+			}
+			else {
+				row2=bs.likeDelete(Ldto);
+				row=bs.likeDown(idxBo);
+			}
+		
+		return row;
+		
 	}
-	
 	
 }
