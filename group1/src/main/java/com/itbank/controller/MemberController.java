@@ -36,25 +36,6 @@ public class MemberController {
 	@Autowired private ClubService clubService;
 	private ObjectMapper mapper = new ObjectMapper();
 
-	// jsh 06.25 인터셉터 
-	@GetMapping("/loginCheck")	// login.jsp와 동일
-	public void loginCehck () {}
-	
-	@PostMapping("/loginCheck")	
-	public ModelAndView login(MemberDTO dto, HttpSession session, String url) {
-		String viewName = "redirect:";
-		viewName += url == null ? "/" : url; 
-		MemberDTO login = memberSerivce.login(dto);
-		ModelAndView mav = new ModelAndView();				
-		mav.setViewName(login != null ? viewName : "msgInterceptor");
-		
-		if(login == null) {
-			mav.addObject("msg", "로그인 실패");
-		}
-		session.setAttribute("login", login);
-		session.setMaxInactiveInterval(600);
-		return mav;
-		}
 	
 	// ajax 방식 결합 로그인 06.14 bcg
 		@PostMapping("/login")
