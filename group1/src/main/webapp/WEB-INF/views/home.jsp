@@ -3,18 +3,18 @@
 <%@ include file="header.jsp"%>
 <%@ include file="scroll.jsp"%>
 <style>
-#s_left{
+#s_left{  
 	widows: 100px;
-	height: 300px;
 	float: left;
+	height: auto;
 }
 
 #contents {
 	width: 1000px;
-	height: 900px;
+	height: auto;
 	float: left;
 	font-size: small;
-}
+} /* 0625.jsh */
 
 nav {
 	display: flex;
@@ -40,13 +40,18 @@ nav>ul>li {
 	display: none;
 }
 
-.title{
+.title{	/* 0625.jsh */
 	font-weight: bold;
 	font-size: 20px;
 	color: blue;
-	margin-top: 50px;
+	margin-top: 20px;
 	margin-bottom: 10px;
 }
+
+li:hover{
+	color: blue;
+	text-decoration: underline;
+}	
 </style>
 
 
@@ -75,6 +80,9 @@ nav>ul>li {
 				
 				<div class="title">[유로 2020] 득점왕을 향한 치열한 경쟁! </div>
 				<div class="score_rank"></div>
+				
+				<div class="title" id="stageTitle"></div>
+				<div class="schedule"></div>
 		</div>
 		
 		<div id="contents" class="euroNews">
@@ -106,7 +114,58 @@ nav>ul>li {
 </main>
 
 <script>
-//유로 관련 뉴스 띄우기
+// 유로 토너먼트 일정 띄우기 (현재시간과 경기시간 비교 통해서 출력) jsh 06.25
+let today = new Date(); 
+let RoundOf16 = new Date(2021, 06, 30, 4, 0, 0);
+let QuarterFinal = new Date(2021, 07, 4, 4, 0, 0);
+let SemiFinal = new Date(2021, 07, 8, 4, 0, 0);
+let Final = new Date(2021, 07, 12, 4, 0, 0);
+let stage
+let title
+
+switch(true){ 
+case today < RoundOf16:
+	stage = 4;			
+	title = "16강"
+	break;
+case today < QuarterFinal:
+	stage = 5;
+	title = "8강"
+	break;
+case today < SemiFinal:
+	stage = 6;
+	title = "준결승"
+	break;
+default:
+	stage = 7;
+	title = "결승"
+}
+
+$.ajax({
+	  headers: {'X-Auth-Token': 'c5798934a44c482a822a642801a9e298'}, 
+	  type: 'GET',
+	  url: 'https://api.football-data.org/v2/competitions/EC/matches?matchday=' + stage,
+	  dataType: 'json',
+	}).done(function(schedule) {
+		document.getElementById('stageTitle').innerHTML = title
+		
+		
+		for(let i=0; schedule.matches.length; i++){
+			const schedule_child = document.createElement('div')
+			let korDate = new Date(schedule.matches[i].utcDate) // 한국 시간으로 변경
+			let strDate = korDate.toString()
+			const content = schedule.matches[i].homeTeam.name + ' vs ' + schedule.matches[i].awayTeam.name +
+			' ( ' + strDate.substring(0,10) + ', ' + strDate.substring(16,21) + ' )'
+			schedule_child.innerHTML = content
+			document.querySelector('div.schedule').appendChild(schedule_child) 
+		}
+
+		 
+	})
+</script>
+
+<script>
+//유로 관련 뉴스 띄우기 jsh
 const url = '${cpath}/api/euro/correct' 			// 여기서만 team, type 매개변수 바꿔주면 됨
 		const opt = {
 			method: 'GET',	
@@ -160,7 +219,7 @@ $.ajax({
 </script>
 
 <script>
-//조별 순위 리스트 기본 화면
+//조별 순위 리스트 기본 화면 jsh
 $.ajax({
   headers: {'X-Auth-Token': 'c5798934a44c482a822a642801a9e298'}, 
   type: 'GET',
@@ -186,6 +245,7 @@ $.ajax({
 </script>
 
 <script>
+// 알파벳 클릭시 해당 조 순위 출력 jsh
 document.querySelectorAll('nav > ul > li > a').forEach(a => a.onclick = function(event) {
 	const className = event.target.className	// A,B,C,D,E,F 조
 	document.querySelectorAll('.main').forEach(div => div.classList.add('hidden'))
