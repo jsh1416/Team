@@ -1,4 +1,4 @@
-// 06.25 bcg
+
 const WARN_CN = 'reborder';
 
 document.getElementById('inputPassword').addEventListener('blur',checkPasswordComplexity);		// 비밀번호 형식 체크 함수 호출
