@@ -1,14 +1,28 @@
-const deleteMemberBtn = document.getElementById('deleteMember');
-
-
+const deleteMemberForm = document.getElementById('deleteMember')
+const deleteMemberBtn = document.getElementById('deleteMemberBtn');
 deleteMemberBtn.addEventListener("click", e => {
-	showDeleteConfirm();
+	showDeleteMember();
 })
 
+
+function showDeleteMember(){
+	clear();
+	
+	if(deleteMemberForm.classList.contains('hide')){
+		deleteMemberForm.classList.remove('hide');
+		passwordChangeForm.classList.add('hide');
+	}else{
+		deleteMemberForm.classList.add('hide');
+	}
+}
+
 function doDelete(){
-	const url = cpath + "/member/deleteMember/" + logInId;
+	
+	const formData = new FormData(document.getElementById('deleteMemberForm'));
+	const url = cpath + "/member/deleteMember";
 	const opt = {
 			method: 'POST',
+			body: formData,
 	}
 	fetch(url, opt).then(resp => resp.text())
 	.then(text => {
@@ -20,32 +34,4 @@ function doDelete(){
 		}
 		
 	})
-}
-
-const sweetConfirm = function(msg, title, resvNum){
-		swal({
-			title : title,
-			text : msg,
-			type : "warning",
-			showCancelButton : true,
-			confirmButtonClass : "btn-danger",
-			confirmButtonText : "예",
-			cancelButtonText : "아니오",
-			closeOnConfirm : false,
-			closeOnCancel : true
-		}, function(isConfirm) {
-			if (isConfirm) {
-				doDelete();
-			}else{
-				swal('회원탈퇴', '회원탈퇴 취소', "warning");
-			}
-
-		});
-}
-
-
-function showDeleteConfirm() {
-	
-	console.log(logInId);
-	sweetConfirm('회원탈퇴', '탈퇴하시겠습니까?');
 }

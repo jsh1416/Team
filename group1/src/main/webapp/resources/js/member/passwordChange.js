@@ -156,6 +156,7 @@ function showPasswordChange(){
 	
 	if(passwordChangeForm.classList.contains('hide')){
 		passwordChangeForm.classList.remove('hide');
+		deleteMemberForm.classList.add('hide');
 	}else{
 		passwordChangeForm.classList.add('hide');
 	}

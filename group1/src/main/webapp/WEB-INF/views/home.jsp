@@ -61,6 +61,22 @@ li:hover{
 
 <main>
 <div id="fullpage">
+		<div class="section active" id="MAIN1" style="padding-left: 50px;">
+			<div class="slide" id="slide1" data-anchor="slide1" style="text-align: center;">
+					<img src="${cpath }/resources/images/background/10.png" style="">
+			</div>
+			<div class="slide active" id="slide2" data-anchor="slide2">
+				<div style="text-align: center;">
+					<img src="${cpath }/resources/images/background/11.png" style="width: ; height: ;">
+				</div>
+			</div>
+			<div class="slide" id="slide3" data-anchor="slide3">
+				<img src="${cpath }/resources/images/background/2.jpg" style="width: ; height: ;">
+			</div>
+
+		</div>
+
+
 	<div class="section" id="MAIN1" style="margin-left: 30px; margin-right: 30px;">
 		<div id="s_left">	
 			<div class="title">[유로 2020] 조별리그 순위표</div>
@@ -91,24 +107,6 @@ li:hover{
 		
 		<div id="contents" class="euroNews">
 			<h1>EURO 2020 News</h1><br><br>
-		</div>
-		
-	</div>
-
-
-	<div class="section active" id="MAIN1" style="padding-left: 50px;">
-			<div class="slide" id="slide1" data-anchor="slide1" style="text-align: center;">
-				<div class="intro">
-					<img src="${cpath }/resources/images/background/1.jpg" style="width: 80%; height: 500px;">
-				</div>
-			</div>
-			<div class="slide active" id="slide2" data-anchor="slide2">
-				<h1>Slide 2</h1>
-			</div>
-			<div class="slide" id="slide3" data-anchor="slide3">
-				<h1>Slide 3</h1>
-			</div>
-
 		</div>
 
 <!-- 	<div class="section" id="MAIN3">

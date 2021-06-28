@@ -60,7 +60,7 @@
 		</div>
 		<div style="margin-top: 15px;">
 			<button type="button" id="changePwBtn" class="btn btn-success">비밀번호 변경</button>
-			<button type="button" id="deleteMember" class="btn btn-danger">회원 탈퇴</button>
+			<button type="button" id="deleteMemberBtn" class="btn btn-danger">회원 탈퇴</button>
 		</div>
 		
 		<div id="passwordChange" class="hide">
@@ -91,6 +91,31 @@
 							    
 							    <div class="form-group" style="width: 80%; margin-left: 16px;">
 									<button type="button" id="changePwConfirm" class="btn-EPL btn btn-primary hide" style="margin-top: 15px;" onclick="chageCheck()">비밀번호 변경</button>
+								</div>
+						  	</div>
+						  </fieldset>
+						</form>
+		</div>		
+		
+		
+		<!-- 0628 bcg 탈퇴폼 -->
+		<div id="deleteMember" class="hide">
+			<form method="POST" id="deleteMemberForm" style="margin-top: 30px;" accept-charset="utf-8">
+						  <fieldset>
+						     <div class="form-group row" style="width: 80%; left: 50%; margin: auto; /*border: 3px solid #FA2781;*/ border-radius: 30px; text-align: left;">
+								<div class="form-group" style="width: 80%; margin-left: 16px;">
+							      <label for="deleteId" class="form-label mt-4">ID</label>
+							      <input type="text" class="form-control showInput" id="deleteId" placeholder="Input ID" name="id" >
+							    </div>
+						    
+							    <div class="form-group" style="width: 80%; margin-left: 16px;">
+							      <label for="deletePassword" class="form-label mt-4">비밀번호</label>
+							      <input type="password" name="pw" class="form-control showInput" id="deletePassword" placeholder="Password">
+							    </div>
+							    
+							    
+							    <div class="form-group" style="width: 80%; margin-left: 16px;">
+									<button type="button" id="deleteConfirm" class="btn-EPL btn btn-primary hide" style="margin-top: 15px;" onclick="deleteMember()">회원탈퇴</button>
 								</div>
 						  	</div>
 						  </fieldset>

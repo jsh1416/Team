@@ -89,7 +89,7 @@
 		
 		/*06.14 bcg*/
 		.hide{
-			display: none;
+			display: none !important;
 		}
 		
 		.show{
