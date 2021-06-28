@@ -51,7 +51,11 @@ nav>ul>li {
 li:hover{
 	color: blue;
 	text-decoration: underline;
-}	
+}
+.winTeam{
+	color: red;
+	font-weight: bold;
+}
 </style>
 
 
@@ -107,9 +111,9 @@ li:hover{
 
 		</div>
 
-	<div class="section" id="MAIN3">
+<!-- 	<div class="section" id="MAIN3">
 		<h2>HOME 3</h2>
-	</div>
+	</div> -->
 </div>
 </main>
 
@@ -149,13 +153,28 @@ $.ajax({
 	}).done(function(schedule) {
 		document.getElementById('stageTitle').innerHTML = title
 		
-		
-		for(let i=0; schedule.matches.length; i++){
+		for(let i=0; i < schedule.matches.length; i++){
 			const schedule_child = document.createElement('div')
+			
 			let korDate = new Date(schedule.matches[i].utcDate) // 한국 시간으로 변경
 			let strDate = korDate.toString()
-			const content = schedule.matches[i].homeTeam.name + ' vs ' + schedule.matches[i].awayTeam.name +
+			
+			// 종료된 경기는 점수 표시
+			if(schedule.matches[i].status == "FINISHED" && schedule.matches[i].score.fullTime.homeTeam > schedule.matches[i].score.fullTime.awayTeam ){ 
+				// 홈팀 이겼을 때
+				var content = '<span class="winTeam">' + schedule.matches[i].homeTeam.name + '</span>' + ' vs ' + schedule.matches[i].awayTeam.name +
+				' ( ' + '<span class="winTeam">' + schedule.matches[i].score.fullTime.homeTeam + '</span>' + ' : ' + schedule.matches[i].score.fullTime.awayTeam + ' ) 종료'
+			}
+			else if(schedule.matches[i].status == "FINISHED" && schedule.matches[i].score.fullTime.homeTeam < schedule.matches[i].score.fullTime.awayTeam){
+				// 어웨이팀 이겼을 때
+				var content = schedule.matches[i].homeTeam.name + ' vs ' + '<span class="winTeam">' + schedule.matches[i].awayTeam.name  + '</span>' +
+				' ( ' + schedule.matches[i].score.fullTime.homeTeam+ ' : ' + '<span class="winTeam">' + schedule.matches[i].score.fullTime.awayTeam + '</span>'  + ' ) 종료'
+			}
+			else {
+				// 경기 전
+				var content = schedule.matches[i].homeTeam.name + ' vs ' + schedule.matches[i].awayTeam.name +
 			' ( ' + strDate.substring(0,10) + ', ' + strDate.substring(16,21) + ' )'
+			}
 			schedule_child.innerHTML = content
 			document.querySelector('div.schedule').appendChild(schedule_child) 
 		}
@@ -174,7 +193,6 @@ const url = '${cpath}/api/euro/correct' 			// 여기서만 team, type 매개변�
 		.then(resp => resp.json())		
 		.then(json => {
 			const eurolist = JSON.parse(json)
-			console.log(eurolist)
 			
 			if(eurolist == null) {
 				document.getElementById('news').innerText = '오류가 발생하였습니다.'
@@ -213,8 +231,6 @@ $.ajax({
 			 score_child.innerHTML = rowScore
 			 document.querySelector('div.score_rank').appendChild(score_child)
 		 }
-		 
-		 
 	})
 </script>
 
