@@ -13,9 +13,10 @@
 
 
 .sb > input {
-		background-color: #6c7ae0;
-		color: #FFFFFF;
+color: #FFFFFF;
 }
+
+input::placeholder {color:#FFFFFF;}
 	
 
 </style>
@@ -32,11 +33,41 @@
 						<table>
 							<thead>
 								<tr>
-									<th>글제목</th>
-									<th>글제목<input type="text" name="title"  placeholder="제목을 입력하세요" required></th>
+<!-- 									<th>글제목</th> -->
+									<c:if test="${login.club== 'Manchester United' }">
+									<th style="background:#C70101; color: #FFFFFF;"><input type="text" name="title" placeholder="제목을 입력하세요" required style="background:#C70101; color: #FFFFFF;" ></th>
 		<%-- 									<th>작성자:${login.nickName}</th> --%>
-									<th><input type="hidden" name="writer"  value="${login.nickName }"></th>
-									<th><input type="hidden" name="clubName"  value="${login.club }"></th>
+									<th style="background:#C70101; color: #FFFFFF;"><input type="hidden" name="writer"  value="${login.nickName } style="background:#C70101; color: #FFFFFF;"></th>
+									<th><input type="hidden" name="clubName"  value="${login.club } style="background:#C70101; color: #FFFFFF;"></th>
+									</c:if>
+									
+									<c:if test="${login.club== 'Liverpool' }">
+									<th style="background:#E31B23; color: #FFFFFF;"><input type="text" name="title" placeholder="제목을 입력하세요" required style="background:#E31B23; color: #FFFFFF;" ></th>
+		<%-- 									<th>작성자:${login.nickName}</th> --%>
+									<th style="background:#E31B23; color: #FFFFFF;"><input type="hidden" name="writer"  value="${login.nickName }" ></th>
+									<th style="background:#E31B23; color: #FFFFFF;"><input type="hidden" name="clubName"  value="${login.club } " ></th>
+									</c:if>
+									
+									<c:if test="${login.club== 'Chelsea' }">
+									<th style="background:#162E59; color: #FFFFFF;"><input type="text" name="title" placeholder="제목을 입력하세요" required style="background:#162E59; color: #FFFFFF;" ></th>
+		<%-- 									<th>작성자:${login.nickName}</th> --%>
+									<th style="background:#162E59; color: #FFFFFF;"><input type="hidden" name="writer"  value="${login.nickName }" ></th>
+									<th style="background:#162E59; color: #FFFFFF;"><input type="hidden" name="clubName"  value="${login.club } " ></th>
+									</c:if>
+									
+									<c:if test="${login.club== 'Manchester City' }">
+									<th style="background:#98C5E9; color: #FFFFFF;"><input type="text" name="title" placeholder="제목을 입력하세요" required style="background:#98C5E9; color: #FFFFFF;" ></th>
+		<%-- 									<th>작성자:${login.nickName}</th> --%>
+									<th style="background:#98C5E9; color: #FFFFFF;"><input type="hidden" name="writer"  value="${login.nickName }" ></th>
+									<th style="background:#98C5E9; color: #FFFFFF;"><input type="hidden" name="clubName"  value="${login.club } " ></th>
+									</c:if>
+									
+									<c:if test="${login.club== 'Arsenal' }">
+									<th style="background:#F00000; color: #FFFFFF;"><input type="text" name="title" placeholder="제목을 입력하세요" required style="background:#F00000; color: #FFFFFF;" ></th>
+		<%-- 									<th>작성자:${login.nickName}</th> --%>
+									<th style="background:#F00000; color: #FFFFFF;"><input type="hidden" name="writer"  value="${login.nickName }" ></th>
+									<th style="background:#F00000; color: #FFFFFF;"><input type="hidden" name="clubName"  value="${login.club } " ></th>
+									</c:if>
 								</tr>
 							</thead>
 						</table>
@@ -48,12 +79,52 @@
 					
 					</div>
 					
-					<div class='sb'>
+					<c:if test="${login.club== 'Liverpool' }">
+					<div class='sb' style="background:#E31B23;">
 					
-					<input type="file" name="file">
+					<input type="file" name="file"  id="file" style="background:#E31B23; ">
 				
-					<input style=  "float:right;" type="submit" value="작성하기">
+					<input style= background:#E31B23;  "float:right;" type="submit" value="작성하기"  >
 					</div>
+					</c:if>
+					
+					
+					<c:if test="${login.club== 'Manchester United' }">
+					<div class='sb' style="background:#FFFFFF;">
+					
+					<input type="file" name="file" style="background:#FFFFFF;">
+				
+					<input style= background:#FFFFFF;  "float:right;" type="submit" value="작성하기"  >
+					</div>
+					</c:if>
+					
+					<c:if test="${login.club== 'Chelsea' }">
+					<div class='sb' style="background:#162E59;">
+					
+					<input type="file" name="file" style="background:#162E59;">
+				
+					<input style= background:#162E59;  "float:right;" type="submit" value="작성하기"  >
+					</div>
+					</c:if>
+					
+					
+					<c:if test="${login.club== 'Manchester City' }">
+					<div class='sb' style="background:#98C5E9;">
+					
+					<input type="file" name="file" style="background:#98C5E9;">
+				
+					<input style= background:#98C5E9;  "float:right;" type="submit" value="작성하기"  >
+					</div>
+					</c:if>
+					
+					<c:if test="${login.club== 'Arsenal' }">
+					<div class='sb' style="background:#F00000;">
+					
+					<input type="file" name="file" style="background:#F00000;">
+				
+					<input style= background:#F00000;  "float:right;" type="submit" value="작성하기"  >
+					</div>
+					</c:if>
 						
 					</form>
 				</div>

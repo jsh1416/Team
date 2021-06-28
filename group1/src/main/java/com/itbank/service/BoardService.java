@@ -1,6 +1,7 @@
 package com.itbank.service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -8,12 +9,17 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itbank.board.BoardDAO;
 import com.itbank.board.BoardDTO;
 import com.itbank.board.BoardLikeDTO;
 import com.itbank.member.MemberDTO;
+import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
 
 @Service
 public class BoardService {
@@ -26,12 +32,14 @@ public class BoardService {
 	private final String serverPass = "1";
 	private ChannelSftp chSftp = null;
 
-	private final String uploadPath = "C:\\upload";
+//	private final String uploadPath = "C:\\upload";
+	private final String uploadPath = "http://" +serverIP+ ":1234/";
 	
 	public List<BoardDTO> selectAll(HashMap<String, String> param) { // 전체 검색
 		boolean flag1 = false, flag2 = false;
 		if(param != null) {
 			flag1 = param.size() == 2;
+//			flag2 = param.get("search").equals("") == false;
 		}
 		return (flag1 && param.get("search").equals("") == false) ? dao.selectSearch(param) : dao.selectAll();
 	}
@@ -48,7 +56,7 @@ public class BoardService {
 		return dao.select(idxBo);
 	}
 
-	public int insert(BoardDTO dto) { // 글 삽입
+	public int insert(BoardDTO dto,MultipartFile file) throws Exception{ // 글 삽입
 		int row = 0;
 		
 		if(dto.getFile().getOriginalFilename().equals("") == false) {
@@ -66,7 +74,10 @@ public class BoardService {
 			} catch (IllegalStateException | IOException e) {
 				System.out.println("업로드 문제 발생 : " + e);
 			}
+//			dto.setUploadFile(dto.getFile().getOriginalFilename());
 			dto.setUploadFile(fileName);
+			String uploadFileName = upload(file);
+			dto.setUploadFile(uploadFileName);
 			row = dao.insert(dto);
 			
 		}else {
@@ -80,6 +91,7 @@ public class BoardService {
 		return row;
 	}
 	
+
 	public int selectMaxIdxBo() { 
 		System.out.println("select Max IDX " + dao.selectMaxIdxBo());
 		return dao.selectMaxIdxBo();
@@ -129,7 +141,6 @@ public class BoardService {
 		if(row != 0) {
 		
 		}
-	
 		
 		return row;
 }
@@ -197,5 +208,40 @@ public class BoardService {
 		
 	}
 
+public String upload(MultipartFile file) throws Exception {
+		
+		
+		Session sess = null;
+		Channel channel = null;
+		JSch jsch = new JSch();
+		
+		sess = jsch.getSession(serverUser,serverIP,serverPort);
+		sess.setPassword(serverPass);
+		sess.setConfig("StrictHostKeyChecking","no");
+		
+		sess.connect();
+		System.out.println("sftp> Connected !!");
+		
+		channel= sess.openChannel("sftp"); //sftp(파일전송)
+		channel.connect();
+		
+		chSftp= (ChannelSftp)channel;
+		
+		File tmp = new File(file.getOriginalFilename()); // 전송 준비끝
+		file.transferTo(tmp);
+		
+		FileInputStream fis = new FileInputStream(tmp);
+		chSftp.cd("/var/www/html");
+		chSftp.put(fis, file.getOriginalFilename());
+
+		System.out.println("sftp> transfer complete !!");
+		
+		fis.close();
+		chSftp.exit();
+		tmp.delete();
+		
+		System.out.println("sftp > exit");
+		return "http://" +serverIP+ ":1234/" + file.getOriginalFilename();
+	}
 	
 }

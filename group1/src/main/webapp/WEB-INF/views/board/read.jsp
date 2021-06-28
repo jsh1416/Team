@@ -38,9 +38,31 @@
 					<table>
 						<thead>
 							<tr class="row100 head">
-								<th class="cell100 column1">${dto.title}</th> <!-- 글제목 -->
-								<th class="cell100 column4">조회:${dto.viewCount} 추천:${dto.likeCount} 댓글:  ${dto.wdate }</th> 
-								<th class="cell100 column5">글쓴이:${dto.writer }</th> <!-- 글쓴이 -->
+								<c:if test="${login.club== 'Liverpool' }">
+								<th class="cell100 column1" style="background:#E31B23;" >${dto.title}</th> <!-- 글제목 -->
+								<th class="cell100 column4" style="background:#E31B23;">조회:${dto.viewCount} 추천:${dto.likeCount} 댓글:  ${dto.wdate }</th> 
+								<th class="cell100 column5" style="background:#E31B23;">글쓴이:${dto.writer }</th> <!-- 글쓴이 -->
+								</c:if>
+								<c:if test="${login.club== 'Chelsea' }"> <!-- 첼시팬 -->
+								<th class="cell100 column1" style="background:#162E59;" >${dto.title}</th> 
+								<th class="cell100 column4" style="background:#162E59;">조회:${dto.viewCount} 추천:${dto.likeCount} 댓글:  ${dto.wdate }</th> 
+								<th class="cell100 column5" style="background:#162E59;">글쓴이:${dto.writer }</th> 
+								</c:if>
+								<c:if test="${login.club== 'Manchester City' }"> <!-- 시티팬 -->
+								<th class="cell100 column1" style="background:#98C5E9;" >${dto.title}</th> 
+								<th class="cell100 column4" style="background:#98C5E9;">조회:${dto.viewCount} 추천:${dto.likeCount} 댓글:  ${dto.wdate }</th> 
+								<th class="cell100 column5" style="background:#98C5E9;">글쓴이:${dto.writer }</th> 
+								</c:if>
+								<c:if test="${login.club== 'Manchester United' }"> <!-- 맨유팬 -->
+								<th class="cell100 column1" style="background:#C70101;" >${dto.title}</th> 
+								<th class="cell100 column4" style="background:#C70101;">조회:${dto.viewCount} 추천:${dto.likeCount} 댓글:  ${dto.wdate }</th> 
+								<th class="cell100 column5" style="background:#C70101;">글쓴이:${dto.writer }</th> 
+								</c:if>
+								<c:if test="${login.club== 'Arsenal' }"> <!-- 아스날팬 -->
+								<th class="cell100 column1" style="background:#F00000;" >${dto.title}</th> 
+								<th class="cell100 column4" style="background:#F00000;">조회:${dto.viewCount} 추천:${dto.likeCount} 댓글:  ${dto.wdate }</th> 
+								<th class="cell100 column5" style="background:#F00000;">글쓴이:${dto.writer }</th> 
+								</c:if>
 							</tr>
 						</thead>
 					</table>
@@ -52,64 +74,87 @@
 <!-- 						업로드 -->
 							<tr class="row100 body " style="">
 								<c:if test="${not empty dto.uploadFile }">
-								<div><img src="${cpath }/upload/${dto.uploadFile }" width="100%" height="250px"></div>
-									<pre style="padding-left:15px; padding-top: 30px; min-height: 480px; text-align: left; ">${dto.content }</pre>
+								<div><img src="${dto.uploadFile }" width="100%" height="250px"></div>
+									<pre style="padding-left:15px; padding-top: 30px; min-height: 180px; text-align: left; ">${dto.content }</pre>
 								</c:if>
 								
 								<c:if test="${empty dto.uploadFile }">
-									<pre style="padding-left:15px; padding-top: 30px; min-height: 480px; text-align: left; ">${dto.content }</pre>
+									<pre style="padding-left:15px; padding-top: 30px; min-height: 180px; text-align: left; ">${dto.content }</pre>
 								</c:if>
 								
 							</tr>
 							
-<%-- 							<c:if test="${not empty login.nickName }"> --%>
-								<div class="sb ${login.nickName == dto.writer ? 'hidden': ''}">
+							<c:if test="${login.nickName!=dto.writer }">
 								<form>
 									<input type="hidden" name="idxBo"  value="${idxBo}">
 									<input type="hidden" name="login.nickName"  value="${login.nickName}">
-									<button id="likeBtn" onclick="doLike()">메</button>
+									<button id="likeBtn" onclick="doLike()">👍🏻추천👍🏻</button>
 								</form>
 								</div>
-<%-- 							</c:if> --%>
+							</c:if>
 							
-							<div class="sb ${login.nickName == dto.writer ? '' : 'hidden'}">
-									<button style= "float:right;" id="modifyBtn" onclick="modify()">수정</button>
-									<button style= "float:right;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
+							<c:if test="${login.club== 'Liverpool' }">
+							<div style= "background:#E31B23; " class="sb ${login.nickName == dto.writer ? '' : 'hidden'}">
+									<button style= "float:right; background:#E31B23;" id="modifyBtn" onclick="modify()">수정</button>
+									<button style= "float:right; background:#E31B23;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
 							</div>
+							</c:if>
+							<c:if test="${login.club== 'Chelsea' }">
+							<div style= "background:#162E59; " class="sb ${login.nickName == dto.writer ? '' : 'hidden'}">
+									<button style= "float:right; background:#162E59;" id="modifyBtn" onclick="modify()">수정</button>
+									<button style= "float:right; background:#162E59;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
+							</div>
+							</c:if>
+							<c:if test="${login.club== 'Manchester City' }">
+							<div style= "background:#98C5E9; " class="sb ${login.nickName == dto.writer ? '' : 'hidden'}">
+									<button style= "float:right; background:#98C5E9;" id="modifyBtn" onclick="modify()">수정</button>
+									<button style= "float:right; background:#98C5E9;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
+							</div>
+							</c:if>
+							<c:if test="${login.club== 'Manchester United' }">
+							<div style= "background:#C70101; " class="sb ${login.nickName == dto.writer ? '' : 'hidden'}">
+									<button style= "float:right; background:#C70101;" id="modifyBtn" onclick="modify()">수정</button>
+									<button style= "float:right; background:#C70101;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
+							</div>
+							</c:if>
+							<c:if test="${login.club== 'Arsenal' }">
+							<div style= "background:#F00000; " class="sb ${login.nickName == dto.writer ? '' : 'hidden'}">
+									<button style= "float:right; background:#F00000;" id="modifyBtn" onclick="modify()">수정</button>
+									<button style= "float:right; background:#F00000;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
+							</div>
+							</c:if>
 					</table>
 				</div>
 				</div>
-					
-					
-					<!-- 06 24 jcw insertform start  -->
 					<div class="container-table100">
 						<div class="wrap-table100">
 							<div class="table100 ver1 m-b-110">
 									<div id="replyDiv">
-										<form id="replyInputForm" 
-											style=" background-color: #dadada;
-											width:100%; height : 140px;">
-											<input type = "hidden" name="idxBo" value = ${dto.idxBo } >
-											<input type = "hidden" name="writer" value = ${login.id } >
-											<input type = "hidden" name="idxParent" value="0" >
-											<textarea class="rTextArea" id="replyInputCheck" name = "content" placeholder="바른말 고운말을 사용합시다."
-												required style=" height:70px; width:100%; resize:none;"></textarea>
-											<input class="rSubmit" type="submit" value="등록" 
-												style="font-size: 20px; width:100%; background-color: #6c7ae0;
-												  height: 70px;">	
+									<form id="replyInputForm" 
+										style="display:flex; background-color: #dadada;
+										width:1170px; height : 70px;">
+										<input type = "hidden" name="idxBo" value = ${dto.idxBo } >
+										<input type = "hidden" name="writer" value = ${login.id } >
+										<input type = "hidden" name="idxParent" value="0" >
+										<textarea name = "content" placeholder="바른말 고운말을 사용합시다."
+											required style="width:1070px; height:70px;"></textarea>
+										<input type="submit" value="등록" 
+											style="font-size: 20px; background-color: #6c7ae0;
+											 width : 100px; height: 70px;">	
 								
-										</form>
-										<div id="replyInputCheck_cnt" style="text-align: right;">(0/150)</div>
-									</div>
-								<h6 style="text-align: left;"> 베스트 댓글</h6>
-								<div id = "likeReplyList"></div>
-								<div style="height: 12px;"></div>
-								<h6 id = "cnt" style="text-align: left;"></h6>
-								<div id="mainReplyMain"></div>
+									</form>
+								</div>
+								<h6 id = "cnt"></h6>
+								<div id = "likeContent" style="display:none; background-color: #dadada;
+										width:1170px; height : 100px;"></div>
+								<div id="mainReplyMain" style="background-color: #4e81c0;"></div>
 							</div>
 						</div>
 					</div>
-					<!-- 06 24 jcw insertform end  -->
+				
+					
+				
+				
 				
 		</div>
 	</div>
@@ -145,7 +190,7 @@
 				<script src="${cpath }/resources/js/board/deleteboard.js"></script>
 <!-- 				수정 -->
 				<script src="${cpath }/resources/js/board/modify.js"></script>
-				<!--===============================================================================================-->
+				<!--=============================================================================================== ksj 영역--> 
 				
 				<script>
 				// jcw 06-25 코드 정리 시작

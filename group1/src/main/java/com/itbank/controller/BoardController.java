@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -102,11 +103,11 @@ public class BoardController {
 	}
 	
 	@PostMapping("/write") //글쓰기
-	public String write(BoardDTO dto) {//HttpSession session 
+	public String write(BoardDTO dto,MultipartFile file) throws Exception {//HttpSession session 
 //		String writer = (String)session.getAttribute("nickName");
 //		dto.setWriter(writer);
 		
-		int row = bs.insert(dto);
+		int row = bs.insert(dto, file);
 		int idxBo = bs.selectMaxIdxBo();
 		
 		if(row==1) {
@@ -182,5 +183,14 @@ public class BoardController {
 		return row;
 		
 	}
+	
+	
+//	@PostMapping("/write")
+//	public ModelAndView upload(MultipartFile file) throws Exception {
+//		ModelAndView mav = new ModelAndView("home");
+//		String uploadFileName = bs.upload(file);
+//		mav.addObject("uploadFileName",uploadFileName);
+//		return mav;
+//	}
 	
 }

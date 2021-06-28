@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 public interface BoardDAO {
 
+	
 	@Select("select * from EPLBoard order by idxBo desc")
 	List<BoardDTO> selectAll();
 
