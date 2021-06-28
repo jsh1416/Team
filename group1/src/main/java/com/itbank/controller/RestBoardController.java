@@ -27,10 +27,17 @@ public class RestBoardController {
 		return rs.replyList(idx, likeId);
 	}
 
+	
+	@RequestMapping(value = "/board/read/callRplMax", method = RequestMethod.GET)
+	public List<EplReplyDTO> callRplMax(@RequestParam("idx") int idx,
+			@RequestParam("likeId") String likeId,
+			@RequestParam("replyMaxCnt") int replyMaxCnt
+			) {
+		return rs.callRplMax(idx, likeId, replyMaxCnt);
+	}
+
 	@PostMapping("/board/read/{idx}")
 	public String insertReply(EplReplyDTO dto) {
-		System.out.println(dto);
-		System.out.println(dto.getContent());
 		int row = rs.insertReply(dto);
 		return row + "";
 	}
