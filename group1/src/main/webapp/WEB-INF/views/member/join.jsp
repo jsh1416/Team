@@ -41,6 +41,7 @@
     <div class="form-group">
       <label for="inputNickName" class="form-label mt-4">Nick Name</label>
       <input type="text" class="form-control" id="inputNickName" placeholder="Input nick-name" name="nickName" required style="width: 50%;">
+      <p class="google-font checkmsg" id="nickNameMsg"></p>
     </div>
     
     

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
 <%@ include file="../header.jsp" %>
+
 
 <main style="width: 1377px; margin: auto; margin-top: 75px; padding: 30px 20px 0px;">
 	<div class="container" style="width: 975px; height: 700px; margin: auto;">
@@ -26,7 +29,13 @@
 		    	
 		    	<div class="secondLineInfo" style="width:70%; height: 30px; margin-bottom: 20px; margin-left: 219.5px; text-align: left;">
 		    		<div style="display: inline-block; margin-right: 40px;">
-		    			<span style="font-size: 14px;">게시글 수</span> <span style="font-size: 14px; font-weight: bold;">${myBoardCount }</span>
+		    			<span style="font-size: 14px;">
+		    				게시글 수
+		    			</span> 
+		    			<!-- 06.28 bcg 내 글 목록 -->
+		    			<span style="font-size: 14px; font-weight: bold;">
+		    				<a href="${cpath }/board/mylist/${login.nickName }" style="color: #3A066B;"> ${myBoardCount }</a>
+		    			</span>
 		    		</div>
 		    		
 		    		<div style="display: inline-block;">
@@ -51,6 +60,7 @@
 		</div>
 		<div style="margin-top: 15px;">
 			<button type="button" id="changePwBtn" class="btn btn-success">비밀번호 변경</button>
+			<button type="button" id="deleteMember" class="btn btn-danger">회원 탈퇴</button>
 		</div>
 		
 		<div id="passwordChange" class="hide">
@@ -91,39 +101,10 @@
 </main>
 
 
-<script>
-	// 비밀번호 변경창 조절
-// 	window.onload=function(){
-// 			const passwordChangeForm = document.getElementById('passwordChange')
-// 			const changePwBtn = document.getElementById('changePwBtn')
-			
-// 			changePwBtn.addEventListener("click", e => {
-// 				showPasswordChange();
-// 			})
-			
-// 			function showPasswordChange(){
-// 				inputs = document.querySelectorAll('.showInput');
-// 				p = document.querySelectorAll('.changePwP')
-// 				for(i=0; i<inputs.length; i++){
-// 					inputs[i].value="";
-// 					p[i].innerHTML = "";
-// 				}
-				
-// 				if(passwordChangeForm.classList.contains('hide')){
-// 					passwordChangeForm.classList.remove('hide');
-// 				}else{
-// 					passwordChangeForm.classList.add('hide');
-// 				}
-// 			}
-// 	}
-	
-</script>
-
-
 
 </body>
 <script src="${cpath }/resources/js/member/passwordChange.js" ></script>
-
+<script src="${cpath }/resources/js/member/deleteMember.js" ></script>
 
 
 </html>

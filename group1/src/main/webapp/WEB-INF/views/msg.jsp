@@ -13,7 +13,7 @@
 		
 				
 		if(row==0){
-			swal('msg', ,'error');
+			swal('msg','','error');
 			if(url == '') {
 				history.go(-1);
 			}
@@ -22,12 +22,12 @@
 			}		
 			
 		}else{
-			swal('msg', ,'success');
+			swal(msg,url,'success');
 			if(url == '') {
 				history.go(-1);
 			}
 			else {
-				location.replace(url);
+				location.href(url);
 			}		
 		}
 		

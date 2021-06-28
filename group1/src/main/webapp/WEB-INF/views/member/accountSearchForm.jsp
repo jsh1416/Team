@@ -46,8 +46,7 @@
 					</div>
 				</div>
 
-				<!-- 인증번호 & 타이머 -->
-				<!--  <div id="verifi_code_id"></div>-->
+			
 
 				<!-- Submit -->
 				<div class="form-group row" style="margin: auto;">
@@ -100,10 +99,6 @@
 					</div>
 				</div>
 				
-				<!-- 인증번호 & 타이머 -->
-				<!--  <div id="verifi_code_pw"></div>-->
-				
-				<!-- Submit -->
 				<div class="form-group row" style="margin: auto;">
 					<div class="col-lg-12 mt-4 mb-4">
 						<input id="pw_search_input" type="button" class="btn btn-primary btn-lg btn-block btn-info"

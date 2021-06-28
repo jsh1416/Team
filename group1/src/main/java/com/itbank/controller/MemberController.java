@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,15 +41,27 @@ public class MemberController {
 	// ajax 방식 결합 로그인 06.14 bcg
 		@PostMapping("/login")
 		@ResponseBody
-		public String login(MemberDTO dto, HttpSession session) throws JsonProcessingException {
+		public String login(MemberDTO dto, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
 			MemberDTO login = memberSerivce.login(dto);
 //			System.out.println("login: "+login);
 			if(login!=null) {
 				session.setAttribute("login", login);
 				session.setMaxInactiveInterval(900);
+				
+				Cookie idCookie = new Cookie("idCookie", login.getId());
+//				System.out.println("rememberID : " + request.getParameter("rememberId"));
+				if("on".equals(request.getParameter("rememberId"))) {	// 이메일 기억하기 체크 되어있을 때 이메일 쿠키 생성
+					idCookie.setMaxAge(60 * 60 * 24 * 7);		// cookie 유효시간 7일
+					idCookie.setPath("/");		//				// 모든 경로에서 쿠키 유효
+				}else {
+					idCookie = new Cookie("idCookie", null);					// 이메일 쿠키가 이미 생성 되어있을 경우 쿠키 삭제
+					idCookie.setMaxAge(0); 										// 쿠키 유호시간 0으로 세팅
+					idCookie.setPath("/");
+				}
+				response.addCookie(idCookie);
+				
 			}
 			String json = mapper.writeValueAsString(login);
-//			System.out.println(json);
 			return json;
 		}
 	
@@ -73,8 +86,7 @@ public class MemberController {
 		int row = memberSerivce.join(dto);
 		// 06.25 bcg
 		
-		System.out.println("name : " + dto.getName());
-		
+		System.out.println("contextPath : "+request.getContextPath());
 		mav.addObject("url", request.getContextPath());
 		mav.addObject("row", row);
 
@@ -181,6 +193,25 @@ public class MemberController {
 		member.setPw(currentPw);
 		int row = memberSerivce.currentPwCheck(member); 
 //		System.out.println("current Check : " + row);
+		return ""+row;
+	}
+	
+	// 06.28 bcg 닉네임 체크
+	@PostMapping(value="/checkNickName/", produces="application/text;charset=utf8")
+	@ResponseBody
+	public String checkNickName(HttpServletRequest request) {
+		return memberSerivce.checkNickName(request);
+	}
+	
+	@PostMapping("/deleteMember/{id}")
+	@ResponseBody
+	public String deleteMember(@PathVariable String id, HttpSession session){
+		int row = memberSerivce.deleteMember(id);
+		System.out.println("row : " + row);
+		if(row!=0) {
+			
+			session.removeAttribute("login");
+		}
 		return ""+row;
 	}
 	

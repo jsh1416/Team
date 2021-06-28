@@ -87,6 +87,33 @@ function checkId(event){
 	}
 }
 
+// 06 28 bcg 닉네임 중복체크 
+function checkNickName(){
+	const inputNickName = document.getElementById('inputNickName')
+	const nickNameMsg = document.getElementById('nickNameMsg')
+	const request = new XMLHttpRequest();
+	request.open('POST', cpath + '/member/checkNickName/');
+	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	request.send("nickName=" + inputNickName.value);
+	request.onreadystatechange = function() {
+		
+	if(request.readyState == 4 && request.status == 200){
+		if(request.responseText === '이미 사용중인 닉네임입니다'){
+			nickNameMsg.innerHTML = request.responseText;
+			nickNameMsg.style.color = 'red';
+			inputNickName.classList.add(WARN_CN);
+			inputNickName.focus();
+		}
+		else{
+			nickNameMsg.innerHTML = request.responseText;
+			inputNickName.classList.remove(WARN_CN);
+			nickNameMsg.style.color = 'blue';
+		}
+			
+		}
+	}
+}
+
 
 
 // 비밀번호 정규식 체크
@@ -161,6 +188,7 @@ function checkPassword(event) {
 		cfpwMsg.className = 'error';
 	}
 }
+
 
 
 // 회원가입

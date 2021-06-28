@@ -1,7 +1,11 @@
 package com.itbank.service;
 
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -29,10 +33,12 @@ public class MemberService {
 	@Autowired private MemberDAO memberDAO;
 	
 	public MemberDTO login(MemberDTO dto) {
-		
+		dto.setPw(getHash(dto.getPw()));
 		return memberDAO.login(dto);
 	}
+	
 	public int join(MemberDTO dto) {
+		dto.setPw(getHash(dto.getPw()));
 		return memberDAO.join(dto);
 		
 	}
@@ -89,8 +95,9 @@ public class MemberService {
 			
 			//String password = SecurePassword.getHashValue(email, ranPw);		// 랜덤 비밀번호 암호화
 			
-			/* 06.18 bcg 임시 비밀번호로 DB pw업데이트*/ 
-			member.setPw(ranPw);
+			/* 06.18 bcg 임시 비밀번호로 DB pw업데이트*/
+			// 0628 비밀번호 해싱처리
+			member.setPw(getHash(ranPw));
 			
 			if(memberDAO.updatePw(member) == 0) {
 				return 0; 
@@ -141,6 +148,7 @@ public class MemberService {
 				
 			}
 		public int changePw(MemberDTO member) {
+			member.setPw(getHash(member.getPw()));
 			return memberDAO.updatePw(member);
 		}
 		
@@ -149,11 +157,49 @@ public class MemberService {
 		}
 		
 		public int currentPwCheck(MemberDTO member) {
+			member.setPw(getHash(member.getPw()));
 			return memberDAO.currentPwCheck(member);
 		}
 			
+		// 0628 비밀번호 해싱
+		private String getHash(String input) {
+			String hash = null;
 			
+			MessageDigest md;
+			try {
+				md = MessageDigest.getInstance("SHA-512");
+				md.reset();
+				md.update(input.getBytes("UTF-8"));
+				hash = String.format("%0128x", new BigInteger(1, md.digest()));
+				
+			} catch (NoSuchAlgorithmException | UnsupportedEncodingException  e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
+			return hash;
+		}
+
+		public String checkNickName(HttpServletRequest request) {
+			try {
+				String nickName = request.getParameter("nickName");
+//				System.out.println("nickName : " + nickName);
+				String alreadyExist = memberDAO.checkNickName(nickName);	
+//				System.out.println("alreadyExist : "+alreadyExist);
+				return alreadyExist != null ? "이미 사용중인 닉네임입니다" : "사용 가능한 닉네임입니다"; 
+			}catch (Exception e){
+				e.printStackTrace();
+				return "통신 실패 : " + e.getClass().getSimpleName();
+			}
+		}
+
+		public int deleteMember(String id) {
+			
+			int row = memberDAO.deleteMember(id);
+			
+			return row;
+		}
+	
 			
 		
 }

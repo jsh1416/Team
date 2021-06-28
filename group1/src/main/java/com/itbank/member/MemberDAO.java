@@ -1,6 +1,7 @@
 package com.itbank.member;
 
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -30,6 +31,13 @@ public interface MemberDAO {
 
 	@Select("select count(*) from EPLmember where pw = #{pw} and name = #{name} and email = #{email}")
 	int currentPwCheck(MemberDTO member);
+
+	// 06.28 bcg 닉네임 체크
+	@Select("select * from EPLmember where nickName=#{nickName}")
+	String checkNickName(String nickName);
+
+	@Delete("delete EPLmember where id = #{id}")
+	int deleteMember(String id);
 
 	
 }

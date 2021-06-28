@@ -11,6 +11,7 @@
 <!-- 06.14 bcg -->
 <script type="text/javascript">
 	const cpath = '${cpath}';
+	const logInId = '${login.id}';
 </script>
 
 
