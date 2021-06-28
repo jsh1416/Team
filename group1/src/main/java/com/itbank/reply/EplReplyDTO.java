@@ -23,7 +23,7 @@ public class EplReplyDTO {
 //			    );
 	
 	int idxRe, idxBo, idxParent, likeCount, replyCount, replyCheck;
-	String content, writer, wdate, nickName;
+	String content, writer, wdate, nickName, club;
 	public int getIdxRe() {
 		return idxRe;
 	}
@@ -84,6 +84,13 @@ public class EplReplyDTO {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
+	public String getClub() {
+		return club;
+	}
+	public void setClub(String club) {
+		this.club = club;
+	}
+	
 	
 	
 	

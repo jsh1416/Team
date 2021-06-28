@@ -5,7 +5,8 @@
 			
 <mapper namespace="com.itbank.reply.EplReplyDAO">
 
-	<select id="replyList" parameterType="hashmap" resultType="EplReply">
+	
+		<select id="replyList" parameterType="hashmap" resultType="EplReply">
 				select
 				distinct EPLreply.idxRe,
 				EPLreply.content,
@@ -15,6 +16,7 @@
                 EPLreply.likeCount,
                 EPLreply.idxParent,
 				EPLmember.nickName	as	nickName,
+				EPLmember.club	as	club,
                 (select count(*) from EPLreplyLike where EPLreply.idxRe = EPLreplyLike.likeIdxRe) as replyCount,
 				(select count(*) from
 				 EPLreplyLike where EPLreply.idxRe = EPLreplyLike.likeIdxRe and EPLreplyLike.likeId = #{likeId})
@@ -34,8 +36,19 @@
                 EPLreply.idxRe = EPLreplyLike.likeIdxRe
 				
 				where idxBo = #{idx}
-				order by idxRe
+				<if test="listCnt != null">
+				and (select count(*) from EPLreplyLike where EPLreply.idxRe = EPLreplyLike.likeIdxRe) = #{replyMaxCnt}
+				</if>
+				order by idxRe 
+				 <if test="listCnt != null">
+				desc
+				</if>
+				
+				 <if test="listCnt != null">
+				fetch first #{listCnt} rows only
+				</if>
 	</select>
+	
 	
 	<insert id="insertReply" parameterType="EplReply">
 		insert into EplReply

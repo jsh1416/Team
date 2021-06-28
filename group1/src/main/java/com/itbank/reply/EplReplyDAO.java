@@ -23,5 +23,7 @@ public interface EplReplyDAO {
 
 	int replyLikeUndo(EplReplyLikeDTO dto);
 
+	List<EplReplyDTO> callRplMax(HashMap<String, Object> map);
+
 
 }

@@ -23,6 +23,15 @@ public class ReplyService {
 		return ERdao.replyList(map);
 	}
 
+	public List<EplReplyDTO> callRplMax(int idx, String likeId, int replyMaxCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("idx", idx);
+		map.put("likeId", likeId);
+		map.put("replyMaxCnt", replyMaxCnt);
+		map.put("listCnt", "1");
+		return ERdao.replyList(map);
+	}
+	
 	public int insertReply(EplReplyDTO dto) {
 		// TODO Auto-generated method stub
 		return ERdao.insertReply(dto);
@@ -53,6 +62,6 @@ public class ReplyService {
 		// TODO Auto-generated method stub
 		return ERdao.replyLikeUndo(dto);
 	}
-	
+
 
 }
