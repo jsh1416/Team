@@ -2,8 +2,47 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <%@ include file="scroll.jsp" %>
+
+<style>
+	.firstSection::before{
+		content: "";
+        background: url(${cpath}/resources/images/background/Liverpool/4.jpg);
+        background-size: cover;
+        opacity: 0.5;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+	}
+		.secondSection::before{
+		content: "";
+        background: url(${cpath}/resources/images/background/Liverpool/2.jpg);
+        background-size: cover;
+        opacity: 0.5;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+	}
+		.thirdSection::before{
+		content: "";
+        background: url(${cpath}/resources/images/background/Liverpool/3.jpg);
+        background-size: cover;
+        opacity: 0.5;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+	}
+</style>
+
+
+
 	<div id="fullpage">
-		<div class="section" id="LIV1">
+		<div class="section firstSection" id="LIV1">
 			<div style="position: absolute; top: 100px;">
 				<h1 style="display: inline-block; margin-right: 10px">Liverpool News</h1>
 				<input id="correctNews" type="button" value="정확도순" style="display: inline-block; margin-right: 5px">
@@ -13,7 +52,7 @@
 			</div>
 		</div>
 
-		<div class="section" id="LIV2">
+		<div class="section secondSection" id="LIV2">
 			<h2>liv2</h2>
 		    <div class="limiter" style="padding-top: 75px; width:1000px; height:800px; color: #E31B23;">
 		<div class="container-table100">
@@ -70,7 +109,7 @@
 	</div>
 		</div>
 
-		<div class="section" id="LIV3">
+		<div class="section thirdSection" id="LIV3">
 			<h2>liv3</h2>
 		</div>
 	</div>

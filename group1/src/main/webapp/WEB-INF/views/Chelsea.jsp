@@ -2,8 +2,46 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <%@ include file="scroll.jsp" %>
+<style>
+	.firstSection::before{
+		content: "";
+        background: url(${cpath}/resources/images/background/Chelsea/4.jpg);
+        background-size: cover;
+        opacity: 0.5;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+	}
+		.secondSection::before{
+		content: "";
+        background: url(${cpath}/resources/images/background/Chelsea/2.jpg);
+        background-size: cover;
+        opacity: 0.5;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+	}
+		.thirdSection::before{
+		content: "";
+        background: url(${cpath}/resources/images/background/Chelsea/3.jpg);
+        background-size: cover;
+        opacity: 0.5;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+	}
+</style>
+
+
+
 	<div id="fullpage">
-		<div class="section" id="CHE1">
+		<div class="section firstSection" id="CHE1">
 			<div style="position: absolute; top: 100px;">
 				<h1 style="display: inline-block; margin-right: 10px">Chelsea News</h1>
 				<input id="correctNews" type="button" value="정확도순" style="display: inline-block; margin-right: 5px">
@@ -13,7 +51,7 @@
 			</div>
 		</div>
 
-		<div class="section" id="CHE2">
+		<div class="section secondSection" id="CHE2">
 			<h2>CHE 2</h2>
 						<div class="limiter" style="padding-top: 75px; width:1000px; height:800px; color: #E31B23;">
 		<div class="container-table100">
@@ -70,7 +108,7 @@
 	</div>
 		</div>
 
-		<div class="section" id="CHE3">
+		<div class="section thirdSection" id="CHE3">
 			<h2>CHE 3</h2>
 		</div>
 	</div>

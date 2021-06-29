@@ -82,7 +82,7 @@ public class MemberController {
 	
 	@PostMapping("/join")
 	public ModelAndView join(MemberDTO dto, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("msg");
+		ModelAndView mav = new ModelAndView("redirect:/");
 		int row = memberSerivce.join(dto);
 		// 06.25 bcg
 		
@@ -91,7 +91,7 @@ public class MemberController {
 		mav.addObject("row", row);
 
 		if(row == 1) {
-			mav.addObject("msg", "join success");
+			return mav;
 		}
 		else {
 			mav.addObject("msg", "join failed");
