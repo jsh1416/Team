@@ -2,10 +2,45 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <%@ include file="scroll.jsp" %>
-<!-- 개jjj -->
+<!-- 0629 bcg -->
+<style>
+	.firstSection::before{
+		content: "";
+        background: url(${cpath}/resources/images/background/Arsenal/4.jpg);
+        background-size: cover;
+        opacity: 0.5;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+	}
+		.secondSection::before{
+		content: "";
+        background: url(${cpath}/resources/images/background/Arsenal/2.jpg);
+        background-size: cover;
+        opacity: 0.5;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+	}
+		.thirdSection::before{
+		content: "";
+        background: url(${cpath}/resources/images/background/Arsenal/3.jpg);
+        background-size: cover;
+        opacity: 0.5;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+	}
+</style>
 
 	<div id="fullpage">
-		<div class="section" id="ARS1">
+		<div class="section firstSection" id="ARS1">
 			<div style="position: absolute; top: 100px;">
 				<h1 style="display: inline-block; margin-right: 10px">Arsenal News</h1>
 				<input id="correctNews" type="button" value="정확도순" style="display: inline-block; margin-right: 5px">
@@ -15,7 +50,7 @@
 			</div>
 		</div>
 
-	<div class="section" id="ARS2">
+	<div class="section secondSection" id="ARS2">
 			<h2>ARS 2</h2>
 				<div class="limiter" style="padding-top: 75px; width:1000px; height:800px; color: #F00000;">
 		<div class="container-table100">
@@ -72,7 +107,7 @@
 	</div>
 		</div>
 
-		<div class="section" id="ARS3">
+		<div class="section thirdSection" id="ARS3">
 			<h2>ARS 3</h2>
 		</div>
 	</div>

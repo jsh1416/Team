@@ -56,28 +56,41 @@ li:hover{
 	color: red;
 	font-weight: bold;
 }
+.secondSection::before{
+		content: "";
+        background: url(${cpath}/resources/images/background/league.jpg);
+        background-size: cover;
+        opacity: 0.5;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+	}
+	
 </style>
 
 
 <main>
 <div id="fullpage">
-		<div class="section active" id="MAIN1" style="padding-left: 50px;">
-			<div class="slide" id="slide1" data-anchor="slide1" style="text-align: center;">
-					<img src="${cpath }/resources/images/background/10.png" style="">
+		<div class="section active" id="MAIN1" style="padding-top: 3%; position: relative;">
+			<div class="slide " id="slide1" data-anchor="slide1" style="text-align: center;">
+					<img src="${cpath }/resources/images/background/wallEx.jpg" style="">
 			</div>
-			<div class="slide active" id="slide2" data-anchor="slide2">
+			<div class="slide " id="slide2" data-anchor="slide2">
 				<div style="text-align: center;">
-					<img src="${cpath }/resources/images/background/11.png" style="width: ; height: ;">
+					<img src="${cpath }/resources/images/background/wall22.jpg" style="width: ; height: ;">
 				</div>
 			</div>
-			<div class="slide" id="slide3" data-anchor="slide3">
-				<img src="${cpath }/resources/images/background/2.jpg" style="width: ; height: ;">
+			<div class="slide " id="slide3" data-anchor="slide3">
+				<div style="text-align: center;">
+					<img src="${cpath }/resources/images/background/wall33.jpg" style="">
+				</div>
 			</div>
-
+			
 		</div>
 
-
-	<div class="section" id="MAIN1" style="margin-left: 30px; margin-right: 30px;">
+	<div class="section secondSection" id="MAIN1" style="margin-left: 30px; margin-right: 30px;">
 		<div id="s_left">	
 			<div class="title">[유로 2020] 조별리그 순위표</div>
 				<nav>
@@ -104,11 +117,12 @@ li:hover{
 				<div class="title" id="stageTitle"></div>
 				<div class="schedule"></div>
 		</div>
+		</div>
 		
 		<div id="contents" class="euroNews">
 			<h1>EURO 2020 News</h1><br><br>
 		</div>
-
+		
 <!-- 	<div class="section" id="MAIN3">
 		<h2>HOME 3</h2>
 	</div> -->
