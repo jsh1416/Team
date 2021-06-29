@@ -208,9 +208,6 @@ public class BoardService {
 		return dao.selectLikeMember(boardLike);
 	}
 
-//	public int likeDelete(BoardLikeDTO Ldto) {
-//		return dao.likeDelte(Ldto);
-//	}
 
 	public int likeDown(String idxBo) {
 		return dao.likeDown(idxBo);
@@ -256,9 +253,9 @@ public String upload(MultipartFile file) throws Exception {
 		return "http://" +serverIP+ ":1234/" + file.getOriginalFilename();
 	}
 
-public ClubDTO clubColor(String clubName) {
-	return clubDAO.setColor(clubName);
-}
+	public ClubDTO clubColor(String clubName) { //클럽닉네임을 받아서 dto를 셀렉트해서 값을 가져와서
+		return clubDAO.setColor(clubName); //클럽컬러를 세팅
+	}
 
 
 

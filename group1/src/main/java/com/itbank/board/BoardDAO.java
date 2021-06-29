@@ -74,12 +74,9 @@ public interface BoardDAO {
 
 	@Select("select * from EPLBoard where ${type} like '%${search}%' order by idxBo desc") //검색
 	List<BoardDTO> selectSearch(HashMap<String, String> param);
-
     
     @Select("select * from EPLBoard order by likeCount desc")
 	List<BoardDTO> selectLike();
-
-
 
     @Select("select * from EPLBoardLike where BoardIdx=#{boardIdx} and  LikeMember=#{likeMember}")
 	BoardLikeDTO selectLikeMember(BoardLikeDTO boardLike);
@@ -96,9 +93,6 @@ public interface BoardDAO {
     @Insert("insert into eplboardhate (boardidx,hatemember) values (#{boardIdx}, #{hateMember})")
     int hateInsert(BoardHateDTO hdto);
     
-//    @Delete("delete EPLboardLike where boardidx = #{boardIdx} and  likemember = #{likeMember}")
-//	int likeDelte(BoardLikeDTO ldto);
-
     @Update("update EPLBoard set likeCount = likeCount+1 where idxBo=#{idxBo}") //좋아요
 	int likeUp(String idxBo);
     

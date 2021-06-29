@@ -36,7 +36,7 @@ import com.itbank.service.ClubService;
 public class BoardController {
 
 	@Autowired private BoardService bs;
-@Autowired private ClubService clubService;
+	@Autowired private ClubService clubService;
 	
 	private ObjectMapper mapper = new ObjectMapper();
 	
@@ -103,15 +103,27 @@ public class BoardController {
 		mav.addObject("dto",dto);
 		List<ClubDTO> clubList = clubService.selectClubList();
 		
+		
 		ClubDTO selectedClub = bs.clubColor(clubName);
+		
 		mav.addObject("clubColor", selectedClub.getClubColor());
 		mav.addObject("clubList", clubList);
-//		}
 		return mav;
 	}
 	
 	@GetMapping("/write") //글쓰기
-	public void write() {
+	public ModelAndView write(HttpSession session) {
+		
+		
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		String clubName = login.getClub();
+		ModelAndView mav = new ModelAndView("board/write");
+		
+		ClubDTO selectedClub = bs.clubColor(clubName);
+		
+		mav.addObject("clubColor", selectedClub.getClubColor());
+		System.out.println(selectedClub.getClubColor());
+		return mav;
 	}
 	
 	@PostMapping("/write") //글쓰기

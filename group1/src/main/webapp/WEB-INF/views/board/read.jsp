@@ -8,12 +8,6 @@
 	const boardidx = '${boardidx}';
 	const likemember = '${likemember}';
 	const clubName = '${dto.clubName}'
-	
-	
-
-
-
-  
 
 </script>
 
@@ -85,40 +79,19 @@
 								</form>
 							</c:if>
 							
+							<c:if test="${login.nickName ==dto.writer }">
+							<div style= "background:#3A066B;" class="sb">
+									<button style= "float:right; background:#3A066B;" id="modifyBtn" onclick="modify()">수정</button>
+									<button style= "float:right; background:#3A066B;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
+							</div>
+							</c:if>
 							
-							<c:if test="${login.club== 'Liverpool' }">
-							<div style= "background:#E31B23; " class="sb ${login.nickName == dto.writer ? '' : 'hide'}">
-									<button style= "float:right; background:#E31B23;" id="modifyBtn" onclick="modify()">수정</button>
-									<button style= "float:right; background:#E31B23;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
+							<c:if test="${login.nickName !=dto.writer }">
+							<div style= "background:#3A066B;" class="sb">
 							</div>
 							</c:if>
-							<c:if test="${login.club== 'Chelsea' }">
-							<div style= "background:#162E59;" class="sb ${login.nickName == dto.writer ? '' : 'hide'}">
-									<button style= "float:right; background:#162E59;" id="modifyBtn" onclick="modify()">수정</button>
-									<button style= "float:right; background:#162E59;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
-									
-							</div>
-							</c:if>
-							<c:if test="${login.club== 'Manchester City' }">
-							<div style= "background:#98C5E9;" class="sb ${login.nickName == dto.writer ? '' : 'hide'}">
-								<div style="display: ${login.nickName == dto.writer ? '':'none'};">
-									<button style= "float:right; background:#98C5E9;" id="modifyBtn" onclick="modify()">수정</button>
-									<button style= "float:right; background:#98C5E9;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
-								</div>
-							</div>
-							</c:if>
-							<c:if test="${login.club== 'Manchester United' }">
-							<div style= "background:#C70101; " class="sb ${login.nickName == dto.writer ? '' : 'hide'}">
-									<button style= "float:right; background:#C70101;" id="modifyBtn" onclick="modify()">수정</button>
-									<button style= "float:right; background:#C70101;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
-							</div>
-							</c:if>
-							<c:if test="${login.club== 'Arsenal' }">
-							<div style= "background:#F00000; " class="sb ${login.nickName == dto.writer ? '' : 'hide'}">
-									<button style= "float:right; background:#F00000;" id="modifyBtn" onclick="modify()">수정</button>
-									<button style= "float:right; background:#F00000;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
-							</div>
-							</c:if>
+							
+							
 					</table>
 				</div>
 				</div>

@@ -13,6 +13,7 @@ function doLike(){
 			
 			if(+text!=0) { 
 					swal('좋아요!',idxBo,'번 글에 좋아요!','success');
+					location.replace();
 													// error
 					console.log('I Like That! : ' + text)
 					
@@ -25,4 +26,6 @@ function doLike(){
 		
 		
 	}
+
+
 

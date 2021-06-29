@@ -84,7 +84,6 @@
 									<td class="cell100 column3 likeCountArea">${ dto.likeCount}</td>
 									<td class="cell100 column3 likeCountArea">${ dto.writer}</td>
 									<td class="cell100 column3 likeCountArea">${ dto.wdate}</td>
-									
 								</tr>
 							</c:forEach>
 							</table>
@@ -103,7 +102,8 @@
                         		<span><input style="background:${clubColor};" type="submit" value="검색"></span>
                     			 </form>
                     			 
-								<c:if test="${login.club == 'Arsenal'}">
+                    			
+								<c:if test="${login.club == 'Chelsea'}">
 								<span style=  "justify-content: space-between; "><a href="${cpath}/board/mylist/${login.nickName}">나의 글</a><a href="${cpath}/board/write">글쓰기</a></span>
 								</c:if>
 					</div>		

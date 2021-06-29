@@ -30,13 +30,13 @@ public interface ClubDAO {
 	@Select("select * from club where clubName= #{clubName}")
 	ClubDTO selectFanClub(String club);
 
-	@Select("select * from club where clubName= #{clubName}")
+	@Select("select * from club where clubName=#{clubName}") //클럽 색상세팅
 	ClubDTO setColor(String clubName);
-
 
 	@Select("select * from club where clubName= #{mav}")
 	ClubDTO setColormav(ModelAndView mav);
 
 	@Select("select * from club where clubName=#{clubName}")
 	ClubDTO selectColor(String clubName);
+	
 }

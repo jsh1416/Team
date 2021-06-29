@@ -47,6 +47,5 @@ public class ClubService {
 	public ClubDTO selectColor(String clubName) {
 		return clubDAO.selectColor(clubName);
 	}
-	
 
 }
