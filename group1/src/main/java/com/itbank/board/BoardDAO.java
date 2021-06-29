@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.itbank.club.ClubDTO;
+
 public interface BoardDAO {
 
 	
@@ -34,7 +36,6 @@ public interface BoardDAO {
 	
 	@Select("select * from EPLBoard where clubName='Arsenal' order by idxBo desc")
 	List<BoardDTO> selectArsenal();
-	
 	
 	@Insert("insert into EPLBoard (idxBo, title, writer,content,clubName ,uploadFile) values "
 			+"(board_seq.nextval, "
@@ -68,16 +69,12 @@ public interface BoardDAO {
 	@Update("update EPLBoard set title = #{title}, content=#{content},uploadFile='${uploadFile}' where idxBo=#{idxBo}")//수정
 	int modify(BoardDTO dto);
 	
-	
 	@Select("select * from EPLBoard where writer = #{writer} order by idxBo desc") 
 	List<BoardDTO> selectWriter(String writer);
 
 	@Select("select * from EPLBoard where ${type} like '%${search}%' order by idxBo desc") //검색
 	List<BoardDTO> selectSearch(HashMap<String, String> param);
 
-
-    
-    
     
     @Select("select * from EPLBoard order by likeCount desc")
 	List<BoardDTO> selectLike();
@@ -86,6 +83,9 @@ public interface BoardDAO {
 
     @Select("select * from EPLBoardLike where BoardIdx=#{boardIdx} and  LikeMember=#{likeMember}")
 	BoardLikeDTO selectLikeMember(BoardLikeDTO boardLike);
+    
+    @Select("select * from EPLBoardHate where BoardIdx=#{boardIdx} and  HateMember=#{hateMember}")
+    BoardHateDTO selectHateMember(BoardHateDTO boardHate);
 
     @Select("select * from EPLBoard order by wdate desc")
 	List<BoardDTO> selectNew();
@@ -93,14 +93,24 @@ public interface BoardDAO {
     @Insert("insert into eplboardlike (boardidx,likemember) values (#{boardIdx}, #{likeMember})")
 	int likeInsert(BoardLikeDTO ldto);
 
-    @Delete("delete EPLboardLike where boardidx = #{boardIdx} and  likemember = #{likeMember}")
-	int likeDelte(BoardLikeDTO ldto);
+    @Insert("insert into eplboardhate (boardidx,hatemember) values (#{boardIdx}, #{hateMember})")
+    int hateInsert(BoardHateDTO hdto);
+    
+//    @Delete("delete EPLboardLike where boardidx = #{boardIdx} and  likemember = #{likeMember}")
+//	int likeDelte(BoardLikeDTO ldto);
 
     @Update("update EPLBoard set likeCount = likeCount+1 where idxBo=#{idxBo}") //좋아요
 	int likeUp(String idxBo);
     
     @Update("update EPLBoard set likeCount = likeCount-1 where idxBo=#{idxBo}")
 	int likeDown(String idxBo);
+
+    @Select("select * from Club where clubname= #{clubName}")
+	ClubDTO clubColor(String clubName);
+
+	
+
+	
 
 
     

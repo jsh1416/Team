@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.board.BoardDTO;
 import com.itbank.club.ClubDAO;
@@ -38,4 +39,14 @@ public class ClubService {
 	public List<BoardDTO> selectArsenal() {
 		return clubDAO.selectArsenal();
 	}
+
+	public ClubDTO selectFanClub(String club) {
+		return clubDAO.selectFanClub(club);
+	}
+
+	public ClubDTO selectColor(String clubName) {
+		return clubDAO.selectColor(clubName);
+	}
+	
+
 }

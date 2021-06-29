@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.board.BoardDTO;
+import com.itbank.club.ClubDTO;
 import com.itbank.service.ClubService;
 
 @Controller
 public class HomeController {
 	
-	@Autowired private ClubService clubService;
+@Autowired private ClubService clubService;
 	
 	/* 06.23 bcg clubList */
 	@GetMapping({"","/"})
@@ -31,6 +32,10 @@ public class HomeController {
 		mav.addObject("list",list);
 		mav.addObject("clubList", clubService.selectClubList());
 		
+		String clubName = "Liverpool";
+		ClubDTO selectedClub = clubService.selectColor(clubName);
+		mav.addObject("clubColor", selectedClub.getClubColor());
+		
 		return mav;
 	}
 	
@@ -40,6 +45,10 @@ public class HomeController {
 		List<BoardDTO> list = clubService.selectMu();
 		mav.addObject("list",list);
 		mav.addObject("clubList", clubService.selectClubList());
+		
+		String clubName = "Manchester United";
+		ClubDTO selectedClub = clubService.selectColor(clubName);
+		mav.addObject("clubColor", selectedClub.getClubColor());
 		return mav;
 	}
 	
@@ -49,6 +58,10 @@ public class HomeController {
 		List<BoardDTO> list = clubService.selectMc();
 		mav.addObject("list",list);
 		mav.addObject("clubList", clubService.selectClubList());
+		
+		String clubName = "Manchester City";
+		ClubDTO selectedClub = clubService.selectColor(clubName);
+		mav.addObject("clubColor", selectedClub.getClubColor());
 		return mav;
 	}
 	
@@ -58,6 +71,11 @@ public class HomeController {
 		List<BoardDTO> list = clubService.selectChelsea();
 		mav.addObject("list",list);
 		mav.addObject("clubList", clubService.selectClubList());
+		
+		String clubName = "Chelsea";
+		ClubDTO selectedClub = clubService.selectColor(clubName);
+		mav.addObject("clubColor", selectedClub.getClubColor());
+		
 		return mav;
 	}
 	
@@ -67,6 +85,13 @@ public class HomeController {
 		List<BoardDTO> list = clubService.selectArsenal();
 		mav.addObject("list",list);
 		mav.addObject("clubList", clubService.selectClubList());
+		mav.addObject("clubColor",clubService.selectColor("Arsenal"));
+		
+		
+		String clubName = "Arsenal";
+		ClubDTO selectedClub = clubService.selectColor(clubName);
+		mav.addObject("clubColor", selectedClub.getClubColor());
+		
 		return mav;
 	}
 	// 팀 별 jsp 게시판글만 view생성 06.25 ksj

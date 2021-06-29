@@ -51,7 +51,11 @@
 
 		<div class="section secondSection" id="MC2">
 			<h2>MC 2</h2>
-					<div class="limiter" style="padding-top: 75px; width:1000px; height:800px; color: #E31B23;">
+		</div>
+
+		<div class="section thirdSection" id="MC3">
+			<h2>MC 3</h2>
+			<div class="limiter" style="padding-top: 75px; width:1000px; height:800px; color: #F00000;">
 		<div class="container-table100">
 			<div class="wrap-table100">
 				<div class="table100 ver1 m-b-110"">
@@ -59,10 +63,11 @@
 						<table>
 							<thead>
 								<tr class="row100 head" >
-									<th class="cell100 column1" style="background:#98C5E9;"><button style="color: #FFFFFF;" id="newNumber" >최신</button></th>
-									<th class="cell100 column2" style="background:#98C5E9;"><button style="color: #FFFFFF;" id="viewNumber" >조회수</button></th>
-									<th class="cell100 column3" style="background:#98C5E9;"><button style="color: #FFFFFF;" id="likeNumber">추천수</button></th>
-								</tr>
+									<th class="cell100 column1" style="background:${clubColor};"><button style="color: #FFFFFF;" id="newNumber" >최신</button></th>
+									<th class="cell100 column2" style="background:${clubColor};"><button style="color: #FFFFFF;" id="viewNumber" >조회수</button></th>
+									<th class="cell100 column3" style="background:${clubColor};"><button style="color: #FFFFFF;" id="likeNumber">추천수</button></th>
+									<th class="cell100 column3" style="background:${clubColor};"><button style="color: #FFFFFF;" id="likeNumber">글쓴이</button></th>
+									<th class="cell100 column3" style="background:${clubColor};"><button style="color: #FFFFFF;" id="likeNumber">날짜</button></th>								</tr>
 							</thead>
 						</table>
 					</div>
@@ -75,22 +80,25 @@
 									<td class="cell100 column1 titleArea" ><a href="${cpath }/board/read/${dto.idxBo}?type=${param.type }&search=${param.search }&vc=true">${dto.title}</a></td>
 									<td class="cell100 column2 viewCountArea">${ dto.viewCount}</td>
 									<td class="cell100 column3 likeCountArea">${ dto.likeCount}</td>
+									<td class="cell100 column3 likeCountArea">${ dto.writer}</td>
+									<td class="cell100 column3 likeCountArea">${ dto.wdate}</td>
+									
 								</tr>
 							</c:forEach>
 							</table>
 						
-					<div class= "sb" style="background:#98C5E9;">
+					<div class= "sb" style="background:${clubColor};">
 							<form >
 								<span >
-								<select  name="type" style="background:#98C5E9;">
+								<select  name="type" style="background:${clubColor};">
 									<option ${param.type == 'title' ? 'selected' : '' } value="title">제목</option>
 									<option ${param.type == 'writer' ? 'selected' : '' } value="writer">글쓴이</option>
 									<option ${param.type == 'content' ? 'selected' : '' } value="content">내용</option>
 								</select>
 								</span>
 								
-								<span><input style="background:#98C5E9;" type="text" name="search" value="${param.search }" ></span>
-                        		<span><input style="background:#98C5E9;" type="submit" value="검색"></span>
+								<span><input style="background:${clubColor};" type="text" name="search" value="${param.search }" ></span>
+                        		<span><input style="background:${clubColor};" type="submit" value="검색"></span>
                     			 </form>
                     			 
 								<c:if test="${login.club == 'Arsenal'}">
@@ -103,11 +111,9 @@
 				</div>
 			</div>
 		</div>
-	</div>
 		</div>
-
-		<div class="section thirdSection" id="MC3">
-			<h2>MC 3</h2>
+	</div>
+ </div>
 		</div>
 	</div>
 

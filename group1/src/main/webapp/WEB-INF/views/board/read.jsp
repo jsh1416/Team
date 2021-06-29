@@ -7,10 +7,21 @@
 	const idxBo = '${dto.idxBo}';
 	const boardidx = '${boardidx}';
 	const likemember = '${likemember}';
-	console.log('idxBo : ' + idxBo)
+	const clubName = '${dto.clubName}'
+	
+	
+
+
+
+  
+
 </script>
 
+
+
 <style>
+
+
 .sb {
 
 		max-width: 100%;
@@ -27,9 +38,6 @@
 		margin:10px;
 }
 
-.m-b-110 {
-    margin-bottom: 0px;
-}
 
 </style>
 
@@ -41,31 +49,11 @@
 					<table>
 						<thead>
 							<tr class="row100 head">
-								<c:if test="${login.club== 'Liverpool' }">
-								<th class="cell100 column1" style="background:#E31B23;" >${dto.title}</th> <!-- 글제목 -->
-								<th class="cell100 column4" style="background:#E31B23;">조회:${dto.viewCount} 추천:${dto.likeCount} 댓글:  ${dto.wdate }</th> 
-								<th class="cell100 column5" style="background:#E31B23;">글쓴이:${dto.writer }</th> <!-- 글쓴이 -->
-								</c:if>
-								<c:if test="${login.club== 'Chelsea' }"> <!-- 첼시팬 -->
-								<th class="cell100 column1" style="background:#162E59;" >${dto.title}</th> 
-								<th class="cell100 column4" style="background:#162E59;">조회:${dto.viewCount} 추천:${dto.likeCount} 댓글:  ${dto.wdate }</th> 
-								<th class="cell100 column5" style="background:#162E59;">글쓴이:${dto.writer }</th> 
-								</c:if>
-								<c:if test="${login.club== 'Manchester City' }"> <!-- 시티팬 -->
-								<th class="cell100 column1" style="background:#98C5E9;" >${dto.title}</th> 
-								<th class="cell100 column4" style="background:#98C5E9;">조회:${dto.viewCount} 추천:${dto.likeCount} 댓글:  ${dto.wdate }</th> 
-								<th class="cell100 column5" style="background:#98C5E9;">글쓴이:${dto.writer }</th> 
-								</c:if>
-								<c:if test="${login.club== 'Manchester United' }"> <!-- 맨유팬 -->
-								<th class="cell100 column1" style="background:#C70101;" >${dto.title}</th> 
-								<th class="cell100 column4" style="background:#C70101;">조회:${dto.viewCount} 추천:${dto.likeCount} 댓글:  ${dto.wdate }</th> 
-								<th class="cell100 column5" style="background:#C70101;">글쓴이:${dto.writer }</th> 
-								</c:if>
-								<c:if test="${login.club== 'Arsenal' }"> <!-- 아스날팬 -->
-								<th class="cell100 column1" style="background:#F00000;" >${dto.title}</th> 
-								<th class="cell100 column4" style="background:#F00000;">조회:${dto.viewCount} 추천:${dto.likeCount} 댓글:  ${dto.wdate }</th> 
-								<th class="cell100 column5" style="background:#F00000;">글쓴이:${dto.writer }</th> 
-								</c:if>
+								<th class="cell100 column1" style="background:${clubColor};" >${dto.title}</th> <!-- 글제목 -->
+								<th class="cell100 column2" style="background:${clubColor};">조회:${dto.viewCount} 댓글: ${rc}</th> 
+								<th class="cell100 column5" style="background:${clubColor};">${dto.wdate}</th>
+								<th class="cell100 column5" style="background:${clubColor};">${dto.writer } </th> <!-- 글쓴이 -->
+							
 							</tr>
 						</thead>
 					</table>
@@ -88,75 +76,78 @@
 							</tr>
 							
 							<c:if test="${login.nickName!=dto.writer }">
-								<form>
+								 <form>
 									<input type="hidden" name="idxBo"  value="${idxBo}">
 									<input type="hidden" name="login.nickName"  value="${login.nickName}">
-									<button id="likeBtn" onclick="doLike()">👍🏻추천👍🏻</button>
+									<button class="btn btn-primary btn-lg" id="likeBtn" onclick="doLike()">🏆️발롱도르 </button>&nbsp;
+									<div class="btn btn-outline-primary btn-sm"> 추천:${dto.likeCount } </div> 
+									&nbsp;<button class="btn btn-danger btn-lg" id="hateBtn" onclick="dohate()"> 🚪나가세요</button>
 								</form>
-								</div>
 							</c:if>
 							
+							
 							<c:if test="${login.club== 'Liverpool' }">
-							<div style= "background:#E31B23; " class="sb ${login.nickName == dto.writer ? '' : 'hidden'}">
+							<div style= "background:#E31B23; " class="sb ${login.nickName == dto.writer ? '' : 'hide'}">
 									<button style= "float:right; background:#E31B23;" id="modifyBtn" onclick="modify()">수정</button>
 									<button style= "float:right; background:#E31B23;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
 							</div>
 							</c:if>
 							<c:if test="${login.club== 'Chelsea' }">
-							<div style= "background:#162E59; " class="sb ${login.nickName == dto.writer ? '' : 'hidden'}">
+							<div style= "background:#162E59;" class="sb ${login.nickName == dto.writer ? '' : 'hide'}">
 									<button style= "float:right; background:#162E59;" id="modifyBtn" onclick="modify()">수정</button>
 									<button style= "float:right; background:#162E59;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
+									
 							</div>
 							</c:if>
 							<c:if test="${login.club== 'Manchester City' }">
-							<div style= "background:#98C5E9; " class="sb ${login.nickName == dto.writer ? '' : 'hidden'}">
+							<div style= "background:#98C5E9;" class="sb ${login.nickName == dto.writer ? '' : 'hide'}">
+								<div style="display: ${login.nickName == dto.writer ? '':'none'};">
 									<button style= "float:right; background:#98C5E9;" id="modifyBtn" onclick="modify()">수정</button>
 									<button style= "float:right; background:#98C5E9;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
+								</div>
 							</div>
 							</c:if>
 							<c:if test="${login.club== 'Manchester United' }">
-							<div style= "background:#C70101; " class="sb ${login.nickName == dto.writer ? '' : 'hidden'}">
+							<div style= "background:#C70101; " class="sb ${login.nickName == dto.writer ? '' : 'hide'}">
 									<button style= "float:right; background:#C70101;" id="modifyBtn" onclick="modify()">수정</button>
 									<button style= "float:right; background:#C70101;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
 							</div>
 							</c:if>
 							<c:if test="${login.club== 'Arsenal' }">
-							<div style= "background:#F00000; " class="sb ${login.nickName == dto.writer ? '' : 'hidden'}">
+							<div style= "background:#F00000; " class="sb ${login.nickName == dto.writer ? '' : 'hide'}">
 									<button style= "float:right; background:#F00000;" id="modifyBtn" onclick="modify()">수정</button>
 									<button style= "float:right; background:#F00000;" id="deleteBtn" onclick="deleteBoard()">삭제</button>
 							</div>
 							</c:if>
 					</table>
 				</div>
-			</div>
-					
-					<!-- 06 24 jcw insertform start  -->
-						<div style="padding-bottom: 100px;">
+				</div>
+					<div class="container-table100">
+						<div class="wrap-table100">
 							<div class="table100 ver1 m-b-110">
 									<div id="replyDiv">
-										<form id="replyInputForm" 
-											style=" background-color: #dadada;
-											width:100%; height : 140px;">
-											<input type = "hidden" name="idxBo" value = ${dto.idxBo } >
-											<input type = "hidden" name="writer" value = ${login.id } >
-											<input type = "hidden" name="idxParent" value="0" >
-											<textarea class="rTextArea" id="replyInputCheck" name = "content" placeholder="바른말 고운말을 사용합시다."
-												required style=" height:70px; width:100%; resize:none;"></textarea>
-											<input class="rSubmit" type="submit" value="등록" 
-												style="font-size: 20px; width:100%; background-color: #6c7ae0;
-												  height: 70px;">	
+									<form id="replyInputForm" 
+										style="display:flex; background-color: #dadada;
+										width:1170px; height : 70px;">
+										<input type = "hidden" name="idxBo" value = ${dto.idxBo } >
+										<input type = "hidden" name="writer" value = ${login.id } >
+										<input type = "hidden" name="idxParent" value="0" >
+										<textarea name = "content" placeholder="바른말 고운말을 사용합시다."
+											required style="width:1070px; height:70px;"></textarea>
+										<input type="submit" value="등록" 
+											style="font-size: 20px; background-color: #6c7ae0;
+											 width : 100px; height: 70px;">	
 								
-										</form>
-										<div id="replyInputCheck_cnt" style="text-align: right;">(0/150)</div>
-									</div>
-								<h6 style="text-align: left;"> 베스트 댓글</h6>
-								<div id = "likeReplyList"></div>
-								<div style="height: 12px;"></div>
-								<h6 id = "cnt" style="text-align: left;"></h6>
-								<div id="mainReplyMain"></div>
+									</form>
+								</div>
+								<h6 id = "cnt"></h6>
+								<div id = "likeContent" style="display:none; background-color: #dadada;
+										width:1170px; height : 100px;"></div>
+								<div id="mainReplyMain" style="background-color: #4e81c0;"></div>
 							</div>
 						</div>
-					<!-- 06 24 jcw insertform end  -->				
+					</div>
+				
 					
 				
 				
@@ -191,6 +182,7 @@
 				
 <!-- 				좋아요 -->
 				<script src="${cpath }/resources/js/board/like.js"></script>
+				<script src="${cpath }/resources/js/board/hate.js"></script>
 <!-- 				삭제 -->
 				<script src="${cpath }/resources/js/board/deleteboard.js"></script>
 <!-- 				수정 -->
@@ -340,6 +332,10 @@
 					
 					replyUserDiv.appendChild(replyUserImg)
 					replyMainStyleDiv.appendChild(replyUserDiv)
+					
+					
+
+					
 										
 					// 댓글 중간 부분 이름, 날짜, 좋아요, 내용
 					const replyBody = document.createElement('div')
@@ -428,13 +424,13 @@
 					
 					//대댓글, 수정, 삭제 버튼
 					const replyListSelectBtnDiv = document.createElement('div')
-					replyListSelectBtnDiv.style = "display:block; margin-top:23px; margin-left:10px; width: 150px;"
+					replyListSelectBtnDiv.style = "display:block; margin-top:23px; width: 150px;"
 											
 						// 대댓글 입력 버튼
 						if (writer != "") {							
 							if (reply.idxParent == 0){	
 								const replyReplyBtn = document.createElement('button')
-								replyReplyBtn.style = "display:block; margin-bottom:10px;"
+								replyReplyBtn.style = "display:block; margin-bottom:5px;"
 								replyReplyBtn.setAttribute("id", "replyReplyBtn" + reply.idxRe)
 								replyReplyBtn.setAttribute("idxre", reply.idxRe)
 								replyReplyBtn.setAttribute("idxparent", reply.idxParent)
@@ -479,16 +475,23 @@
 								const idx = $(this).attr("idxre");
 								deleteReplyBTN(idx)
 							})
-							if(RlikeCheck == 1){} 
-							else {
 							replyUserDiv.appendChild(deleteReplyBtn)
-							}
 						}
+						
+					
+										
+					
 					
 					if(RlikeCheck == 1){}
 					else{
 					replyBody.appendChild(replyListSelectBtnDiv)
 					}
+					
+					
+					
+					
+					
+
 					
 					// 버튼으로 생성된 form이 붙을 위치
 					const replySelectSubDiv = document.createElement('div')
@@ -499,9 +502,12 @@
 					}
 					replySelectSubDiv.setAttribute("class", "replySelectSubDiv")
 					replySelectSubDiv.style = "display:none;"
+													
 					
 					replyMainStyleDiv.appendChild(replyBody)
+					
 					replySecondDiv.appendChild(replyMainStyleDiv)
+					
 					replyMainDiv.appendChild(replySecondDiv)
 					
 					//// 댓글 폼을 붙이는 위치      
@@ -516,6 +522,7 @@
 					replyMainDiv.appendChild(replySubListDiv)
 					
 					// 분배부: 댓글을 조건에 따라 다른 곳에 붙인다.
+									
 					if(RlikeCheck == 1){
 						document.getElementById("likeReplyList").appendChild(replyMainDiv)
 					} else {
@@ -528,9 +535,9 @@
 					}
 				}
 				// replyWindow(reply, rc, RlikeCheck) 끝.
-				
-				// 버튼 작동 함수 부분	
-				// 대댓글 버튼을 누르면 입력 폼을 생성한다.	
+					
+			// 버튼 작동 함수 부분	
+			// 대댓글 버튼을 누르면 입력 폼을 생성한다.	
 		 		function replyReplyBTN(idx, writer, idxBo){
 				
 					if(document.getElementById("replySelectSubDiv" + idx).style.display == 'block'){
@@ -553,16 +560,23 @@
 						const replyReplyMainDiv = document.createElement('div')
 
 						const replyInputMainStyleDiv = document.createElement('div')
-						replyInputMainStyleDiv.style = "display:flex;background-color: #6c7ae0; width:100%;"
+						replyInputMainStyleDiv.style = "display:flex;background-color: #2d5986; width:100%;"
 							
 						const replyInputUserDiv = document.createElement('div')
-						replyInputUserDiv.style = "margin: 0.7%; width:150px;  height :87px;"
-												
+						replyInputUserDiv.style = "margin: 0.7%; width:80px;  height :87px;"
+						
+						const replyInputNameMainDiv = document.createElement('div')
+						replyInputNameMainDiv.style = " line-height :58px;"
+						const replyInputNameDiv = document.createElement('div')
+						replyInputNameDiv.style = "font-weight: 700; text-align: "
+							
+						replyInputNameMainDiv.appendChild(replyInputNameDiv)
+						replyInputUserDiv.appendChild(replyInputNameMainDiv)
 						replyInputMainStyleDiv.appendChild(replyInputUserDiv)
 							
 						//댓글 리스트, 수정, 삭제 관련 div//
 						const replyInputMainDiv = document.createElement('div')
-						replyInputMainDiv.style = "padding-top :5px;margin: 0.7%; display:flex; height :95px; width:100%;"
+						replyInputMainDiv.style = "margin: 0.7%; background-color:#fff; display:flex; width: 100%; height :70px;"
 							
 						const replyInputSecondDiv = document.createElement('div')
 						replyInputSecondDiv.style = "width:100%"
@@ -588,6 +602,9 @@
 						inputIdxparent.value = idx
 						inputIdxparent.type = 'hidden'
 						testForm.appendChild(inputIdxparent)
+								
+
+									
 								
 						const textarea = document.createElement('textarea')
 						textarea.name="content"
@@ -667,15 +684,20 @@
  					document.getElementById("replySecondDiv" + idx).style.display='none' 					
 					document.getElementById("replySelectSubDiv" + idx).style.display='block'
 					
-						//수정 창 색 변경
+					//사용자 정보 입력 div >> 공백으로 변경
 						const replyReplyMainDiv = document.createElement('div')
 
 						const replyInputMainStyleDiv = document.createElement('div')
-						replyInputMainStyleDiv.style = "display:flex;background-color: #6c7ae0; width:100%;"
+						if(idxParent == 0){
+						replyInputMainStyleDiv.style = "display:flex;background-color: #4e81c0; width:100%;"
+						} else {
+						replyInputMainStyleDiv.style = "display:flex;background-color: #2d5986; width:100%;"	
+						}
+						
 												
 						//댓글 리스트, 수정, 삭제 관련 div//
 						const replyInputMainDiv = document.createElement('div')
-						replyInputMainDiv.style = "padding-top :5px;margin: 0.7%; display:flex; height :95px; width:100%;"
+						replyInputMainDiv.style = "margin: 0.7%; display:flex; height :87px; width:100%;"
 						
 						const replyInputSecondDiv = document.createElement('div')
 						replyInputSecondDiv.style = "width:100%;"
@@ -880,6 +902,7 @@
 			
 			// jcw 06-25 코드 정리 끝
 			</script>
+		
 
 				
 				</body>

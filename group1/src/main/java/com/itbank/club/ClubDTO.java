@@ -9,7 +9,8 @@ package com.itbank.club;
 //06.09 bong 
 public class ClubDTO {	
 	private int clubIdx;
-	private String logo, clubName, clubNickname;
+	private String logo, clubName, clubNickname, clubColor;
+	
 	
 	public int getClubIdx() {
 		return clubIdx;
@@ -34,6 +35,12 @@ public class ClubDTO {
 	}
 	public void setClubNickname(String clubNickname) {
 		this.clubNickname = clubNickname;
+	}
+	public String getClubColor() {
+		return clubColor;
+	}
+	public void setClubColor(String clubColor) {
+		this.clubColor = clubColor;
 	}
 	
 	

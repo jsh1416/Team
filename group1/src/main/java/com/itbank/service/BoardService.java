@@ -10,10 +10,14 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.board.BoardDAO;
 import com.itbank.board.BoardDTO;
+import com.itbank.board.BoardHateDTO;
 import com.itbank.board.BoardLikeDTO;
+import com.itbank.club.ClubDAO;
+import com.itbank.club.ClubDTO;
 import com.itbank.member.MemberDTO;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
@@ -25,6 +29,7 @@ import com.jcraft.jsch.Session;
 public class BoardService {
 
 	@Autowired private BoardDAO dao;
+	@Autowired private ClubDAO clubDAO;
 	
 	private final String serverIP = "192.168.0.85";
 	private final int serverPort = 22;
@@ -192,6 +197,10 @@ public class BoardService {
 		
 		return dao.likeInsert(Ldto);
 	}
+	
+	public int hateInsert(BoardHateDTO Hdto) {
+		return dao.hateInsert(Hdto);
+	}
 
 	public BoardLikeDTO selectLikeMember(BoardLikeDTO boardLike) {
 		System.out.println("selectLikeMember");
@@ -199,13 +208,16 @@ public class BoardService {
 		return dao.selectLikeMember(boardLike);
 	}
 
-	public int likeDelete(BoardLikeDTO Ldto) {
-		return dao.likeDelte(Ldto);
-	}
+//	public int likeDelete(BoardLikeDTO Ldto) {
+//		return dao.likeDelte(Ldto);
+//	}
 
 	public int likeDown(String idxBo) {
 		return dao.likeDown(idxBo);
 		
+	}
+	public BoardHateDTO selectHateMember(BoardHateDTO boardHate) {
+		return dao.selectHateMember(boardHate);
 	}
 
 public String upload(MultipartFile file) throws Exception {
@@ -243,5 +255,15 @@ public String upload(MultipartFile file) throws Exception {
 		System.out.println("sftp > exit");
 		return "http://" +serverIP+ ":1234/" + file.getOriginalFilename();
 	}
+
+public ClubDTO clubColor(String clubName) {
+	return clubDAO.setColor(clubName);
+}
+
+
+
+
+
+
 	
 }

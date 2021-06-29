@@ -23,16 +23,20 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.board.BoardDTO;
+import com.itbank.board.BoardHateDTO;
 import com.itbank.board.BoardLikeDTO;
+import com.itbank.club.ClubDTO;
 import com.itbank.member.MemberDTO;
 import com.itbank.reply.EplReplyLikeDTO;
 import com.itbank.service.BoardService;
+import com.itbank.service.ClubService;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 
 	@Autowired private BoardService bs;
+@Autowired private ClubService clubService;
 	
 	private ObjectMapper mapper = new ObjectMapper();
 	
@@ -56,8 +60,6 @@ public class BoardController {
 	@GetMapping(value="/orderByNew/", produces="application/json; charset=utf-8")//최신순 
 	public String newNumber(@RequestParam HashMap<String, String> param) throws JsonProcessingException {
 		List<BoardDTO> list = bs.selectNew();
-		System.out.println("view LIst  : " + list.size());
-		System.out.println("컨트롤러진입");
 		String json = mapper.writeValueAsString(list);
 		return json;
 	}
@@ -80,8 +82,9 @@ public class BoardController {
 	}
 	
 	@GetMapping("/read/{idxBo}")
-	public ModelAndView read(@PathVariable int idxBo,boolean vc,String type,String search) {
+	public ModelAndView read(@PathVariable int idxBo,boolean vc,String type,String search, HttpSession session) {
 		
+		MemberDTO login = (MemberDTO) session.getAttribute("login");
 		if(vc) { //조회수 
 			bs.updateViewCount(idxBo);
 			try {
@@ -92,9 +95,18 @@ public class BoardController {
 			String location = "redirect:/board/read/" + idxBo + "?type=" + type + "&search=" + search;
 			return new ModelAndView(location);
 		}
+		
+		
 		BoardDTO dto = bs.select(idxBo);
+		String clubName = dto.getClubName();
 		ModelAndView mav = new ModelAndView("board/read");
 		mav.addObject("dto",dto);
+		List<ClubDTO> clubList = clubService.selectClubList();
+		
+		ClubDTO selectedClub = bs.clubColor(clubName);
+		mav.addObject("clubColor", selectedClub.getClubColor());
+		mav.addObject("clubList", clubList);
+//		}
 		return mav;
 	}
 	
@@ -124,7 +136,6 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView("msg");
 		int row = 0;
 		row = bs.delete(idxBo);
-		System.out.println("row="+row);
 		mav.addObject("msg",row ==1 ? "게시글이 삭제되었습니다" : "게시글이 삭제되지않았습니다");
 		mav.addObject("url", row == 1 ? "/EPL/board/" : "");
 		return mav;
@@ -150,12 +161,10 @@ public class BoardController {
 	@PostMapping("/read/boardLike/{idxBo}/") //좋아요
 	@ResponseBody   //버튼을 누르면 로그인 닉네임과 게시글 번호를 받은뒤 
 	public int likeboard(@PathVariable String idxBo ,HttpSession session) {
-		System.out.println("idx : " +idxBo);
 		int row = 0;
 		int row2 = 0 ;
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
 		
-		System.out.println("login : " + login.getNickName());
 		
 		
 		BoardLikeDTO boardLike = new BoardLikeDTO();
@@ -164,19 +173,52 @@ public class BoardController {
 		
 		BoardLikeDTO Ldto = bs.selectLikeMember(boardLike);
 		
-		if(Ldto == null) {
-			System.out.println("Ldto : " + Ldto);
+		BoardHateDTO boardHate = new BoardHateDTO();
+		boardHate.setBoardIdx(Integer.parseInt(idxBo));
+		boardHate.setHateMember(login.getNickName());
+		
+		BoardHateDTO Hdto = bs.selectHateMember(boardHate);
+		
+		if(Ldto == null && Hdto == null) {
 			row2= bs.likeInsert(boardLike); // 인설트를 했을때
-			System.out.println("row2 : " + row2);
 			
 			if(row2 !=0) {
 				row = bs.likeUp(idxBo);
-				System.out.println("row : " + row);
 			}
 			
 			}
 			else {
-				row2=bs.likeDelete(Ldto);
+				System.out.println("이미 추천을 누르셨습니다");
+			}
+		
+		return row;
+		
+	}
+	
+	@PostMapping("/read/boardHate/{idxBo}/") //좋아요
+	@ResponseBody   //버튼을 누르면 로그인 닉네임과 게시글 번호를 받은뒤 
+	public int hateboard(@PathVariable String idxBo ,HttpSession session) {
+		int row = 0;
+		int row2 = 0;
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		
+		
+		BoardLikeDTO boardLike = new BoardLikeDTO();
+		boardLike.setBoardIdx(Integer.parseInt(idxBo));
+		boardLike.setLikeMember(login.getNickName());
+		
+		BoardLikeDTO Ldto = bs.selectLikeMember(boardLike);
+		
+		BoardHateDTO boardHate = new BoardHateDTO();
+		boardHate.setBoardIdx(Integer.parseInt(idxBo));
+		boardHate.setHateMember(login.getNickName());
+		
+		BoardHateDTO Hdto = bs.selectHateMember(boardHate); //셀렉트로 찾은다음
+		
+		if(Hdto == null && Ldto == null) {
+			row2= bs.hateInsert(boardHate); // 인설트를 했을때
+			}
+			if(row2 !=0) {
 				row=bs.likeDown(idxBo);
 			}
 		
@@ -185,12 +227,7 @@ public class BoardController {
 	}
 	
 	
-//	@PostMapping("/write")
-//	public ModelAndView upload(MultipartFile file) throws Exception {
-//		ModelAndView mav = new ModelAndView("home");
-//		String uploadFileName = bs.upload(file);
-//		mav.addObject("uploadFileName",uploadFileName);
-//		return mav;
-//	}
+	
+	
 	
 }
