@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <%@ include file="scroll.jsp" %>
+<!-- 0629 bcg -->
 <style>
 	.firstSection::before{
 		content: "";
