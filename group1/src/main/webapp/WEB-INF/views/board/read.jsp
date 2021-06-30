@@ -43,7 +43,7 @@
 					<table>
 						<thead>
 							<tr class="row100 head">
-								<th class="cell100 column1" style="background:${clubColor};" >${dto.title}</th> <!-- 글제목 -->
+								<th class="cell100 column1" style="background:${clubColor};">${dto.title}</th> <!-- 글제목 -->
 								<th class="cell100 column2" style="background:${clubColor};">조회:${dto.viewCount} 댓글: ${rc}</th> 
 								<th class="cell100 column5" style="background:${clubColor};">${dto.wdate}</th>
 								<th class="cell100 column5" style="background:${clubColor};">${dto.writer } </th> <!-- 글쓴이 -->
@@ -73,9 +73,9 @@
 								 <form>
 									<input type="hidden" name="idxBo"  value="${idxBo}">
 									<input type="hidden" name="login.nickName"  value="${login.nickName}">
-									<button class="btn btn-primary btn-lg" id="likeBtn" onclick="doLike()">🏆️발롱도르 </button>&nbsp;
+									<button type="button" class="btn btn-primary btn-lg" id="likeBtn" onclick="doLike()">🏆️발롱도르 </button>&nbsp;
 									<div class="btn btn-outline-primary btn-sm"> 추천:${dto.likeCount } </div> 
-									&nbsp;<button class="btn btn-danger btn-lg" id="hateBtn" onclick="dohate()"> 🚪나가세요</button>
+									&nbsp;<button  type="button" class="btn btn-danger btn-lg" id="hateBtn" onclick="dohate()"> 🚪나가세요</button>
 								</form>
 							</c:if>
 							

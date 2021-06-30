@@ -2,6 +2,21 @@
     pageEncoding="UTF-8"%>
  <%@include file="../header.jsp" %>
  <% 	request.setCharacterEncoding("UTF-8"); %>
+ <style>
+.sb {
+		max-width: 1300px;
+		padding: 10px 0px;
+		display: flex;
+		justify-content: space-between;
+		background-color: #6c7ae0;
+}
+
+
+.sb > input {
+color: #FFFFFF;
+float:right;
+}
+</style>
 <!-- 611 김선진 -->
 	<div class="limiter">
 		<div class="container-table100">
@@ -13,10 +28,8 @@
 						<table>
 							<thead>
 								<tr>
-									<th>글제목</th>
-									<th><input type="text" name="title"  placeholder="${dto.title }" required></th>
-		<%-- 									<th>작성자:${login.nickName}</th> --%>
-									<th><input type="hidden" name="writer"  value="${login.nickName }"></th>
+									<th style="background:${clubColor}; color: #FFFFFF;" ><input style="background:${clubColor}; type="text" name="title"  placeholder="${dto.title }" required></th>
+									<input type="hidden" name="writer"  value="${login.nickName }">
 								</tr>
 							</thead>
 						</table>
@@ -24,18 +37,18 @@
 
 			
 					<div class="table100-body js-pscroll">
-								<textarea style="resize: none;" rows="5" cols="164" name="content"  placeholder="${dto.content }"  required> </textarea>	
+								<textarea style="resize: none;" rows="5" cols="164" name="content"  placeholder="${dto.content}"  required> </textarea>	
 					
 					</div>
 					
-					<div>
+					<div class='sb' style="background:#3A066B; color="#FFFFFF;">
 					
 					<input type="file" name="file">
 					<c:if test="${not empty dto.uploadFile }">
 					현재 파일 : ${dto.uploadFile }
 					</c:if>
 				
-					<input style=  "float:right;" type="submit" value="수정하기">
+					<input style= background:#3A066B; type="submit" value="수정하기">
 					</div>
 						
 					</form>

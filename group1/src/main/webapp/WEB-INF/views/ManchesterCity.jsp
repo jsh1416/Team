@@ -179,7 +179,7 @@
 								</tr>
 							</c:forEach>
 							</table>
-						
+					</div>	
 					<div class= "sb" style="background:${clubColor};">
 							<form >
 								<span >

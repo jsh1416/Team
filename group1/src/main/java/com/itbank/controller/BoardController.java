@@ -122,16 +122,12 @@ public class BoardController {
 		ClubDTO selectedClub = bs.clubColor(clubName);
 		
 		mav.addObject("clubColor", selectedClub.getClubColor());
-		System.out.println(selectedClub.getClubColor());
 		return mav;
 	}
 	
 	@PostMapping("/write") //글쓰기
-	public String write(BoardDTO dto,MultipartFile file) throws Exception {//HttpSession session 
-//		String writer = (String)session.getAttribute("nickName");
-//		dto.setWriter(writer);
-		
-		int row = bs.insert(dto, file);
+	public String write(BoardDTO dto) throws Exception {//HttpSession session 
+		int row = bs.insert(dto);
 		int idxBo = bs.selectMaxIdxBo();
 		
 		if(row==1) {
@@ -155,10 +151,18 @@ public class BoardController {
 	}
 	
 	@GetMapping("/modify/{idxBo}") //글 수정
-	public ModelAndView modify(@PathVariable int idxBo) {
+	public ModelAndView modify(@PathVariable int idxBo ,HttpSession session) {
 		ModelAndView mav = new ModelAndView("board/modify");
 		BoardDTO dto = bs.selectOne(idxBo);
 		mav.addObject("dto",dto);
+		
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		String clubName = login.getClub();
+		ClubDTO selectedClub = bs.clubColor(clubName);
+		mav.addObject("clubColor", selectedClub.getClubColor());
+		
+		System.out.println("dto.content"+dto.getContent());
+		
 		return mav;
 	}
 	

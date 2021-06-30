@@ -12,13 +12,12 @@ function doLike(){
 		.then(text => { 
 			
 			if(+text!=0) { 
-					swal('좋아요!',idxBo,'번 글에 좋아요!','success');
-					location.replace();
-													// error
+					swal('좋아요!','이 글이 좋아요!','success');
+					location.reload();
 					console.log('I Like That! : ' + text)
 					
 				} else{
-					swal('싫어요!','68번 글에 좋아요 실패!','error');
+					swal('에러발생!','이 글 평가를 이미 하셨습니다!','error');
 					console.log('I hate that : ' + text)
 				}
 			

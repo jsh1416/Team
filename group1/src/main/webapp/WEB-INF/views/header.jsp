@@ -175,8 +175,12 @@
             <span style="display: inline-block; width: 45px; height: 65px;"><img src="${cpath }/resources/images/icons/premier-league-2-logo.png" style="width: 45px; height: 65px; vertical-align;"></span>
             <span style="display: inline-block;"><h1><a href="${cpath}" style="color: #3A0640;">EPL Fan Site</a></h1></span>
 <!--             <p class="lead">The medium is the message</p> -->
+			<c:if test="${not empty login.nickName }">
+    		<span style="display: inline-block;"><h8><a href="${cpath}/board/write" style="color: #3A0640;">글쓰기</a></h8></span>
+    		</c:if>
             
     </div>  
+    	
          
  		<!-- 06.09 봉찬균 회원 관련 메뉴 -->	        
          <div style="float: right; display: inline-block; margin-right: 15px; 

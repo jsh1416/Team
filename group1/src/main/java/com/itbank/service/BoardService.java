@@ -61,7 +61,7 @@ public class BoardService {
 		return dao.select(idxBo);
 	}
 
-	public int insert(BoardDTO dto,MultipartFile file) throws Exception{ // 글 삽입
+	public int insert(BoardDTO dto) throws Exception{ // 글 삽입
 		int row = 0;
 		
 		if(dto.getFile().getOriginalFilename().equals("") == false) {
@@ -79,10 +79,11 @@ public class BoardService {
 			} catch (IllegalStateException | IOException e) {
 				System.out.println("업로드 문제 발생 : " + e);
 			}
-//			dto.setUploadFile(dto.getFile().getOriginalFilename());
-			dto.setUploadFile(fileName);
-			String uploadFileName = upload(file);
+			System.out.println("f======="+f);
+			
+			String uploadFileName = upload(dto.getFile());
 			dto.setUploadFile(uploadFileName);
+			System.out.println("setuploadfile==========="+uploadPath+fileName);
 			row = dao.insert(dto);
 			
 		}else {
@@ -256,9 +257,6 @@ public String upload(MultipartFile file) throws Exception {
 	public ClubDTO clubColor(String clubName) { //클럽닉네임을 받아서 dto를 셀렉트해서 값을 가져와서
 		return clubDAO.setColor(clubName); //클럽컬러를 세팅
 	}
-
-
-
 
 
 

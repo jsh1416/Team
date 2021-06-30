@@ -5,7 +5,7 @@
 <style>
 .sb {
 		max-width: 1300px;
-		padding: 10px 0px;
+		padding: 0px;
 		display: flex;
 		justify-content: space-between;
 		background-color: #6c7ae0;
@@ -83,14 +83,16 @@ input::placeholder {color:#FFFFFF;}
 					</div>
 					
 					
-					<div class='sb' style="background:#3A066B;">
+					<div 	class="sb" style="background:#343a40;">
 					
 					
 					
-				    <input type="file" name="file">
+<!-- 				    <input  class="btn btn-dark"    style="padding-top:5px; padding-left:0px;height:36px"type="file" name="file"> -->
 				
+					<input type="file" name="file"  id="file" style="background:#343a40; display: none; ">
+					<button  type="button" class="btn btn-dark" onclick="document.all.file.click()">파일</button>
 					
-					<input style= background:#3A066B;   type="submit" value="작성하기"  >
+					<input  class="btn btn-dark"    type="submit" value="작성하기"  >
 					</div>
 					
 					
