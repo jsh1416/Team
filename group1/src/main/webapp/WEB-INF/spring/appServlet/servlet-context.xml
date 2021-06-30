@@ -30,6 +30,7 @@
 	<!-- jsh 06.25 -->
 	<interceptors>
 		<interceptor>
+			<mapping path="/board/read/reply" />
 			<mapping path="/board/modify" />
 			<mapping path="/board/mylist" />
 			<mapping path="/board/write" />

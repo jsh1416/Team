@@ -36,7 +36,7 @@ public class RestBoardController {
 		return rs.callRplMax(idx, likeId, replyMaxCnt);
 	}
 
-	@PostMapping("/board/read/{idx}")
+	@PostMapping("/board/read/reply/{idx}")
 	public String insertReply(EplReplyDTO dto) {
 		int row = rs.insertReply(dto);
 		return row + "";
@@ -53,12 +53,12 @@ public class RestBoardController {
 		return rs.updateReply(dto);
 	}
 
-	@RequestMapping(value="/board/read/replyLikeDo/", method = RequestMethod.POST, consumes="application/json; charset=utf-8")
+	@RequestMapping(value="/board/read/reply/LikeDo/", method = RequestMethod.POST, consumes="application/json; charset=utf-8")
 	public int replyLikeDo(@RequestBody EplReplyLikeDTO dto) {
 		return rs.replyLikeDo(dto);
 	}
 	
-	@RequestMapping(value="/board/read/replyLikeUndo/", method = RequestMethod.POST, consumes="application/json; charset=utf-8")
+	@RequestMapping(value="/board/read/reply/LikeUndo/", method = RequestMethod.POST, consumes="application/json; charset=utf-8")
 	public int replyLikeUndo(@RequestBody EplReplyLikeDTO dto) {
 		return rs.replyLikeUndo(dto);
 	}

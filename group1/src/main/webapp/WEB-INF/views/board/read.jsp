@@ -32,6 +32,9 @@
 		margin:10px;
 }
 
+.m-b-110 {
+    margin-bottom: 0px;
+}
 
 </style>
 
@@ -94,32 +97,35 @@
 							
 					</table>
 				</div>
-				</div>
-					<div class="container-table100">
-						<div class="wrap-table100">
+			</div>
+					
+					<!-- 06 24 jcw insertform start  -->
+						<div style="padding-bottom: 100px;">
 							<div class="table100 ver1 m-b-110">
 									<div id="replyDiv">
-									<form id="replyInputForm" 
-										style="display:flex; background-color: #dadada;
-										width:1170px; height : 70px;">
-										<input type = "hidden" name="idxBo" value = ${dto.idxBo } >
-										<input type = "hidden" name="writer" value = ${login.id } >
-										<input type = "hidden" name="idxParent" value="0" >
-										<textarea name = "content" placeholder="바른말 고운말을 사용합시다."
-											required style="width:1070px; height:70px;"></textarea>
-										<input type="submit" value="등록" 
-											style="font-size: 20px; background-color: #6c7ae0;
-											 width : 100px; height: 70px;">	
+										<form id="replyInputForm" 
+											style=" background-color: #dadada;
+											width:100%; height : 140px;">
+											<input type = "hidden" name="idxBo" value = ${dto.idxBo } >
+											<input type = "hidden" name="writer" value = ${login.id } >
+											<input type = "hidden" name="idxParent" value="0" >
+											<textarea class="rTextArea" id="replyInputCheck" name = "content" placeholder="바른말 고운말을 사용합시다."
+												required style=" height:70px; width:100%; resize:none;"></textarea>
+											<input class="rSubmit" type="submit" value="등록" 
+												style="font-size: 20px; width:100%; background-color: ${clubColor};color:#fff;
+												  height: 70px;">	
 								
-									</form>
-								</div>
-								<h6 id = "cnt"></h6>
-								<div id = "likeContent" style="display:none; background-color: #dadada;
-										width:1170px; height : 100px;"></div>
-								<div id="mainReplyMain" style="background-color: #4e81c0;"></div>
+										</form>
+										<div id="replyInputCheck_cnt" style="text-align: right;">(0/150)</div>
+									</div>
+								<h6 id ="bestReply" style="text-align: left; padding-left:60px;"></h6>
+								<div id = "likeReplyList" style="padding-bottom:17px;"></div>
+								
+								<div id="mainReplyMain" style="padding-top:12px;border-top: 5px solid ${clubColor};"></div>
+								<div id="rPaging" style="padding-bottom:30px;"></div>
 							</div>
 						</div>
-					</div>
+					<!-- 06 24 jcw insertform end  -->
 				
 					
 				
@@ -164,6 +170,9 @@
 				
 				<script>
 				// jcw 06-25 코드 정리 시작
+				//jcw 210620 필요 인자 불러오기
+				const teamColor = '${clubColor}'
+				const writer = '${login.id }'
 				//  jcw 210620 페이지 로드시 실행될 함수
 				$(document).ready(function(){
 					showReplyList();
@@ -179,8 +188,6 @@
 					});
 				 	
 				});
-				//jcw 210620 필요 인자 불러오기
-				const writer = '${login.id }'
 				// jcw 210614 ajax reply 리스트 호출 파라미터를 받아서 해쉬맵으로 전달
 				function showReplyList(){
 					$("#mainReplyMain").empty();		// reply 리스트를 보여줄 div 초기화
@@ -206,8 +213,10 @@
 					})
 					replyMaxCnt = Math.max.apply(null, replyMaxCnt)
 					// 게시판에 좋아요가 0 이상을 때 조건에 맏는 리스트르 불러온다.
+					$("#bestReply").empty();
 					$("#likeReplyList").empty();
-					if(replyMaxCnt != 0){
+					if(replyMaxCnt > 0){
+						document.getElementById("bestReply").innerHTML="베스트 댓글"
 						callRplMCnt(replyMaxCnt)
 					}
 					// json의 수를 구하여 댓글수로 등록
@@ -269,6 +278,7 @@
 				// jcw 210614 댓글 리스트를 createElement로 만들어 appendChild 붙인다.
 				// RlikeCheck는 코드를 통해서 결과가 달라진다.
 				function replyWindow(reply, rc, RlikeCheck){
+//					const teamColor = "#6c7ae0"				// 팀컬러 수정부분
 					const replyMainDiv = document.createElement('div')
 					if(RlikeCheck == 1){} 
 					else {
@@ -297,7 +307,7 @@
 					replyMainStyleDiv.appendChild(replyBlank)
 					
 					const replyUserDiv = document.createElement('div')
-					replyUserDiv.style = "margin-top : 20px; margin-right: 30px; width: 60px;"
+					replyUserDiv.style = "margin-top : 20px; margin-right: 30px; width: 60px; padding-bottom:5px;"
 					
 					const replyUserImg = document.createElement('img')
 					replyUserImg.style = "width:60px;  height :60px;"
@@ -305,10 +315,6 @@
 					
 					replyUserDiv.appendChild(replyUserImg)
 					replyMainStyleDiv.appendChild(replyUserDiv)
-					
-					
-
-					
 										
 					// 댓글 중간 부분 이름, 날짜, 좋아요, 내용
 					const replyBody = document.createElement('div')
@@ -325,7 +331,7 @@
 					// 이름 출력
 					const replyNameDiv = document.createElement('div')
 					replyNameDiv.innerHTML = reply.nickName
-					replyNameDiv.style = "margin-right:17px; font-size : 22px;"
+					replyNameDiv.style = "margin-right:25px; margin-bottom:5px; font-size : 22px;"
 					replyInfo.appendChild(replyNameDiv)
 					// 댓글 등록 날짜 출력
 					const replyWdateDiv = document.createElement('div')
@@ -338,12 +344,13 @@
 					const likeBtnTagA = document.createElement('button')
 					likeBtnTagA.style = ""
 					likeBtnTagA.setAttribute("id", "likeBtnTagA" + reply.idxRe)
+					likeBtnTagA.setAttribute("class", "btn btn-primary btn-sm")
 					likeBtnTagA.setAttribute("idxre", reply.idxRe)
 					likeBtnTagA.setAttribute("userid", writer)
 					if(reply.replyCheck == 0){
-						likeBtnTagA.style = ""
+						likeBtnTagA.style = "background-color: " + teamColor + "; border-color: " + teamColor + "; margin-bottom:5px; "
 					} else {
-						likeBtnTagA.style = "color:#ff0000;"
+						likeBtnTagA.style = "background-color: " + teamColor + ";border-color: " + teamColor + ";color:#fff; margin-bottom:5px; "
 					}					
 					
 					// 좋아요 수에 따라서 표시 변경
@@ -369,6 +376,7 @@
 					replyListContentDiv.style = "line-height :24px; font-size: 100%; width : 95%;"
 					
 					const replyContentPtag =  document.createElement('div')
+					replyContentPtag.setAttribute("class", "text-muted")
 					if(reply.idxParent == 0){
 					replyContentPtag.style = "width : 100%; margin : 10px; text-align:left; valign:middle;white-space: pre-wrap; word-wrap: break-word; word-break: break-word;"
 					} else {
@@ -397,7 +405,7 @@
 					
 					//대댓글, 수정, 삭제 버튼
 					const replyListSelectBtnDiv = document.createElement('div')
-					replyListSelectBtnDiv.style = "display:block; margin-top:23px; width: 150px;"
+					replyListSelectBtnDiv.style = "display:block; margin-top:20px; margin-left:10px; width: 150px;"
 											
 						// 대댓글 입력 버튼
 						if (writer != "") {							
@@ -405,6 +413,7 @@
 								const replyReplyBtn = document.createElement('button')
 								replyReplyBtn.style = "display:block; margin-bottom:5px;"
 								replyReplyBtn.setAttribute("id", "replyReplyBtn" + reply.idxRe)
+								replyReplyBtn.setAttribute("class", "btn btn-outline-secondary")
 								replyReplyBtn.setAttribute("idxre", reply.idxRe)
 								replyReplyBtn.setAttribute("idxparent", reply.idxParent)
 								replyReplyBtn.setAttribute("idxbo", reply.idxBo)
@@ -414,7 +423,7 @@
 									const idx = $(this).attr("idxre");
 									const writer = $(this).attr("writer");
 									const idxBo = $(this).attr("idxbo");
-									replyReplyBTN(idx, writer, idxBo)
+									replyReplyBTN(idx, writer, idxBo, teamColor)
 								})
 								replyReplyBtn.innerText="💬댓글"
 							replyListSelectBtnDiv.appendChild(replyReplyBtn)
@@ -426,6 +435,7 @@
 							const updateReplyBtn = document.createElement('button')
 							updateReplyBtn.style = "display:block;"
 							updateReplyBtn.setAttribute("id", "updateReplyBtn" + reply.idxRe)
+							updateReplyBtn.setAttribute("class", "btn btn-outline-secondary")
 							updateReplyBtn.setAttribute("idxre", reply.idxRe)
 							updateReplyBtn.setAttribute("content", reply.content)
 							updateReplyBtn.setAttribute("idxparent", reply.idxParent)
@@ -433,7 +443,7 @@
 								const idx = $(this).attr("idxre");
 								const content = $(this).attr("content");
 								const idxParent = $(this).attr("idxparent");
-								updateReplyBTN(idx, content, idxParent)
+								updateReplyBTN(idx, content, idxParent, teamColor)
 							})
 							updateReplyBtn.innerText="✏️수정"
 							replyListSelectBtnDiv.appendChild(updateReplyBtn)
@@ -442,29 +452,25 @@
 							const deleteReplyBtn = document.createElement('button')
 							deleteReplyBtn.style = "display:block;"
 							deleteReplyBtn.setAttribute("id", "deleteReplyBtn")
+							deleteReplyBtn.setAttribute("class", "btn btn-outline-secondary")
+							deleteReplyBtn.style="width : 60px;"
+							deleteReplyBtn.alt="삭제"							
 							deleteReplyBtn.setAttribute("idxre", reply.idxRe)
-							deleteReplyBtn.innerText="🗑️삭제"
+							deleteReplyBtn.innerText="🗑️"
 							deleteReplyBtn.addEventListener ("click", function() {
 								const idx = $(this).attr("idxre");
 								deleteReplyBTN(idx)
 							})
+							if(RlikeCheck == 1){} 
+							else {
 							replyUserDiv.appendChild(deleteReplyBtn)
+							}
 						}
-						
-					
-										
-					
 					
 					if(RlikeCheck == 1){}
 					else{
 					replyBody.appendChild(replyListSelectBtnDiv)
 					}
-					
-					
-					
-					
-					
-
 					
 					// 버튼으로 생성된 form이 붙을 위치
 					const replySelectSubDiv = document.createElement('div')
@@ -475,12 +481,9 @@
 					}
 					replySelectSubDiv.setAttribute("class", "replySelectSubDiv")
 					replySelectSubDiv.style = "display:none;"
-													
 					
 					replyMainStyleDiv.appendChild(replyBody)
-					
 					replySecondDiv.appendChild(replyMainStyleDiv)
-					
 					replyMainDiv.appendChild(replySecondDiv)
 					
 					//// 댓글 폼을 붙이는 위치      
@@ -495,7 +498,6 @@
 					replyMainDiv.appendChild(replySubListDiv)
 					
 					// 분배부: 댓글을 조건에 따라 다른 곳에 붙인다.
-									
 					if(RlikeCheck == 1){
 						document.getElementById("likeReplyList").appendChild(replyMainDiv)
 					} else {
@@ -508,10 +510,10 @@
 					}
 				}
 				// replyWindow(reply, rc, RlikeCheck) 끝.
-					
-			// 버튼 작동 함수 부분	
-			// 대댓글 버튼을 누르면 입력 폼을 생성한다.	
-		 		function replyReplyBTN(idx, writer, idxBo){
+				
+				// 버튼 작동 함수 부분	
+				// 대댓글 버튼을 누르면 입력 폼을 생성한다.	
+		 		function replyReplyBTN(idx, writer, idxBo, teamColor){
 				
 					if(document.getElementById("replySelectSubDiv" + idx).style.display == 'block'){
 					// 대댓글 입력 창이 열려 있으면 닫는다	
@@ -533,23 +535,16 @@
 						const replyReplyMainDiv = document.createElement('div')
 
 						const replyInputMainStyleDiv = document.createElement('div')
-						replyInputMainStyleDiv.style = "display:flex;background-color: #2d5986; width:100%;"
+						replyInputMainStyleDiv.style = "display:flex;background-color: " + teamColor + "; width:100%;"
 							
 						const replyInputUserDiv = document.createElement('div')
-						replyInputUserDiv.style = "margin: 0.7%; width:80px;  height :87px;"
-						
-						const replyInputNameMainDiv = document.createElement('div')
-						replyInputNameMainDiv.style = " line-height :58px;"
-						const replyInputNameDiv = document.createElement('div')
-						replyInputNameDiv.style = "font-weight: 700; text-align: "
-							
-						replyInputNameMainDiv.appendChild(replyInputNameDiv)
-						replyInputUserDiv.appendChild(replyInputNameMainDiv)
+						replyInputUserDiv.style = "margin: 0.7%; width:150px;  height :87px;"
+												
 						replyInputMainStyleDiv.appendChild(replyInputUserDiv)
 							
 						//댓글 리스트, 수정, 삭제 관련 div//
 						const replyInputMainDiv = document.createElement('div')
-						replyInputMainDiv.style = "margin: 0.7%; background-color:#fff; display:flex; width: 100%; height :70px;"
+						replyInputMainDiv.style = "padding-top :5px;margin: 0.7%; display:flex; height :95px; width:100%;"
 							
 						const replyInputSecondDiv = document.createElement('div')
 						replyInputSecondDiv.style = "width:100%"
@@ -576,16 +571,13 @@
 						inputIdxparent.type = 'hidden'
 						testForm.appendChild(inputIdxparent)
 								
-
-									
-								
 						const textarea = document.createElement('textarea')
 						textarea.name="content"
 						////////////////////////////////////textarea 글자 체크
 						textarea.setAttribute("id", "replyReplyCheck")
 						////////////////////////////////////textarea 글자 체크
 						textarea.placeholder="바른말 고운말을 사용합시다."
-						textarea.style = "width : 100%; height : 70px;  resize:none;"
+						textarea.style = "width : 85%; height : 70px;  resize:none;"
 						textarea.required="required"
 						testForm.appendChild(textarea)
 						replyInputSecondDiv.appendChild(testForm)
@@ -602,6 +594,7 @@
 
 						// 서브밋 버튼 부분
 						const submit = document.createElement('input')
+						submit.setAttribute("class", "btn btn-outline-success")						
 						submit.style = "font-size:20px; width : 70px; height : 70px; "
 						submit.type = 'submit'
 						submit.value = '✔️'
@@ -617,7 +610,7 @@
 						document.getElementById('testForm').onsubmit = function(event) {
 							event.preventDefault();						
 							const formData = new FormData(event.target)	
-							const url = '${cpath}/board/read/' + idxBo
+							const url = '${cpath}/board/read/reply/' + idxBo
 							const opt = {
 								method: 'POST',
 								body: formData,
@@ -650,27 +643,22 @@
 				// replyReplyBTN(idx, writer, idxBo) 끝.
 				
 			// 수정 버튼을 누르면 replySecondDiv를 숨기고 수정 폼을 생성한다.
-			function updateReplyBTN(idx, content, idxParent){
+			function updateReplyBTN(idx, content, idxParent, teamColor){
  					$(".replySelectSubDiv").empty();
  					$(".replySelectSubDiv").hide();
  					$(".replySecondDiv").show()
  					document.getElementById("replySecondDiv" + idx).style.display='none' 					
 					document.getElementById("replySelectSubDiv" + idx).style.display='block'
 					
-					//사용자 정보 입력 div >> 공백으로 변경
+						//수정 창 색 변경
 						const replyReplyMainDiv = document.createElement('div')
 
 						const replyInputMainStyleDiv = document.createElement('div')
-						if(idxParent == 0){
-						replyInputMainStyleDiv.style = "display:flex;background-color: #4e81c0; width:100%;"
-						} else {
-						replyInputMainStyleDiv.style = "display:flex;background-color: #2d5986; width:100%;"	
-						}
-						
+						replyInputMainStyleDiv.style = "display:flex;background-color: " + teamColor + "; width:100%;"
 												
 						//댓글 리스트, 수정, 삭제 관련 div//
 						const replyInputMainDiv = document.createElement('div')
-						replyInputMainDiv.style = "margin: 0.7%; display:flex; height :87px; width:100%;"
+						replyInputMainDiv.style = "padding-top :5px;margin: 0.7%; display:flex; height :95px; width:100%;"
 						
 						const replyInputSecondDiv = document.createElement('div')
 						replyInputSecondDiv.style = "width:100%;"
@@ -696,7 +684,7 @@
 						textarea.setAttribute("id", "replyReplyCheck")
 						////////////////////////////////////textarea 글자 체크
 						textarea.placeholder=content
-						textarea.style = "width : 100%; height : 70px;  resize:none;"
+						textarea.style = "width : 80%; height : 70px;  resize:none;"
 						textarea.required="required"
 						updateForm.appendChild(textarea)
 						replyInputSecondDiv.appendChild(updateForm)
@@ -713,6 +701,7 @@
 						
 						// 서브밋 버튼 부분														
 						const submit = document.createElement('input')
+						submit.setAttribute("class", "btn btn-outline-success")
 						submit.style = "font-size:20px; width : 70px; height : 70px; "
 						submit.type = 'submit'
 						submit.value = '✔️'
@@ -767,8 +756,9 @@
 						
 						//취소버튼
 							const updateReplyCancleBtn = document.createElement('button')
+							updateReplyCancleBtn.setAttribute("class", "btn btn-outline-danger")
 							updateReplyCancleBtn.setAttribute("idx", idx)
-							updateReplyCancleBtn.style = "font-size:20px; width : 70px; height : 70px; background-color : #efefef;"
+							updateReplyCancleBtn.style = "font-size:20px; width : 70px; height : 70px; border-color: " + teamColor + ";"
 							updateReplyCancleBtn.addEventListener ("click", function() {
 								event.preventDefault();	
 							const idx = $(this).attr("idx");
@@ -808,7 +798,7 @@
 			document.getElementById('replyInputForm').onsubmit = function(event) {
 				event.preventDefault();						
 				const formData = new FormData(event.target)	
-				const url = '${cpath}/board/read/' + idxBo
+				const url = '${cpath}/board/read/reply/' + idxBo
 				const opt = {
 					method: 'POST',
 					body: formData,
@@ -833,7 +823,7 @@
 			// 좋아요 버튼 실행 insert
 			function replyLikeDo(likeIdxRe, likeId){
 				const ob = {"likeIdxRe" : likeIdxRe, "likeId" : likeId}
-				const url = '${cpath}/board/read/replyLikeDo/'
+				const url = '${cpath}/board/read/reply/LikeDo/'
 				const opt = {
 					method: 'POST',
 					body: JSON.stringify(ob),
@@ -854,7 +844,7 @@
 			// 좋아요 버튼 취소 delete
 			function replyLikeUndo(likeIdxRe, likeId){
 				const ob = {"likeIdxRe" : likeIdxRe, "likeId" : likeId}
-				const url = '${cpath}/board/read/replyLikeUndo/'
+				const url = '${cpath}/board/read/reply/LikeUndo/'
 				const opt = {
 					method: 'POST',
 					body: JSON.stringify(ob),
