@@ -26,14 +26,13 @@
     
     <div class="form-group">
       <label for="inputName" class="form-label mt-4">Name</label>
-      <input type="text" class="form-control" id="inputName" placeholder="Input your name" name="name" 
-      	maxlength="30" autofocus required style="width: 50%;">
+      <input type="text" class="form-control" id="inputName" placeholder="Input your name" name="name" autofocus required style="width: 50%;">
     </div>
     
     <div class="form-group">
       <label for="inputID" class="form-label mt-4">ID</label>
       <div>
-      	<input type="text" class="form-control" id="inputId" placeholder="inputID" name="id" maxlength="30" required style="width: 50%;">
+      	<input type="text" class="form-control" id="inputId" placeholder="inputID" name="id" required style="width: 50%;">
       	<p class="google-font checkmsg" id="idMsg"></p>
       </div>
 	  <button type="button" class="btn-EPL btn btn-primary google-font" onclick="checkId()">아이디 중복확인</button>
@@ -41,7 +40,7 @@
     
     <div class="form-group">
       <label for="inputNickName" class="form-label mt-4">Nick Name</label>
-      <input type="text" class="form-control" maxlength="30" id="inputNickName" placeholder="Input nick-name" name="nickName" required style="width: 50%;">
+      <input type="text" class="form-control" id="inputNickName" placeholder="Input nick-name" name="nickName" required style="width: 50%;">
       <p class="google-font checkmsg" id="nickNameMsg"></p>
     </div>
     
@@ -49,20 +48,20 @@
     <div class="form-group">
       <label for="inputEmail" class="form-label mt-4">Email address</label>
       <input type="email" class="form-control" id="inputEmail" 
-       	aria-describedby="emailHelp" placeholder="Enter email" name="email" maxlength="50" required style="width: 50%;">
+       	aria-describedby="emailHelp" placeholder="Enter email" name="email" required style="width: 50%;">
       <p class="google-font checkmsg" id="emailMsg"></p>
       <button type="button" class="btn-EPL btn btn-primary google-font" onclick="checkEmail()">이메일 확인</button>
     </div>
     
     <div class="form-group">
       <label for="inputPassword" class="form-label mt-4">Password</label>
-      <input type="password" name="pw" class="form-control" maxlength="50" id="inputPassword" placeholder="Password" required style="width: 50%;">
+      <input type="password" name="pw" class="form-control" id="inputPassword" placeholder="Password" required style="width: 50%;">
       <p id="pwMsg"></p>
     </div>
     
     <div class="form-group">
       <label for="checkPassword" class="form-label mt-4">Check Password</label>
-      <input type="password" class="form-control" id="checkPassword" maxlength="50" placeholder="Check Password" required style="width: 50%;">
+      <input type="password" class="form-control" id="checkPassword" placeholder="Check Password" required style="width: 50%;">
       <p id="cfpwMsg"></p>
     </div>
     
