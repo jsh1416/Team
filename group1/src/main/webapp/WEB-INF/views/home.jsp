@@ -3,7 +3,7 @@
 <%@ include file="header.jsp"%>
 <%@ include file="scroll.jsp"%>
 <style>
-/* jsh1416 계정 접속이 안됨  ㅠㅠ */
+/* jsh14165 계정 테스트 */
 nav {
 	display: flex;
 	justify-content: flex-start;
