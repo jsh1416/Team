@@ -1,14 +1,34 @@
+
 const modal = document.getElementById("modal")
 			
 				function modalOn() {
 				    modal.style.display = "flex"
+				    
+				    // 06.30 bcg
+				    document.getElementById('loginForm').reset();
+				    const rememberId = document.getElementById('rememberId');
+				    
+				    if(!getCookie('idCookie')){
+				    	// 비어있을때
+				    	rememberId.checked = false;
+				    }else{
+				    	rememberId.checked = true;
+				    }
+				    
 				}
 				function isModalOn() {
 				    return modal.style.display === "flex"
 				}
 				function modalOff() {
+					
 				    modal.style.display = "none"
 				}
+				
+				function getCookie(name) {
+					  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+					  return value? value[2] : null;
+				}
+				
 				
 				const btnModal = document.getElementById("btn-modal")
 				window.onload = function(){

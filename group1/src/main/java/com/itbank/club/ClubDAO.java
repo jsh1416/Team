@@ -11,6 +11,10 @@ public interface ClubDAO {
 
 	@Select("select * from club")
 	List<ClubDTO> selectClubList();
+	
+
+	@Select("select clubName from club")
+	List<String> selectClubNameList();
 
 	@Select("select * from EPLBoard where clubName='Liverpool' order by idxBo desc")
 	List<BoardDTO> selectliv();
@@ -39,4 +43,6 @@ public interface ClubDAO {
 	@Select("select * from club where clubName=#{clubName}")
 	ClubDTO selectColor(String clubName);
 	
+	@Select("select point from winpoint where season = #{seasonArr}")
+	List<Integer> selectWinPoint(String seasonArr);
 }

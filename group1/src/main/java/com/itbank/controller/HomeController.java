@@ -1,5 +1,6 @@
 package com.itbank.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,25 @@ public class HomeController {
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
 		
+		// 0629 bcg
+		List<String> clubNameList =  clubService.selectClubNameList();
+		mav.addObject("clubNameList", clubNameList);
+				
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(cal.YEAR); 
+		String[] seasonArr = new String[5];
+				
+				
+		for(int i = 0 ; i < seasonArr.length ; i++) {
+			seasonArr[i] =  Integer.toString(year-(5-i))  + "/" +  Integer.toString(year-(4-i));
+					
+			mav.addObject("point"+i, clubService.selectWinPoint(seasonArr[i]));
+				
+		}
+				
+		mav.addObject("seasonArr", seasonArr);
+		// 0629 bcg end
+		
 		return mav;
 	}
 	
@@ -49,6 +69,26 @@ public class HomeController {
 		String clubName = "Manchester United";
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
+		
+		// 0629 bcg
+		List<String> clubNameList =  clubService.selectClubNameList();
+		mav.addObject("clubNameList", clubNameList);
+						
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(cal.YEAR); 
+		String[] seasonArr = new String[5];
+						
+						
+		for(int i = 0 ; i < seasonArr.length ; i++) {
+			seasonArr[i] =  Integer.toString(year-(5-i))  + "/" +  Integer.toString(year-(4-i));
+							
+			mav.addObject("point"+i, clubService.selectWinPoint(seasonArr[i]));
+						
+		}
+						
+		mav.addObject("seasonArr", seasonArr);
+		// 0629 bcg end
+				
 		return mav;
 	}
 	
@@ -62,6 +102,27 @@ public class HomeController {
 		String clubName = "Manchester City";
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
+		
+		// 0629 bcg
+				List<String> clubNameList =  clubService.selectClubNameList();
+				mav.addObject("clubNameList", clubNameList);
+						
+				Calendar cal = Calendar.getInstance();
+				int year = cal.get(cal.YEAR); 
+				String[] seasonArr = new String[5];
+						
+						
+				for(int i = 0 ; i < seasonArr.length ; i++) {
+					seasonArr[i] =  Integer.toString(year-(5-i))  + "/" +  Integer.toString(year-(4-i));
+							
+					mav.addObject("point"+i, clubService.selectWinPoint(seasonArr[i]));
+						
+				}
+						
+				mav.addObject("seasonArr", seasonArr);
+				// 0629 bcg end
+				
+				
 		return mav;
 	}
 	
@@ -75,6 +136,25 @@ public class HomeController {
 		String clubName = "Chelsea";
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
+		
+		// 0629 bcg
+		List<String> clubNameList =  clubService.selectClubNameList();
+		mav.addObject("clubNameList", clubNameList);
+						
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(cal.YEAR); 
+		String[] seasonArr = new String[5];
+						
+						
+		for(int i = 0 ; i < seasonArr.length ; i++) {
+			seasonArr[i] =  Integer.toString(year-(5-i))  + "/" +  Integer.toString(year-(4-i));
+							
+			mav.addObject("point"+i, clubService.selectWinPoint(seasonArr[i]));
+						
+		}
+						
+		mav.addObject("seasonArr", seasonArr);
+		// 0629 bcg end
 		
 		return mav;
 	}
@@ -91,6 +171,25 @@ public class HomeController {
 		String clubName = "Arsenal";
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
+
+		// 0629 bcg
+		List<String> clubNameList =  clubService.selectClubNameList();
+		mav.addObject("clubNameList", clubNameList);
+						
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(cal.YEAR); 
+		String[] seasonArr = new String[5];
+						
+						
+		for(int i = 0 ; i < seasonArr.length ; i++) {
+			seasonArr[i] =  Integer.toString(year-(5-i))  + "/" +  Integer.toString(year-(4-i));
+							
+			mav.addObject("point"+i, clubService.selectWinPoint(seasonArr[i]));
+						
+		}
+						
+		mav.addObject("seasonArr", seasonArr);
+		// 0629 bcg end
 		
 		return mav;
 	}

@@ -45,8 +45,7 @@
 								<div style="margin-left: 20px; display: inline-block; margin-top: 15px; vertical-align: middle; float: right;
 									padding-top: 10px;">
 									<label class=".google-font"> 
-											<input name="rememberId" type="checkbox"  style="display: inline-block;"
-												 ${cookie.idCookie.value != '' ? 'checked' : ''} />
+											<input name="rememberId" type="checkbox"  style="display: inline-block;"/>
 											<span class="google-font" style="display: inline-block; color:#3A066B;">&nbsp;아이디 기억하기</span>
 									</label>
 								</div>

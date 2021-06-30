@@ -4,6 +4,7 @@ package com.itbank.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.servlet.http.Cookie;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itbank.club.ClubDTO;
 import com.itbank.member.MemberDTO;
 import com.itbank.service.ClubService;
 import com.itbank.service.MemberService;
@@ -37,7 +39,16 @@ public class MemberController {
 	@Autowired private ClubService clubService;
 	private ObjectMapper mapper = new ObjectMapper();
 
-	
+	// 0629 bcg login
+		@GetMapping("/login")
+		public ModelAndView login() {
+			ModelAndView mav = new ModelAndView("/member/login");
+			List<ClubDTO> clubList = clubService.selectClubList();
+			mav.addObject("clubList", clubList);
+			return mav;
+		}
+		
+		
 	// ajax 방식 결합 로그인 06.14 bcg
 		@PostMapping("/login")
 		@ResponseBody
@@ -82,15 +93,14 @@ public class MemberController {
 	
 	@PostMapping("/join")
 	public ModelAndView join(MemberDTO dto, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("redirect:/");
+		ModelAndView mav = new ModelAndView("msg");
 		int row = memberSerivce.join(dto);
-		// 06.25 bcg
+		// 06.29 bcg
 		
-		System.out.println("contextPath : "+request.getContextPath());
-		mav.addObject("url", request.getContextPath());
 		mav.addObject("row", row);
 
 		if(row == 1) {
+			mav.addObject("url", request.getContextPath()+"/member/login");
 			return mav;
 		}
 		else {

@@ -38,6 +38,96 @@
 	}
 </style>
 
+<!-- google charts -->
+       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+			const seasonArr = '${seasonArr}';
+			const clubNameList = '${clubNameList}';
+			
+			const score1617 = '${point0}';
+			const score1718 = '${point1}';
+			const score1819 = '${point2}';
+			const score1920 = '${point3}';
+			const score2021 = '${point4}';
+			
+			
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawVisualization);
+
+			function drawVisualization() { 
+				var data = google.visualization.arrayToDataTable([
+						['Season', 'Liverpool', 'Manchester United', 'Manchester City', 'Chelsea', 'Arsenal' ],
+						['2016/2017', +(score1617[1].concat(score1617[2])), +(score1617[5]+score1617[6]), +(score1617[9]+score1617[10]), +(score1617[13]+score1617[14]), +(score1617[17]+score1617[18]) ],
+						['2017/2018', +(score1718[1]+score1718[2]), +(score1718[5]+score1718[6]), +(score1718[9]+score1718[10]+score1718[11]), +(score1718[14]+score1718[15]), +(score1718[18]+score1718[19]) ],
+						['2018/2019', +(score1819[1]+score1819[2]), +(score1819[5]+score1819[6]), +(score1819[9]+score1819[10]), +(score1819[13]+score1819[14]), +(score1819[17]+score1819[18]) ],
+						['2019/2020', +(score1920[1]+score1920[2]), +(score1920[5]+score1920[6]), +(score1920[9]+score1920[10]), +(score1920[13]+score1920[14]), +(score1920[17]+score1920[18]) ],
+						['2020/2021', +(score2021[1]+score2021[2]), +(score2021[5]+score2021[6]), +(score2021[9]+score2021[10]), +(score2021[13]+score2021[14]), +(score2021[17]+score2021[18]) ],
+						
+					]);
+				var options = {
+						title : 'EPL Club win point',
+						curveType: 'function',
+						pointSize: 8,
+						annotations: {
+						    textStyle: {
+						      fontName: 'Times-Roman',
+						      fontSize: 10,
+						      bold: true,
+						      italic: true,
+						      // The color of the text.
+						      color: '#871b47',
+						      // The color of the text outline.
+						      auraColor: '#d799ae',
+						      // The transparency of the text.
+						      opacity: 0.8
+						    }
+						  },
+						vAxis: {title: 'Win Point',
+							 textStyle: {
+						     	color: '#3A066B',
+						        fontSize: 17,
+								bold: true,
+								
+						     },
+						     titleTextStyle: {
+								color: '#3A066B',
+								fontSize: 24,
+								bold: true
+							}
+						},
+						hAxis: {title: 'Season',
+							textStyle: {
+						     	color: '#3A066B',
+						        fontSize: 17,
+								bold: true
+						     },
+						     titleTextStyle: {
+								color: '#3A066B',
+								fontSize: 24,
+								bold: true
+							},
+							minorGridlines: {color: '#3A066B', minSpacing: 20}
+						}, 
+// 						seriesType: 'bars',
+						series: {
+							0: {lineWidth: 4, color: '#E31B23'},
+							1: {lineWidth: 4, color: '#FFE500'},
+							2: {lineWidth: 4, color: '#98C5E9'},
+							3: {lineWidth: 4, color: '#162E59'},
+							4: {lineWidth: 4, color: '#9C824A'},
+							
+							5: {type: 'point'}
+						},
+						
+						
+						
+					};
+				
+				var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+				chart.draw(data, options);
+			}
+		</script>
+
 
 	<div id="fullpage">
 		<div class="section firstSection" id="MU1">
@@ -51,7 +141,9 @@
 		</div>
 
 		<div class="section secondSection" id="MU2">
-			<h2>MU 2</h2>
+			<div style="text-align: center; width: 100%; height: 70%">
+				<div id="chart_div" style="width:80%; height: 100%; margin: auto;"></div>
+			</div>
 		</div>
 
 		<div class="section thirdSection" id="MU3">

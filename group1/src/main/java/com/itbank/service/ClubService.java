@@ -47,5 +47,15 @@ public class ClubService {
 	public ClubDTO selectColor(String clubName) {
 		return clubDAO.selectColor(clubName);
 	}
+	
+	// 0629 bcg 
+		public List<Integer> selectWinPoint(String seasonArr) {
+			return clubDAO.selectWinPoint(seasonArr);
+		}
+
+		public List<String> selectClubNameList() {
+			// TODO Auto-generated method stub
+			return clubDAO.selectClubNameList();
+		}
 
 }
