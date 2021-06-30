@@ -22,6 +22,41 @@
 	
 	<!-- 0609 jsh -->
 	<style>	
+		.mainflex { /* jsh 06.28 */
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		}
+		
+		#s_left {
+			margin-left: 10%;
+			width: 28%;
+			float: left;
+			height: auto;
+		}
+		
+		#contents {
+			margin-right: 10%;
+			width: 800px;
+			height: auto;
+			float: left;
+			font-size: small;
+		} /* 0625.jsh */
+	
+			.newsflex{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			align-content:center;
+			margin-left: 12%;
+			margin-right: 12%;
+			}
+			.titleflex{
+				display: flex;
+				justify-content:flex-start;
+				align-items: baseline;
+			}
+	
 			a {
 			text-decoration: none;
 			cursor: pointer;

@@ -3,19 +3,6 @@
 <%@ include file="header.jsp"%>
 <%@ include file="scroll.jsp"%>
 <style>
-#s_left{  
-	widows: 100px;
-	float: left;
-	height: auto;
-}
-
-#contents {
-	width: 1000px;
-	height: auto;
-	float: left;
-	font-size: small;
-} /* 0625.jsh */
-
 nav {
 	display: flex;
 	justify-content: flex-start;
@@ -32,18 +19,20 @@ nav>ul {
 
 nav>ul>li {
 	text-align: center;
-	width: 100px;
 	font-weight: bold;
 	font-size: 15px;
+	margin-right: 30px;
 }
 .hidden {
 	display: none;
 }
 
 .title{	/* 0625.jsh */
+	padding: 0;
+	margin: 0;
 	font-weight: bold;
 	font-size: 20px;
-	color: blue;
+	color: #3A0640;
 	margin-top: 20px;
 	margin-bottom: 10px;
 }
@@ -54,6 +43,14 @@ li:hover{
 }
 .winTeam{
 	color: red;
+	font-weight: bold;
+}
+
+table {
+	height: 100px;
+}
+
+th {
 	font-weight: bold;
 }
 
@@ -94,37 +91,138 @@ li:hover{
 		</div>
 
 	<div class="section secondSection" id="MAIN2" style="margin-left: 0px; padding-left: 5%; padding-top: 2%;">
-		<div id="s_left">	
-			<div class="title">[유로 2020] 조별리그 순위표</div>
-				<nav>
-					<ul>
-						<li><a class="A">A</a></li>
-						<li><a class="B">B</a></li>
-						<li><a class="C">C</a></li>
-						<li><a class="D">D</a></li>
-						<li><a class="E">E</a></li>
-						<li><a class="F">F</a></li>
+		<div class="mainflex">
+			<div id="s_left">
+				<div class="title">[유로 2020] 조별리그 순위표</div>
+				<div>
+					<ul class="pagination">
+						<li class="page-item"><a class="A page-link" href="#">A조</a>
+						</li>
+						<li class="page-item"><a class="B page-link" href="#">B조</a>
+						</li>
+						<li class="page-item"><a class="C page-link" href="#">C조</a>
+						</li>
+						<li class="page-item"><a class="D page-link" href="#">D조</a>
+						</li>
+						<li class="page-item"><a class="E page-link" href="#">E조</a>
+						</li>
+						<li class="page-item"><a class="F page-link" href="#">F조</a>
+						</li>
 					</ul>
-				</nav>
-				<div class="list main"></div>
-				<div class="A main hidden"></div>
-				<div class="B main hidden"></div>
-				<div class="C main hidden"></div>
-				<div class="D main hidden"></div>
-				<div class="E main hidden"></div>
-				<div class="F main hidden"></div>
+				</div>
+
+				<table class="table table-hover">
+					<thead>
+						<tr class="table-primary">
+							<th scope="col">순위</th>
+							<th scope="col">국가</th>
+							<th scope="col">승</th>
+							<th scope="col">무</th>
+							<th scope="col">패</th>
+							<th scope="col">골득실</th>
+							<th scope="col">승점</th>
+						</tr>
+					</thead>
+					<tbody class="list main">
+					</tbody>
+					<tbody class="A main hidden">
+					</tbody>
+					<tbody class="B main hidden">
+					</tbody>
+					<tbody class="C main hidden">
+					</tbody>
+					<tbody class="D main hidden">
+					</tbody>
+					<tbody class="E main hidden">
+					</tbody>
+					<tbody class="F main hidden">
+					</tbody>
+				</table>
+
+				<div class="title">[유로 2020] 득점왕을 향한 치열한 경쟁!</div>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">순위</th>
+							<th scope="col">선수명</th>
+							<th scope="col">국가</th>
+							<th scope="col">득점수</th>
+						</tr>
+					</thead>
+					<tbody id="score_tbody">
+					</tbody>
+				</table>
+			</div>
+
+
+			<div id="contents" class="euroNews"
+				style="height: 700px; padding-top: 70px">
+				<button type="button" class="btn btn-dark" id="correctNews">정확도순 뉴스</button> 
+				<button type="button" class="btn btn-dark" id="latestNews">최신순 뉴스</button>
 				
-				<div class="title">[유로 2020] 득점왕을 향한 치열한 경쟁! </div>
-				<div class="score_rank"></div>
-				
-				<div class="title" id="stageTitle"></div>
-				<div class="schedule"></div>
+				<!-- news부분 jsh 0630 -->
+				<div class="list-group">
+					<a id="link0" href=""
+						class="list-group-item list-group-item-action flex-column align-items-start"
+						target="_blank">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="euro_title0 mb-1" style="font-weight: bold;"></h5>
+							<small class="euro_time0 text-muted"></small>
+						</div>
+						<br>
+						<p class="euro_des0 mb-1"></p>
+					</a> 
+					
+					<a id="link1" href=""
+						class="list-group-item list-group-item-action flex-column align-items-start"
+						target="_blank">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="euro_title1 mb-1" style="font-weight: bold;"></h5>
+							<small class="euro_time1 text-muted"></small>
+						</div>
+						<br>
+						<p class="euro_des1 mb-1"></p>
+					</a> 
+					
+					<a id="link2" href=""
+						class="list-group-item list-group-item-action flex-column align-items-start"
+						target="_blank">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="euro_title2 mb-1" style="font-weight: bold;"></h5>
+							<small class="euro_time2 text-muted"></small>
+						</div>
+						<br>
+						<p class="euro_des2 mb-1"></p>
+					</a> 
+					
+					<a id="link3" href=""
+						class="list-group-item list-group-item-action flex-column align-items-start"
+						target="_blank">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="euro_title3 mb-1" style="font-weight: bold;"></h5>
+							<small class="euro_time3 text-muted"></small>
+						</div>
+						<br>
+						<p class="euro_des3 mb-1"></p>
+					</a> 
+					
+					<a id="link4" href=""
+						class="list-group-item list-group-item-action flex-column align-items-start"
+						target="_blank">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="euro_title4 mb-1" style="font-weight: bold;"></h5>
+							<small class="euro_time4 text-muted"></small>
+						</div>
+						<br>
+						<p class="euro_des4 mb-1"></p>
+					</a>
+				</div>
+			</div>
+
 		</div>
 		</div>
 		
-		<div id="contents" class="euroNews">
-			<h1>EURO 2020 News</h1><br><br>
-		</div>
+
 		
 <!-- 	<div class="section" id="MAIN3">
 		<h2>HOME 3</h2>
@@ -135,15 +233,18 @@ li:hover{
 <script>
 // 유로 토너먼트 일정 띄우기 (현재시간과 경기시간 비교 통해서 출력) jsh 06.25
 let today = new Date(); 
-let RoundOf16 = new Date(2021, 06, 30, 4, 0, 0);
+let RoundOf16 = new Date(2021, 06, 30, 4, 0, 0);  // 지남
 let QuarterFinal = new Date(2021, 07, 4, 4, 0, 0);
 let SemiFinal = new Date(2021, 07, 8, 4, 0, 0);
 let Final = new Date(2021, 07, 12, 4, 0, 0);
 let stage
 let title
 
+console.log(today > RoundOf16) 	  // T 
+console.log(today > QuarterFinal) // F 떠야함
+
 switch(true){ 
-case today < RoundOf16:
+case today < RoundOf16: 
 	stage = 4;			
 	title = "16강"
 	break;
@@ -160,12 +261,15 @@ default:
 	title = "결승"
 }
 
+
+
 $.ajax({
 	  headers: {'X-Auth-Token': 'c5798934a44c482a822a642801a9e298'}, 
 	  type: 'GET',
 	  url: 'https://api.football-data.org/v2/competitions/EC/matches?matchday=' + stage,
 	  dataType: 'json',
 	}).done(function(schedule) {
+		
 		document.getElementById('stageTitle').innerHTML = title
 		
 		for(let i=0; i < schedule.matches.length; i++){
@@ -209,26 +313,71 @@ const url = '${cpath}/api/euro/correct' 			// 여기서만 team, type 매개변�
 		.then(json => {
 			const eurolist = JSON.parse(json)
 			
-			if(eurolist == null) {
-				document.getElementById('news').innerText = '오류가 발생하였습니다.'
+			for(let i=0; i<5; i++){		
+				let title = eurolist.items[i].title
+				let des = eurolist.items[i].description
+				let time = eurolist.items[i].pubDate.slice(0, -5)
+				let href = eurolist.items[i].link
+				
+				document.querySelector('h5.euro_title'+i).innerHTML = title
+				document.querySelector('p.euro_des'+i).innerHTML = des
+				document.querySelector('small.euro_time'+i).innerHTML = time	
+				document.getElementById('link'+i).href = href	
 			}
-			else {
-				for(let i = 0; i < eurolist.items.length; i++){
-					const child = document.createElement('div')		// 제목
-					const child2 = document.createElement('div')	// 내용
-					const newstitle = '<a href=' + eurolist.items[i].link + ' target="_blank" font-weight:bold; cursor: pointer;">' 
-					+ '<span style="font-weight:bold;">' + (i+1) + '</span>' + '&nbsp&nbsp&nbsp[' + eurolist.items[i].title + ']</a>'
-					const content = eurolist.items[i].description  + 
-					'(' + eurolist.items[i].pubDate.slice(0, -5) + ')' + '<br>' +  '<br>'
-					child.innerHTML = newstitle
-					child2.innerHTML = content
-					document.querySelector('div.euroNews').appendChild(child) 	// 제목 출력
-					document.querySelector('div.euroNews').appendChild(child2)	// 내용 미리보기 출력
-				}
-			} 
 		})
 </script>
 
+<script>
+//정확도순 뉴스 
+	document.getElementById('correctNews').onclick = function(event) {
+		const url = '${cpath}/api/euro/correct'		// 여기서만 team, type 매개변수 바꿔주면 됨
+		const opt = {
+			method: 'GET',	
+		}
+		fetch(url, opt)				
+		.then(resp => resp.json())		
+		.then(json => {
+			const eurolist = JSON.parse(json)
+			
+			for(let i=0; i<5; i++){		
+				let title = eurolist.items[i].title
+				let des = eurolist.items[i].description
+				let time = eurolist.items[i].pubDate.slice(0, -5)
+				let href = eurolist.items[i].link
+				
+				document.querySelector('h5.euro_title'+i).innerHTML = title
+				document.querySelector('p.euro_des'+i).innerHTML = des
+				document.querySelector('small.euro_time'+i).innerHTML = time	
+				document.getElementById('link'+i).href = href	
+			}
+		})
+	}
+	
+	//최신순 뉴스 
+	document.getElementById('latestNews').onclick = function(event) {
+		const url = '${cpath}/api/euro/latest' 			// 여기서만 team, type 매개변수 바꿔주면 됨
+		const opt = {
+			method: 'GET',	
+		}
+		fetch(url, opt)				
+		.then(resp => resp.json())		
+		.then(json => {
+			const eurolist = JSON.parse(json)
+			
+			for(let i=0; i<5; i++){		
+				let title = eurolist.items[i].title
+				let des = eurolist.items[i].description
+				let time = eurolist.items[i].pubDate.slice(0, -5)
+				let href = eurolist.items[i].link
+				
+				document.querySelector('h5.euro_title'+i).innerHTML = title
+				document.querySelector('p.euro_des'+i).innerHTML = des
+				document.querySelector('small.euro_time'+i).innerHTML = time	
+				document.getElementById('link'+i).href = href	
+			}
+		})
+	}
+</script>
 
 
 <script>
@@ -239,74 +388,104 @@ $.ajax({
 	  url: 'https://api.football-data.org/v2/competitions/EC/scorers',
 	  dataType: 'json',
 	}).done(function(score) {
-		 for(let i=0; i<5; i++){
-			 const score_child = document.createElement('div')
-			 const rowScore = (i+1) + ' | ' + score.scorers[i].player.name + '(' + score.scorers[i].player.nationality + ') | ' +
-			 score.scorers[i].player.position + ' | ' + score.scorers[i].numberOfGoals + '골<br>'
-			 score_child.innerHTML = rowScore
-			 document.querySelector('div.score_rank').appendChild(score_child)
-		 }
+		 
+		const tbody = document.getElementById('score_tbody')
+		for(let i=0; i<5; i++){
+			const row = document.createElement("tr");
+			const col1 = document.createElement("td");
+			col1.innerHTML = (i+1)
+			const col2 = document.createElement("td");
+			col2.innerHTML = score.scorers[i].player.name
+			const col3 = document.createElement("td");
+			col3.innerHTML = score.scorers[i].player.nationality
+			const col4 = document.createElement("td");
+			col4.innerHTML = score.scorers[i].numberOfGoals
+			row.appendChild(col1); row.appendChild(col2); row.appendChild(col3); row.appendChild(col4);
+			tbody.appendChild(row)
+		}
 	})
 </script>
 
 <script>
+
+</script>
+
+<script>
 //조별 순위 리스트 기본 화면 jsh
-$.ajax({
+  $.ajax({
   headers: {'X-Auth-Token': 'c5798934a44c482a822a642801a9e298'}, 
   type: 'GET',
   url: 'https://api.football-data.org/v2/competitions/EC/standings',
   dataType: 'json',
 }).done(function(response) {
-	document.querySelector('div.list').innerText=''	 
-	
-	  for(let j = 0; j < response.standings[0].table.length; j++) {  
-	  	  const child = document.createElement('div')
-	  	  const rowRank = response.standings[0].table[j].position + ' | ' +
-	  	  '<img src="' +  response.standings[0].table[j].team.crestUrl + '" height="20" width"20">' + '| ' +
-	  	  response.standings[0].table[j].team.name + ' | ' +
-	  	  response.standings[0].table[j].won + ' | ' +
-	  	  response.standings[0].table[j].draw + ' | ' +
-	  	  response.standings[0].table[j].lost + ' | ' +
-	  	  response.standings[0].table[j].goalDifference + ' | ' +
-	  	  response.standings[0].table[j].points + '<br>'
-	  	  child.innerHTML = rowRank
-	  	  document.querySelector('div.list').appendChild(child)
-	  }
-})
+	 	let tbody_list = document.querySelector('tbody.list')
+
+		for(let j = 0; j < response.standings[0].table.length; j++) {
+		    let row = document.createElement("tr");
+		    let col1 = document.createElement("td");	
+		    let col2 = document.createElement("td");
+		    let col3 = document.createElement("td");	
+		    let col4 = document.createElement("td");	
+		    let col5 = document.createElement("td");	
+		    let col6 = document.createElement("td");	
+		    let col7 = document.createElement("td");
+			col1.innerHTML = response.standings[0].table[j].position
+			col2.innerHTML = '<img src="' +  response.standings[0].table[j].team.crestUrl + '" height="20" width"20">' 
+			 + response.standings[0].table[j].team.name
+			col3.innerHTML = response.standings[0].table[j].won
+			col4.innerHTML = response.standings[0].table[j].draw
+			col5.innerHTML = response.standings[0].table[j].lost
+			col6.innerHTML = response.standings[0].table[j].goalDifference
+			col7.innerHTML = response.standings[0].table[j].points
+			row.appendChild(col1); row.appendChild(col2); row.appendChild(col3); row.appendChild(col4); row.appendChild(col5);
+			row.appendChild(col6); row.appendChild(col7);
+			tbody_list.appendChild(row)
+			}
+	})
 </script>
 
+<!-- <script>
+const pageLink =  document.querySelectorAll('.page-link');
+pageLink.forEach(pageLink => pageLink.onclick = function(event){
+   const className = event.target.className[0]
+   document.querySelector('.page-item .'+ className).classList.add('active')   
+})
+</script> -->
+
+
 <script>
-// 알파벳 클릭시 해당 조 순위 출력 jsh
-document.querySelectorAll('nav > ul > li > a').forEach(a => a.onclick = function(event) {
-	const className = event.target.className	// A,B,C,D,E,F 조
+//  클릭시 해당 조 순위 출력 jsh
+	const pageLink =  document.querySelectorAll('.page-link');
+	pageLink.forEach(pageLink => pageLink.onclick = function(event) {
+	const className = event.target.className[0]
 	document.querySelectorAll('.main').forEach(div => div.classList.add('hidden'))
-	document.querySelector('div.' + className).classList.remove('hidden')
-	console.log(className)
+	document.querySelector('tbody.' + className).classList.remove('hidden')
+	
 	
 	switch(className){ // A라면  div class="A"에 순위 출력
 	case "A":
 		var i = 0;	
-		var divGroup = "div." + className;
+		var tbodyGroup = "tbody." + className;
 		break;
 	case "B":		
 		var i = 1;	// const 사용시 already defined 에러 
-		var divGroup = "div." + className;
+		var tbodyGroup = "tbody." + className;
 		break;
 	case "C":
 		var i = 2;
-		var divGroup = "div." + className;
+		var tbodyGroup = "tbody." + className;
 		break;
 	case "D":
 		var i = 3;
-		var divGroup = "div." + className;
+		var tbodyGroup = "tbody." + className;
 		break;
 	case "E":
 		var i = 4;
-		var divGroup = "div." + className;
+		var tbodyGroup = "tbody." + className;
 		break;
 	case "F":
 		var i = 5;
-		var divGroup = "div." + className;
+		var tbodyGroup = "tbody." + className;
 		break;
 	}
 	
@@ -317,20 +496,31 @@ document.querySelectorAll('nav > ul > li > a').forEach(a => a.onclick = function
 	  url: 'https://api.football-data.org/v2/competitions/EC/standings',
 	  dataType: 'json',
 	}).done(function(response) {
-	  document.querySelector(divGroup).innerText=''	  
-	  for(let j = 0; j < response.standings[i].table.length; j++) { // j = 0~3 
-		  const child = document.createElement('div')
-		  const rowRank = response.standings[i].table[j].position + ' | ' +
-		  '<img src="' +  response.standings[i].table[j].team.crestUrl + '" height="20" width"20">' + '| ' +
-		  response.standings[i].table[j].team.name + ' | ' +
-		  response.standings[i].table[j].won + ' | ' +
-		  response.standings[i].table[j].draw + ' | ' +
-		  response.standings[i].table[j].lost + ' | ' +
-		  response.standings[i].table[j].goalDifference + ' | ' +
-		  response.standings[i].table[j].points + '<br>'
-		  child.innerHTML = rowRank
-		  document.querySelector(divGroup).appendChild(child)
-	  }
+		
+		$('.main').empty();
+		
+		let tbody_group = document.querySelector(tbodyGroup)
+		for(let j = 0; j < response.standings[i].table.length; j++) {
+		    let row = document.createElement("tr");
+		    let col1 = document.createElement("td");	
+		    let col2 = document.createElement("td");
+		    let col3 = document.createElement("td");	
+		    let col4 = document.createElement("td");	
+		    let col5 = document.createElement("td");	
+		    let col6 = document.createElement("td");	
+		    let col7 = document.createElement("td");
+			col1.innerHTML = response.standings[i].table[j].position
+			col2.innerHTML = '<img src="' +  response.standings[i].table[j].team.crestUrl + '" height="20" width"20">' 
+			 + response.standings[i].table[j].team.name
+			col3.innerHTML = response.standings[i].table[j].won
+			col4.innerHTML = response.standings[i].table[j].draw
+			col5.innerHTML = response.standings[i].table[j].lost
+			col6.innerHTML = response.standings[i].table[j].goalDifference
+			col7.innerHTML = response.standings[i].table[j].points
+			row.appendChild(col1); row.appendChild(col2); row.appendChild(col3); row.appendChild(col4); row.appendChild(col5);
+			row.appendChild(col6); row.appendChild(col7);
+			tbody_group.appendChild(row)
+		}
 	})
 })
 </script>
