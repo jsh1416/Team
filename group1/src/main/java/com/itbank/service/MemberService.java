@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -198,6 +199,12 @@ public class MemberService {
 			int row = memberDAO.deleteMember(id);
 			
 			return row;
+		}
+
+		public MemberDTO exlogin(HashMap<String, String> dto) {
+			String pw = dto.get("pw"); 
+			dto.put("pw", getHash(pw));
+			return memberDAO.exlogin(dto);
 		}
 	
 			

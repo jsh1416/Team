@@ -4,6 +4,7 @@ package com.itbank.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -76,6 +78,36 @@ public class MemberController {
 			return json;
 		}
 	
+		@PostMapping(value="/exlogin", consumes = "application/json; charset=utf-8",
+				produces="application/text; charset=utf-8")
+		@ResponseBody
+		public String exlogin(@RequestBody HashMap<String, String> dto, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
+			
+			
+			MemberDTO login = memberSerivce.exlogin(dto);
+			
+			
+			if(login!=null) {
+				session.setAttribute("login", login);
+				session.setMaxInactiveInterval(900);
+				
+				Cookie idCookie = new Cookie("idCookie", login.getId());
+				if("on".equals(request.getParameter("rememberId"))) {	// 이메일 기억하기 체크 되어있을 때 이메일 쿠키 생성
+					idCookie.setMaxAge(60 * 60 * 24 * 7);		// cookie 유효시간 7일
+					idCookie.setPath("/");		//				// 모든 경로에서 쿠키 유효
+				}else {
+					idCookie = new Cookie("idCookie", null);					// 이메일 쿠키가 이미 생성 되어있을 경우 쿠키 삭제
+					idCookie.setMaxAge(0); 										// 쿠키 유호시간 0으로 세팅
+					idCookie.setPath("/");
+				}
+				response.addCookie(idCookie);
+			
+				
+			}
+			
+			return login != null ? "1" : "0";
+		}
+		
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		/* 06.11 봉찬균 로그아웃 방식 수정 */
@@ -170,6 +202,23 @@ public class MemberController {
 		MemberDTO login = (MemberDTO) session.getAttribute("login");
 		mav.addObject("clubList", clubService.selectClubList());
 		mav.addObject("myBoardCount", memberSerivce.myBoardCount(login));
+		
+		// 0630 bcg
+		int totalNum = clubService.selectTotalMember();
+		double livNum = (clubService.selectLivMemberNum() * 1.0) / totalNum * 100;
+		double muNum = (clubService.selectMuMemberNum() * 1.0) / totalNum * 100;
+		double mcNum = (clubService.selectMcMemberNum() * 1.0) / totalNum * 100;
+		double cheNum = (clubService.selectCheMemberNum() * 1.0) / totalNum * 100;
+		double ttoNum =  (clubService.selectTtoMemberNum() * 1.0) / totalNum * 100;
+		double arsNum = (clubService.selectArsMemberNum() * 1.0) / totalNum * 100;
+		
+		mav.addObject("livNum", livNum);
+		mav.addObject("muNum", muNum);
+		mav.addObject("mcNum", mcNum);
+		mav.addObject("cheNum", cheNum);
+		mav.addObject("ttoNum", ttoNum);
+		mav.addObject("arsNum", arsNum);
+		
 		return mav;
 	}
 	

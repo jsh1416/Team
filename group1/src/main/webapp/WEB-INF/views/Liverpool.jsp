@@ -153,16 +153,17 @@
 			<div class="limiter" style="padding-top: 75px; width:1000px; height:800px; color: #F00000;">
 		<div class="container-table100">
 			<div class="wrap-table100">
-				<div class="table100 ver1 m-b-110"">
-					<div class="table100-head"">
+				<div class="table100 ver1 m-b-110">
+					<div class="table100-head">
 						<table>
 							<thead>
 								<tr class="row100 head" >
-									<th class="cell100 column1" style="background:${clubColor};"><button style="color: #FFFFFF;" id="newNumber" >최신</button></th>
-									<th class="cell100 column2" style="background:${clubColor};"><button style="color: #FFFFFF;" id="viewNumber" >조회수</button></th>
-									<th class="cell100 column3" style="background:${clubColor};"><button style="color: #FFFFFF;" id="likeNumber">추천수</button></th>
-									<th class="cell100 column3" style="background:${clubColor};"><button style="color: #FFFFFF;" id="likeNumber">글쓴이</button></th>
-									<th class="cell100 column3" style="background:${clubColor};"><button style="color: #FFFFFF;" id="likeNumber">날짜</button></th>								</tr>
+									<th class="cell100 column1" style="background:${clubColor};"><button style="color: #FFFFFF;" id="newNumber" ><h6>Title</h6></button></th>
+									<th class="cell100 column2" style="background:${clubColor};"><button style="color: #FFFFFF;" id="viewNumber" ><h6>View</h6></button></th>
+									<th class="cell100 column3" style="background:${clubColor};"><button style="color: #FFFFFF;" id="likeNumber"><h6>Like</h6></button></th>
+									<th class="cell100 column3" style="background:${clubColor};"><button style="color: #FFFFFF;" id="writer"><h6>Writer</h6></button></th>
+									<th class="cell100 column3" style="background:${clubColor};"><button style="color: #FFFFFF;" id="wdate"><h6>Date</h6></button></th>
+								</tr>
 							</thead>
 						</table>
 					</div>
@@ -209,8 +210,7 @@
 		</div>
 	</div>
  </div>
-		</div>
-	</div>
+		
 
 
 <script>

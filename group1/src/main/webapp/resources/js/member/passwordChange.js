@@ -116,11 +116,16 @@ function changePw() {
 	.then(text => {
 		if(+text == 1){
 			swal('비밀번호 변경 완료!','','success');
-			window.reload()
+			setTimeout(function reload(){
+				location.reload()
+			} ,1500);
+			
 		}else{
 			
 			swal('비밀번호 변경 실패!','','error');
-			window.reload()
+			setTimeout(function reload(){
+				location.reload()
+			} ,1500);
 			
 		}
 	})
@@ -128,6 +133,8 @@ function changePw() {
 
 const passwordChangeForm = document.getElementById('passwordChange')
 const changePwBtn = document.getElementById('changePwBtn')
+
+
 changePwBtn.addEventListener("click", e => {
 				showPasswordChange();
 })
@@ -150,6 +157,8 @@ function clear(){
 	}
 }
 
+const numClubDiv = document.getElementById('numClubDiv')
+
 function showPasswordChange(){
 	
 	clear();
@@ -157,8 +166,12 @@ function showPasswordChange(){
 	if(passwordChangeForm.classList.contains('hide')){
 		passwordChangeForm.classList.remove('hide');
 		deleteMemberForm.classList.add('hide');
+		numClubDiv.classList.add('hide');
+		
 	}else{
 		passwordChangeForm.classList.add('hide');
+		numClubDiv.classList.remove('hide');
+		
 	}
 }
 

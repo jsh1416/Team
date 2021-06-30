@@ -49,9 +49,22 @@ public class BoardController {
 	}
 	
 	@GetMapping("/mylist/{writer}") //내 글 목록
-	public ModelAndView mylist(@PathVariable String writer) {
+	public ModelAndView mylist(@PathVariable String writer, HttpSession session) {
 		ModelAndView mav = new ModelAndView("/board/mylist");
 		List<BoardDTO> mylist = bs.selectWriter(writer);
+		// 0630 bcg
+		MemberDTO login =  (MemberDTO) session.getAttribute("login");
+				
+		String clubName = "";
+		try {
+			clubName = login.getClub();
+		}catch (Exception e) {
+			mav.setViewName("redirect:/");
+			return mav;
+		}
+		// 0630 bcg clubColor
+		ClubDTO selectedClub = bs.clubColor(clubName);
+				
 		mav.addObject("mylist",mylist);
 		return mav;
 	}

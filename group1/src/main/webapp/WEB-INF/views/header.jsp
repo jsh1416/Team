@@ -209,10 +209,6 @@
 	<div style="display: inline-block; float: left;">
             <span style="display: inline-block; width: 45px; height: 65px;"><img src="${cpath }/resources/images/icons/premier-league-2-logo.png" style="width: 45px; height: 65px; vertical-align;"></span>
             <span style="display: inline-block;"><h1><a href="${cpath}" style="color: #3A0640;">EPL Fan Site</a></h1></span>
-<!--             <p class="lead">The medium is the message</p> -->
-			<c:if test="${not empty login.nickName }">
-    		<span style="display: inline-block;"><h8><a href="${cpath}/board/write" style="color: #3A0640;">글쓰기</a></h8></span>
-    		</c:if>
             
     </div>  
     	
@@ -262,30 +258,11 @@
 		        <!-- 06.23 bcg 클럽 상단 아이콘 -->
 		      	<c:forEach items="${clubList }" var="clubList">
 		      	<li class="nav-item">
-			    	<a>	
+			    	<a style="display: block; width: 50px; height: 50px; margin-left: 20px;">	
 						<img class="${clubList.clubIdx }" src="${cpath }/resources/images/logo/${clubList.clubName }.png" >
 				  	</a>
 		        	</li>
 		      	</c:forEach>
-		        
-		        
-		        <!-- 0610ksj test -->
-		        <li class="nav-item">
-		          <a href="${cpath }/board/">list</a>
-		        </li>
-		        
-		        
-		        
-<!-- 		        <li class="nav-item dropdown"> -->
-<!-- 		          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a> -->
-<!-- 		          <div class="dropdown-menu"> -->
-<!-- 		            <a class="dropdown-item" href="#">Action</a> -->
-<!-- 		            <a class="dropdown-item" href="#">Another action</a> -->
-<!-- 		            <a class="dropdown-item" href="#">Something else here</a> -->
-<!-- 		            <div class="dropdown-divider"></div> -->
-<!-- 		            <a class="dropdown-item" href="#">Separated link</a> -->
-<!-- 		          </div> -->
-<!-- 		        </li> -->
 		        
 		      </ul>
 		      

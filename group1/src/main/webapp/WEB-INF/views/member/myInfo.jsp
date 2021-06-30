@@ -4,9 +4,19 @@
 
 <%@ include file="../header.jsp" %>
 
+<style>
+	.wrapPro{
+		margin-top: 5%;
+	}
+	
+	.progress{margin-top: 3px;}
+	
+	
+</style>
 
-<main style="width: 1377px; margin: auto; margin-top: 75px; padding: 30px 20px 0px;">
-	<div class="container" style="width: 975px; height: 700px; margin: auto;">
+
+<main style="width: 1377px; margin: auto; margin-top: 75px; padding: 30px 20px 0px; ">
+	<div class="container" style="width: 975px; height: 850px; margin: auto; padding-bottom: 3%;">
 		<div class="head" 
 			style="width: 100%;height: 200px; vertical-align: middle; padding-top: 25px; display: flex;">
 		    
@@ -63,6 +73,52 @@
 			<button type="button" id="deleteMemberBtn" class="btn btn-danger">회원 탈퇴</button>
 		</div>
 		
+		<div id="numClubDiv" style="margin-top: 4%; padding-bottom: 2%; margin-bottom: 3%;">
+			<h4>Number of member per Club</h4>
+			
+			<div class="wrapPro">
+				<img src="${cpath }/resources/images/logo/Liverpool.png">
+				<div class="progress">
+				  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${livNum}" aria-valuemin="0" aria-valuemax="100" style="width: ${livNum}%; background-color: #E31B23;"></div>
+				</div>
+			</div>
+			
+			<div class="wrapPro">
+				<img src="${cpath }/resources/images/logo/Chelsea.png">
+				<div class="progress">
+				  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${cheNum}" aria-valuemin="0" aria-valuemax="100" style="width: ${cheNum}%; background-color: #034694;"></div>
+				</div>
+			</div>
+			
+			<div class="wrapPro">
+				<img src="${cpath }/resources/images/logo/Manchester City.png">
+				<div class="progress">
+				  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${mcNum}" aria-valuemin="0" aria-valuemax="100" style="width: ${mcNum}%; background-color: #98C5E9;"></div>
+				</div>
+			</div>
+			
+			<div class="wrapPro">
+				<img src="${cpath }/resources/images/logo/Manchester United.png">
+				<div class="progress">
+				  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${muNum}" aria-valuemin="0" aria-valuemax="100" style="width: ${muNum}%; background-color: #FFE500;"></div>
+				</div>
+			</div>
+			
+			<div class="wrapPro">
+				<img src="${cpath }/resources/images/logo/Arsenal.png">
+				<div class="progress">
+				  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${arsNum}" aria-valuemin="0" aria-valuemax="100" style="width: ${arsNum}%; background-color: #9C824A;"></div>
+				</div>
+			</div>
+			
+			<div class="wrapPro">
+				<img src="${cpath }/resources/images/logo/Tottenham.png">
+				<div class="progress">
+				  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${ttoNum}" aria-valuemin="0" aria-valuemax="100" style="width: ${ttoNum}%; background-color: #0B1C56;"></div>
+				</div>
+			</div>			
+		</div>
+		
 		<div id="passwordChange" class="hide">
 			<form method="POST" id="passwordChangeForm" style="margin-top: 30px;" accept-charset="utf-8">
 				<input type="hidden" name="email" value="${login.email }" id="hiddenEmail">
@@ -115,7 +171,7 @@
 							    
 							    
 							    <div class="form-group" style="width: 80%; margin-left: 16px;">
-									<button type="button" id="deleteConfirm" class="btn-EPL btn btn-primary hide" style="margin-top: 15px;" onclick="deleteMember()">회원탈퇴</button>
+									<button type="button" id="deleteConfirm" class="btn-EPL btn btn-primary" style="margin-top: 15px;" onclick="deleteMember()">회원탈퇴</button>
 								</div>
 						  	</div>
 						  </fieldset>
@@ -133,24 +189,6 @@
 
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

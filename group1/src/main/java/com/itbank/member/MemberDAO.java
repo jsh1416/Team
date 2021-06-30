@@ -1,6 +1,8 @@
 package com.itbank.member;
 
 
+import java.util.HashMap;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -38,6 +40,10 @@ public interface MemberDAO {
 
 	@Delete("delete EPLmember where id = #{id}")
 	int deleteMember(String id);
+
+	//0630 bcg
+	@Select("select * from EPLmember where id=#{id} and pw = #{pw}")
+	MemberDTO exlogin(HashMap<String, String> dto);
 
 	
 }

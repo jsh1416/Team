@@ -3,7 +3,7 @@
 <%@ include file="../header.jsp" %>
 <!-- 인터셉터 로그인 페이지  jsh 06.25 -->
 	<div style="margin-top: 20%; text-align: center;">
-	<form method="POST" id="loginForm" style="width: 65%; margin: auto;" action="${cpath}/member/login" accept-charset="utf-8">
+	<form method="POST" id="exloginForm" style="width: 65%; margin: auto;" accept-charset="utf-8">
 						  <fieldset>
 						     <div class="form-group row" style="width: 80%; left: 50%; margin: auto; border: 3px solid #FA2781; border-radius: 30px; text-align: left;">
 							<div class="form-group" style="width: 80%; margin-left: 16px;">
@@ -28,7 +28,7 @@
 						    
 							<!-- 06.28 bcg 아이디기억하기 추가 -->						    						    
 						    <div class="form-group" style="width: 80%; margin-left: 16px;">
-						    	<p id="loginMsg"></p>
+						    	<p id="exloginMsg"></p>
 								<button id="login" type="submit" class="btn-EPL btn btn-primary" style="margin-top: 15px;">Login</button>
 								
 								<div style="margin-left: 20px; display: inline-block; margin-top: 15px; vertical-align: middle; float: right;
@@ -42,22 +42,20 @@
 							
 							<p></p>
 							
-							<div class="form-group" style="display: flex; text-align: center; margin-top: 15px;">
-								<div style="margin: 10px 0px 0px 0px; display: inline-block; flex: 1; text-align: center;">
-									<a href="${cpath }/member/join" style="color:#3A066B;">회원가입</a>
-								</div>
-								<div style="margin: 10px 0px 0px 0px; display: inline-block; flex: 1; text-align: center;">
-									<a id="search_account" style="color:#3A066B;">아이디/비밀번호 찾기</a>
-								</div>
-							</div>
+<!-- 							<div class="form-group" style="display: flex; text-align: center; margin-top: 15px;"> -->
+<!-- 								<div style="margin: 10px 0px 0px 0px; display: inline-block; flex: 1; text-align: center;"> -->
+<%-- 									<a href="${cpath }/member/join" style="color:#3A066B;">회원가입</a> --%>
+<!-- 								</div> -->
+<!-- 								<div style="margin: 10px 0px 0px 0px; display: inline-block; flex: 1; text-align: center;"> -->
+<!-- 									<a id="search_account" style="color:#3A066B;">아이디/비밀번호 찾기</a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 							
 						  	</div>
 						  </fieldset>
 						  
 						</form>
 	</div>
-<%@include file="accountSearchForm.jsp" %>
-<script src="${cpath }/resources/js/loginModal.js"></script>
 <script>
 const rememberIdjsp = document.getElementById('rememberIdjsp');
 
@@ -66,6 +64,40 @@ if(!getCookie('idCookie')){
 	rememberIdjsp.checked = false;
 }else{
 	rememberIdjsp.checked = true;
+}
+</script>
+
+<script>
+document.getElementById('exloginForm').onsubmit = function (event) {
+	event.preventDefault();
+	
+	const ob = {}
+	const formData = new FormData(event.target)
+	for(let key of formData.keys()) {
+		const value = formData.get(key)
+		ob[key] = value
+	}
+	
+	const url = cpath + '/member/exlogin';
+	const opt = {
+			method: 'POST',
+			body: JSON.stringify(ob),
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+			}
+	}
+	fetch(url, opt)
+	.then(resp => resp.text())
+	.then(text => {
+		if(text == '1'){
+			const url = '${param.url}'
+			location.href = (url == '') ? cpath : url
+		}else{
+			const loginMsg = document.getElementById('exloginMsg');
+			loginMsg.innerText = '아이디 혹은 패스워드가 일치하지 않습니다.';
+			loginMsg.style.color = 'red';
+		}
+	})
 }
 </script>
 </body>

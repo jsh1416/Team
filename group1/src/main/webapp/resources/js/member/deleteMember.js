@@ -1,5 +1,6 @@
 const deleteMemberForm = document.getElementById('deleteMember')
 const deleteMemberBtn = document.getElementById('deleteMemberBtn');
+
 deleteMemberBtn.addEventListener("click", e => {
 	showDeleteMember();
 })
@@ -11,8 +12,10 @@ function showDeleteMember(){
 	if(deleteMemberForm.classList.contains('hide')){
 		deleteMemberForm.classList.remove('hide');
 		passwordChangeForm.classList.add('hide');
+		numClubDiv.classList.add('hide');
 	}else{
 		deleteMemberForm.classList.add('hide');
+		numClubDiv.classList.remove('hide');
 	}
 }
 
@@ -28,7 +31,6 @@ function doDelete(){
 	.then(text => {
 		if(+text != 0){
 			swal('회원탈퇴','회원탈퇴 성공','success')
-			location.href(url);
 		}else{
 			swal('회원탈퇴','회원탈퇴 실패','error')
 		}

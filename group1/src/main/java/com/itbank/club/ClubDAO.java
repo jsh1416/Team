@@ -48,4 +48,25 @@ public interface ClubDAO {
 
 	@Select("select * from EPLBoard where clubName='Tottenham' order by idxBo desc")
 	List<BoardDTO> selectTottenham();
+	
+	@Select("select count(*) from eplMember where club = 'Liverpool'")
+	int selectLivMemberNum();
+
+	@Select("select count(*) from eplMember where club = 'Manchester United'")
+	int selectMuMemberNum();
+
+	@Select("select count(*) from eplMember where club = 'Manchester City'")
+	int selectMcMemberNum();
+
+	@Select("select count(*) from eplMember where club = 'Chelsea'")
+	int selectCheMemberNum();
+
+	@Select("select count(*) from eplMember where club = 'Tottenham'")
+	int selectTtoMemberNum();
+
+	@Select("select count(*) from eplMember where club = 'Arsenal'")
+	int selectArsMemberNum();
+
+	@Select("select count(*) from EPLmember")
+	int selectTotalMember();
 }

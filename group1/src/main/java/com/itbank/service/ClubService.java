@@ -52,14 +52,49 @@ public class ClubService {
 		return clubDAO.selectColor(clubName);
 	}
 	
-	// 0629 bcg 
-		public List<Integer> selectWinPoint(String seasonArr) {
-			return clubDAO.selectWinPoint(seasonArr);
-		}
+	// 0629 bcg
+	public List<Integer> selectWinPoint(String seasonArr) {
+		return clubDAO.selectWinPoint(seasonArr);
+	}
 
-		public List<String> selectClubNameList() {
-			// TODO Auto-generated method stub
-			return clubDAO.selectClubNameList();
-		}
+	public List<String> selectClubNameList() {
+		// TODO Auto-generated method stub
+		return clubDAO.selectClubNameList();
+	}
+
+	// 0630 bcg
+	public int selectLivMemberNum() {
+		return clubDAO.selectLivMemberNum();
+	}
+
+	public int selectMuMemberNum() {
+		// TODO Auto-generated method stub
+		return clubDAO.selectMuMemberNum();
+	}
+
+	public int selectMcMemberNum() {
+		// TODO Auto-generated method stub
+		return clubDAO.selectMcMemberNum();
+	}
+
+	public int selectCheMemberNum() {
+		// TODO Auto-generated method stub
+		return clubDAO.selectCheMemberNum();
+	}
+
+	public int selectTtoMemberNum() {
+		// TODO Auto-generated method stub
+		return clubDAO.selectTtoMemberNum();
+	}
+	
+	public int selectArsMemberNum() {
+		// TODO Auto-generated method stub
+		return clubDAO.selectArsMemberNum();
+	}
+
+	public int selectTotalMember() {
+		// TODO Auto-generated method stub
+		return clubDAO.selectTotalMember();
+	}
 
 }
