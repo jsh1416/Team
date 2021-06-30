@@ -8,7 +8,7 @@ deleteMemberBtn.addEventListener("click", e => {
 
 function showDeleteMember(){
 	clear();
-	// bcg
+	// bcg last
 	if(deleteMemberForm.classList.contains('hide')){
 		deleteMemberForm.classList.remove('hide');
 		passwordChangeForm.classList.add('hide');
