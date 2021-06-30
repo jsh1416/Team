@@ -56,6 +56,7 @@ li:hover{
 	color: red;
 	font-weight: bold;
 }
+
 .secondSection::before{
 		content: "";
         background: url(${cpath}/resources/images/background/league.jpg);
@@ -66,6 +67,8 @@ li:hover{
         left: 0px;
         right: 0px;
         bottom: 0px;
+/*         0629 bcg */
+        z-index: -1;
 	}
 	
 </style>
@@ -90,7 +93,7 @@ li:hover{
 			
 		</div>
 
-	<div class="section secondSection" id="MAIN1" style="margin-left: 30px; margin-right: 30px;">
+	<div class="section secondSection" id="MAIN2" style="margin-left: 0px; padding-left: 5%; padding-top: 2%;">
 		<div id="s_left">	
 			<div class="title">[유로 2020] 조별리그 순위표</div>
 				<nav>

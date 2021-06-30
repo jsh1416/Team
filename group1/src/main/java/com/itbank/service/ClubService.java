@@ -39,6 +39,10 @@ public class ClubService {
 	public List<BoardDTO> selectArsenal() {
 		return clubDAO.selectArsenal();
 	}
+	
+	public List<BoardDTO> selectTottenham() {
+		return clubDAO.selectTottenham();
+	}
 
 	public ClubDTO selectFanClub(String club) {
 		return clubDAO.selectFanClub(club);

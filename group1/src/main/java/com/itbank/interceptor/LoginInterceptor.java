@@ -16,7 +16,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if (session.getAttribute("login") == null) {
 			
 			// 원래 페이지 저장해놨다가 로그인 성공하면 페이지 이동
-			response.sendRedirect(request.getContextPath() + "/member/loginCheck?url=" + requestURL);
+			response.sendRedirect(request.getContextPath() + "/member/login?url=" + requestURL);
 			return false;
 		}
 		return true;

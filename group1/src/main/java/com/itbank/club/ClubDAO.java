@@ -9,7 +9,7 @@ import com.itbank.board.BoardDTO;
 
 public interface ClubDAO {
 
-	@Select("select * from club")
+	@Select("select * from club order by clubidx")
 	List<ClubDTO> selectClubList();
 	
 
@@ -45,4 +45,7 @@ public interface ClubDAO {
 	
 	@Select("select point from winpoint where season = #{seasonArr}")
 	List<Integer> selectWinPoint(String seasonArr);
+
+	@Select("select * from EPLBoard where clubName='Tottenham' order by idxBo desc")
+	List<BoardDTO> selectTottenham();
 }

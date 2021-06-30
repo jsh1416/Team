@@ -16,6 +16,14 @@ import com.itbank.service.ClubService;
 public class HomeController {
 	
 @Autowired private ClubService clubService;
+
+//0629 bcg
+	 private final static String liv = "Liverpool";
+	 private final static String mu = "Manchester United";
+	 private final static String mc = "Manchester City";
+	 private final static String ar = "Arsenal";
+	 private final static String ch = "Chelsea";
+	 private final static String tt = "Tottenham";
 	
 	/* 06.23 bcg clubList */
 	@GetMapping({"","/"})
@@ -28,12 +36,12 @@ public class HomeController {
 	
 	@GetMapping("0")
 	public ModelAndView liv() {
-		ModelAndView mav = new ModelAndView("Liverpool");
+		ModelAndView mav = new ModelAndView(liv);
 		List<BoardDTO> list = clubService.selectliv();
 		mav.addObject("list",list);
 		mav.addObject("clubList", clubService.selectClubList());
 		
-		String clubName = "Liverpool";
+		String clubName = liv;
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
 		
@@ -66,7 +74,7 @@ public class HomeController {
 		mav.addObject("list",list);
 		mav.addObject("clubList", clubService.selectClubList());
 		
-		String clubName = "Manchester United";
+		String clubName = mu;
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
 		
@@ -128,12 +136,12 @@ public class HomeController {
 	
 	@GetMapping("1")
 	public ModelAndView che() {
-		ModelAndView mav = new ModelAndView("Chelsea");
+		ModelAndView mav = new ModelAndView(ch);
 		List<BoardDTO> list = clubService.selectChelsea();
 		mav.addObject("list",list);
 		mav.addObject("clubList", clubService.selectClubList());
 		
-		String clubName = "Chelsea";
+		String clubName = ch;
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
 		
@@ -161,14 +169,51 @@ public class HomeController {
 	
 	@GetMapping("4")
 	public ModelAndView ars() {
-		ModelAndView mav = new ModelAndView("Arsenal");
+		ModelAndView mav = new ModelAndView(ar);
 		List<BoardDTO> list = clubService.selectArsenal();
 		mav.addObject("list",list);
 		mav.addObject("clubList", clubService.selectClubList());
-		mav.addObject("clubColor",clubService.selectColor("Arsenal"));
+		mav.addObject("clubColor",clubService.selectColor(ar));
 		
 		
-		String clubName = "Arsenal";
+		String clubName = ar;
+		ClubDTO selectedClub = clubService.selectColor(clubName);
+		mav.addObject("clubColor", selectedClub.getClubColor());
+
+		// 0629 bcg
+		List<String> clubNameList =  clubService.selectClubNameList();
+		mav.addObject("clubNameList", clubNameList);
+						
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(cal.YEAR); 
+		String[] seasonArr = new String[5];
+						
+						
+		for(int i = 0 ; i < seasonArr.length ; i++) {
+			seasonArr[i] =  Integer.toString(year-(5-i))  + "/" +  Integer.toString(year-(4-i));
+							
+			mav.addObject("point"+i, clubService.selectWinPoint(seasonArr[i]));
+						
+		}
+						
+		mav.addObject("seasonArr", seasonArr);
+		// 0629 bcg end
+		
+		return mav;
+	}
+	
+	
+	// 0630 토트넘 추가
+	@GetMapping("5")
+	public ModelAndView spurs() {
+		ModelAndView mav = new ModelAndView(tt);
+		List<BoardDTO> list = clubService.selectTottenham();
+		mav.addObject("list",list);
+		mav.addObject("clubList", clubService.selectClubList());
+		mav.addObject("clubColor",clubService.selectColor(tt));
+		
+		
+		String clubName = tt;
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
 

@@ -23,11 +23,18 @@
 			
 		}else{
 			swal(msg,url,'success');
+			
+			//0630 bcg
+			
 			if(url == '') {
-				history.go(-1);
+				setTimeout(function name() {
+					history.go(-1);
+				}, 1500)
 			}
 			else {
-				location.href(url);
+				setTimeout(function name() {
+					location.replace(url)
+				}, 1500)
 			}		
 		}
 		
