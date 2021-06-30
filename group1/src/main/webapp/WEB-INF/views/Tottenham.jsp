@@ -6,7 +6,7 @@
 <style>
 	.firstSection::before{
 		content: "";
-        background: url(${cpath}/resources/images/background/Tottenham/1.png);
+        background: url(${cpath}/resources/images/background/Tottenham/4.png);
         background-size: cover;
         opacity: 0.5;
         position: absolute;

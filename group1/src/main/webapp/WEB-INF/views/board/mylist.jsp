@@ -7,7 +7,7 @@
 <style>
 	.limiter::before{
 		content: "";
-        background: url(${cpath}/resources/images/background/${login.club}/4.jpg);
+        background: url(${cpath}/resources/images/background/${login.club}/4.png);
         background-size: cover;
         opacity: 0.5;
         position: absolute;

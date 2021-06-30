@@ -6,7 +6,7 @@
 <style>
 	.firstSection::before{
 		content: "";
-        background: url(${cpath}/resources/images/background/Liverpool/4.jpg);
+        background: url(${cpath}/resources/images/background/Liverpool/4.png);
         background-size: cover;
         opacity: 0.5;
         position: absolute;
