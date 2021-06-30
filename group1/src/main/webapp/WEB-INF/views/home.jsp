@@ -56,7 +56,7 @@ th {
 
 .secondSection::before{
 		content: "";
-        background: url(${cpath}/resources/images/background/league.jpg);
+        background: url(${cpath}/resources/images/background/league.png);
         background-size: cover;
         opacity: 0.5;
         position: absolute;
@@ -113,7 +113,7 @@ th {
 
 				<table class="table table-hover">
 					<thead>
-						<tr class="table-primary">
+						<tr class="table" style="background-color: #3A066B !important; color: #ffff;">
 							<th scope="col">순위</th>
 							<th scope="col">국가</th>
 							<th scope="col">승</th>
@@ -123,25 +123,25 @@ th {
 							<th scope="col">승점</th>
 						</tr>
 					</thead>
-					<tbody class="list main">
+					<tbody class="list main" style="background-color: #ffff;">
 					</tbody>
-					<tbody class="A main hidden">
+					<tbody class="A main hidden" style="background-color: #ffff;">
 					</tbody>
-					<tbody class="B main hidden">
+					<tbody class="B main hidden" style="background-color: #ffff;">
 					</tbody>
-					<tbody class="C main hidden">
+					<tbody class="C main hidden" style="background-color: #ffff;">
 					</tbody>
-					<tbody class="D main hidden">
+					<tbody class="D main hidden" style="background-color: #ffff;">
 					</tbody>
-					<tbody class="E main hidden">
+					<tbody class="E main hidden" style="background-color: #ffff;">
 					</tbody>
-					<tbody class="F main hidden">
+					<tbody class="F main hidden" style="background-color: #ffff;">
 					</tbody>
 				</table>
 
 				<div class="title">[유로 2020] 득점왕을 향한 치열한 경쟁!</div>
 				<table class="table table-hover">
-					<thead>
+					<thead style="background-color: #3A066B !important; color: #ffff;">
 						<tr>
 							<th scope="col">순위</th>
 							<th scope="col">선수명</th>
@@ -149,7 +149,7 @@ th {
 							<th scope="col">득점수</th>
 						</tr>
 					</thead>
-					<tbody id="score_tbody">
+					<tbody id="score_tbody" style="background-color: #ffff;">
 					</tbody>
 				</table>
 			</div>
@@ -157,8 +157,8 @@ th {
 
 			<div id="contents" class="euroNews"
 				style="height: 700px; padding-top: 70px">
-				<button type="button" class="btn btn-dark" id="correctNews">정확도순 뉴스</button> 
-				<button type="button" class="btn btn-dark" id="latestNews">최신순 뉴스</button>
+				<button type="button" class="btn-EPL btn btn-dark" id="correctNews">정확도순 뉴스</button> 
+				<button type="button" class="btn-EPL btn btn-dark" id="latestNews">최신순 뉴스</button>
 				
 				<!-- news부분 jsh 0630 -->
 				<div class="list-group">
