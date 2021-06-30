@@ -147,7 +147,6 @@
 		</div>
 
 		<div class="section thirdSection" id="MU3">
-			<h2>MU 3</h2>
 			<div class="limiter" style="padding-top: 75px; width:1000px; height:800px; color: #F00000;">
 		<div class="container-table100">
 			<div class="wrap-table100">

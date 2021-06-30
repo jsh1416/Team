@@ -31,6 +31,9 @@ function doDelete(){
 	.then(text => {
 		if(+text != 0){
 			swal('회원탈퇴','회원탈퇴 성공','success')
+			setTimeout(function go(){
+				location.replace(cpath)
+			},1500)
 		}else{
 			swal('회원탈퇴','회원탈퇴 실패','error')
 		}

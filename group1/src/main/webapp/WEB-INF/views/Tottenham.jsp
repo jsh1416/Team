@@ -149,7 +149,6 @@
 	</div>
 
 		<div class="section thirdSection" id="tto3">
-			<h2>ARS 3</h2>
 				<div class="limiter" style="padding-top: 75px; width:1000px; height:800px; color: #F00000;">
 		<div class="container-table100">
 			<div class="wrap-table100">
@@ -196,7 +195,7 @@
                         		<span><input style="background:${clubColor};" type="submit" value="검색"></span>
                     			 </form>
                     			 
-								<c:if test="${login.club == 'Arsenal'}">
+								<c:if test="${login.club == 'Tottenham'}">
 								<span style=  "justify-content: space-between; "><a href="${cpath}/board/mylist/${login.nickName}">나의 글</a><a href="${cpath}/board/write">글쓰기</a></span>
 								</c:if>
 					</div>		

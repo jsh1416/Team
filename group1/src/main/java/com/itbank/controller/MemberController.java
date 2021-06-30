@@ -169,10 +169,11 @@ public class MemberController {
 	}
 	
 	// 아이디와 이메일을 통한 임시 비밀번호 발급
-	@RequestMapping(value="/helpPw/{name}/{id}/{email:.+}")
+	@GetMapping(value="/helpPw/{name}/{id}/{email}/")
 	@ResponseBody
 	public String helpPw(HttpSession session, HttpServletResponse response, @PathVariable("name")String name, @PathVariable("id")String id, @PathVariable("email")String email) throws Exception {
 		
+		System.out.println("help PW!");
 		
 		String filePath = session.getServletContext().getRealPath("/WEB-INF/data/mailAccount.dat");
 		File f = new File(filePath);
@@ -190,6 +191,8 @@ public class MemberController {
 		member.setId(id);
 		member.setName(name);
 		member.setEmail(email);
+		
+		System.out.println("memberInfo : " + member.getId() + " / " + member.getName() + " / " + member.getEmail());
 		
 		return memberSerivce.helpPw(member,response, account);
 		
@@ -262,10 +265,10 @@ public class MemberController {
 		return memberSerivce.checkNickName(request);
 	}
 	
-	@PostMapping("/deleteMember/{id}")
+	@PostMapping("/deleteMember")
 	@ResponseBody
-	public String deleteMember(@PathVariable String id, HttpSession session){
-		int row = memberSerivce.deleteMember(id);
+	public String deleteMember(MemberDTO dto, HttpSession session){
+		int row = memberSerivce.deleteMember(dto.getId());
 		System.out.println("row : " + row);
 		if(row!=0) {
 			

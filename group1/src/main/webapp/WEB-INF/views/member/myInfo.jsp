@@ -171,7 +171,7 @@
 							    
 							    
 							    <div class="form-group" style="width: 80%; margin-left: 16px;">
-									<button type="button" id="deleteConfirm" class="btn-EPL btn btn-primary" style="margin-top: 15px;" onclick="deleteMember()">회원탈퇴</button>
+									<button type="button" id="deleteConfirm" class="btn-EPL btn btn-primary" style="margin-top: 15px;" onclick="doDelete()">회원탈퇴</button>
 								</div>
 						  	</div>
 						  </fieldset>

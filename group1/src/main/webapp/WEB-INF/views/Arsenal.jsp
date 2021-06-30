@@ -149,7 +149,6 @@
 	</div>
 
 		<div class="section thirdSection" id="ARS3">
-			<h2>ARS 3</h2>
 				<div class="limiter" style="padding-top: 75px; width:1000px; height:800px; color: #F00000;">
 		<div class="container-table100">
 			<div class="wrap-table100">
