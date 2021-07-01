@@ -278,21 +278,6 @@
 							</table>
 					</div>
 
-					<div class="table100-body js-pscroll"   >
-							<table>
-							<tbody>
-							<c:forEach var="dto" items="${list }">
-								<tr class="row100 body">
-									<td class="cell100 column1 titleArea" ><a href="${cpath }/board/read/${dto.idxBo}?type=${param.type }&search=${param.search }&vc=true">${dto.title}</a></td>
-									<td class="cell100 column2 viewCountArea">${ dto.viewCount}</td>
-									<td class="cell100 column3 likeCountArea">${ dto.likeCount}</td>
-									<td class="cell100 column3 likeCountArea">${ dto.writer}</td>
-									<td class="cell100 column3 likeCountArea">${ dto.wdate}</td>
-									
-								</tr>
-							</c:forEach>
-							</table>
-					</div>	
 					<div class= "sb" style="background:${clubColor};">
 							<form >
 								<span >
