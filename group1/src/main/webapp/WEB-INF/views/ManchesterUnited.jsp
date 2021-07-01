@@ -13,6 +13,7 @@
         left: 0px;
         right: 0px;
         bottom: 0px;
+        z-index: -1; /* 팀별페이지에서만 추가 */
 	}
 		.secondSection::before{
 		content: "";
@@ -35,6 +36,13 @@
         left: 0px;
         right: 0px;
         bottom: 0px;
+	}
+	table {
+	height: 100px;
+	}
+
+	th {
+	font-weight: bold;
 	}
 </style>
 
@@ -131,13 +139,100 @@
 
 	<div id="fullpage">
 		<div class="section firstSection" id="MU1">
-			<div style="position: absolute; top: 100px;">
-				<h1 style="display: inline-block; margin-right: 10px">Manchester United News</h1>
-				<input id="correctNews" type="button" value="정확도순" style="display: inline-block; margin-right: 5px">
-				<input id="latestNews" type="button" value="최신순" style="display: inline-block;">  <br></br>
-				<div class="news">
+			<div class="mainflex">
+				<div id="s_left">
+					<div class="btn-EPL alert alert-dismissible alert-danger" style="color:#ffff; width: 318px; padding: 0; margin-bottom:20px; text-align: center;">
+					  <button type="button" data-bs-dismiss="alert"></button>
+					  <strong style="font-size: xx-large;">MATCHDAY 1</strong>
+					</div>
+				
+					<!-- homeTeam 정보-->
+					<div class="card border-dark mb-3" style="max-width: 25rem;">
+					  <div class="card-header">HOME TEAM</div>
+					  <div class="card-body">
+					    <h4 class="homeName card-title">
+					    
+					    </h4>
+					    <p class="homeInfo card-text"></p>
+					  </div>
+					</div>
+					
+					
+					<!-- awayTeam 정보  jsh-->
+					<div class="card border-dark mb-3" style="max-width: 25rem;">
+					  <div class="card-header">AWAY TEAM</div>
+					  <div class="card-body">
+					    <h4 class="awayName card-title"></h4>
+					    <p class="awayInfo card-text"></p>
+					  </div>
+					</div>
 				</div>
-			</div>
+				
+				<div id="contents" class="News"
+					style="height: 700px; padding-top: 70px">
+					<button type="button" class="btn-EPL btn btn-dark" id="correctNews">정확도순 뉴스</button> 
+					<button type="button" class="btn-EPL btn btn-dark" id="latestNews">최신순 뉴스</button>
+					
+					<!-- news부분 jsh 0630 -->
+					<div class="list-group">
+						<a id="link0" href=""
+							class="list-group-item list-group-item-action flex-column align-items-start"
+							target="_blank">
+							<div class="d-flex w-100 justify-content-between">
+								<h5 class="title0 mb-1" style="font-weight: bold;"></h5>
+								<small class="time0 text-muted"></small>
+							</div>
+							<br>
+							<p class="des0 mb-1"></p>
+						</a> 
+						
+						<a id="link1" href=""
+							class="list-group-item list-group-item-action flex-column align-items-start"
+							target="_blank">
+							<div class="d-flex w-100 justify-content-between">
+								<h5 class="title1 mb-1" style="font-weight: bold;"></h5>
+								<small class="time1 text-muted"></small>
+							</div>
+							<br>
+							<p class="des1 mb-1"></p>
+						</a> 
+						
+						<a id="link2" href=""
+							class="list-group-item list-group-item-action flex-column align-items-start"
+							target="_blank">
+							<div class="d-flex w-100 justify-content-between">
+								<h5 class="title2 mb-1" style="font-weight: bold;"></h5>
+								<small class="time2 text-muted"></small>
+							</div>
+							<br>
+							<p class="des2 mb-1"></p>
+						</a> 
+						
+						<a id="link3" href=""
+							class="list-group-item list-group-item-action flex-column align-items-start"
+							target="_blank">
+							<div class="d-flex w-100 justify-content-between">
+								<h5 class="title3 mb-1" style="font-weight: bold;"></h5>
+								<small class="time3 text-muted"></small>
+							</div>
+							<br>
+							<p class="des3 mb-1"></p>
+						</a> 
+						
+						<a id="link4" href=""
+							class="list-group-item list-group-item-action flex-column align-items-start"
+							target="_blank">
+							<div class="d-flex w-100 justify-content-between">
+								<h5 class="title4 mb-1" style="font-weight: bold;"></h5>
+								<small class="time4 text-muted"></small>
+							</div>
+							<br>
+							<p class="des4 mb-1"></p>
+						</a>
+					</div>
+				</div>
+
+		</div>
 		</div>
 
 		<div class="section secondSection" id="MU2">
@@ -208,70 +303,122 @@
 
 
 <script>
-	// 정확도순 뉴스 
-	document.getElementById('correctNews').onclick = function(event) {
-		document.querySelector('div.news').innerText='' // 내용 비우기
-		const url = '${cpath}/api/mu/correct' 			// 여기서만 team, type 매개변수 바꿔주면 됨
+// 해당팀 다음 경기 정보 불러오기 jsh
+$.ajax({
+	  headers: {'X-Auth-Token': 'c5798934a44c482a822a642801a9e298'}, 
+	  type: 'GET',
+		url: 'https://api.football-data.org/v2/competitions/PL/matches?matchday=1',
+	  dataType: 'json',
+	}).done(function(matchday) {
+		let stop = true
+		let isHome = true
+		const color = '${clubColor}';
+		const clubName = '${clubName}';
+		
+		for(let i = 0; i < matchday.matches.length; i++) { // 팀 고유 id를 받아와서 비교
+			if(matchday.matches[i].homeTeam.id == 66 || matchday.matches[i].awayTeam.id == 66){
+				matchday.matches[i].homeTeam.id == 66 ? isHome=true : isHome=false // 해당팀이 홈팀인지 어웨이팀인지 구분
+				
+				if(isHome){
+					var homename = '<img src="'+cpath+'/resources/images/logo/${clubName}.png">'
+						+ '<span style="color: ' + color + ';">' + matchday.matches[i].homeTeam.name + '</span>'
+					var awayname = matchday.matches[i].awayTeam.name
+				}
+				else{
+					var homename = matchday.matches[i].homeTeam.name
+					var awayname = '<img src="'+cpath+'/resources/images/logo/${clubName}.png">'
+						+ '<span style="color: ' + color + ';">' + matchday.matches[i].awayTeam.name + '</span>'
+				}
+				
+				let status = matchday.matches[i].status == 'SCHEDULED' ? ' 예정' : ' 종료'
+				let utcDate = matchday.matches[i].utcDate.substring(0,10)
+				
+				document.querySelector('h4.homeName').innerHTML = homename
+				document.querySelector('p.homeInfo').innerHTML = utcDate + status
+				document.querySelector('h4.awayName').innerHTML = awayname
+				stop = false
+			}
+			if(stop == false) break;
+		}
+		 
+	})
+</script>
+
+<script>
+//해당팀 관련 뉴스 띄우기 jsh
+const url = '${cpath}/api/mu/correct' 			// 여기서만 team, type 매개변수 바꿔주면 됨
 		const opt = {
 			method: 'GET',	
 		}
 		fetch(url, opt)				
 		.then(resp => resp.json())		
 		.then(json => {
+			let newslist = JSON.parse(json)
 			
-			const newslist = JSON.parse(json) // string -> obj
-   			if(newslist == null) {
-				document.getElementById('news').innerText = '오류가 발생하였습니다.'
-			}
-			else {
-				for(let i = 0; i < newslist.items.length; i++){
-					const child = document.createElement('div')		// 제목
-					const child2 = document.createElement('div')	// 내용
-					const newstitle = '<a href=' + newslist.items[i].link + ' target="_blank" style="color:#C70101; font-weight:bold; cursor: pointer;">' 
-					+ '<span style="color:#E31B23; font-weight:bold;">' + (i+1) + '</span>' + '&nbsp&nbsp&nbsp[' + newslist.items[i].title + ']</a>'
-					const content = newslist.items[i].description  + 
-					'(' + newslist.items[i].pubDate.slice(0, -5) + ')' + '<br>' +  '<br>'
-					child.innerHTML = newstitle
-					child2.innerHTML = content
-					document.querySelector('div.news').appendChild(child) 	// 제목 출력
-					document.querySelector('div.news').appendChild(child2)	// 내용 미리보기 출력
-				}
-			} 
-		})
-	}
-	
-	// 최신순 뉴스
-	document.getElementById('latestNews').onclick = function(event) {
-		document.querySelector('div.news').innerText='' // 내용 비우기
-		const url = '${cpath}/api/mu/latest' 			// 여기서만 team, type 매개변수 바꿔주면 됨
-			const opt = {
-				method: 'GET',	
-			}
-			fetch(url, opt)				
-			.then(resp => resp.json())		
-			.then(json => {
+			for(let i=0; i<5; i++){		
+				let title = newslist.items[i].title
+				let des = newslist.items[i].description
+				let time = newslist.items[i].pubDate.slice(0, -5)
+				let href = newslist.items[i].link
 				
-				 const newslist = JSON.parse(json) // string -> obj
+				document.querySelector('h5.title'+i).innerHTML = title
+				document.querySelector('p.des'+i).innerHTML = des
+				document.querySelector('small.time'+i).innerHTML = time	
+				document.getElementById('link'+i).href = href	
+			}
+		})
+</script>
+
+<script>
+//정확도순 뉴스 
+document.getElementById('correctNews').onclick = function(event) {
+	const url = '${cpath}/api/mu/correct'		// 여기서만 team, type 매개변수 바꿔주면 됨
+	const opt = {
+		method: 'GET',	
+	}
+	fetch(url, opt)				
+	.then(resp => resp.json())		
+	.then(json => {
+		let newslist = JSON.parse(json)
+		
+		for(let i=0; i<5; i++){		
+			let title = newslist.items[i].title
+			let des = newslist.items[i].description
+			let time = newslist.items[i].pubDate.slice(0, -5)
+			let href = newslist.items[i].link
 			
-	   			if(newslist == null) {
-					document.getElementById('news').innerText = '오류가 발생하였습니다.'
-				}
-				else {
-					for(let i = 0; i < newslist.items.length; i++){
-						const child = document.createElement('div')	
-						const child2 = document.createElement('div')
-						const newstitle = '<a href=' + newslist.items[i].link + ' target="_blank" style="color:#C70101; font-weight:bold; cursor: pointer;">' 
-						+ '<span style="color:#E31B23; font-weight:bold;">' + (i+1) + '</span>' + '&nbsp&nbsp&nbsp[' + newslist.items[i].title + ']</a>'
-						const content = newslist.items[i].description  + 
-						'(' + newslist.items[i].pubDate.slice(0, -5) + ')' + '<br>' +  '<br>'
-						child.innerHTML = newstitle
-						child2.innerHTML = content
-						document.querySelector('div.news').appendChild(child)
-						document.querySelector('div.news').appendChild(child2)
-					}
-				} 
-			})
+			document.querySelector('h5.title'+i).innerHTML = title
+			document.querySelector('p.des'+i).innerHTML = des
+			document.querySelector('small.time'+i).innerHTML = time	
+			document.getElementById('link'+i).href = href	
 		}
+	})
+}
+	
+//최신순 뉴스 
+document.getElementById('latestNews').onclick = function(event) {
+	const url = '${cpath}/api/mu/latest' 			// 여기서만 team, type 매개변수 바꿔주면 됨
+	const opt = {
+		method: 'GET',	
+	}
+	fetch(url, opt)				
+	.then(resp => resp.json())		
+	.then(json => {
+		let newslist = JSON.parse(json)
+		
+		for(let i=0; i<5; i++){		
+			let title = newslist.items[i].title
+			let des = newslist.items[i].description
+			let time = newslist.items[i].pubDate.slice(0, -5)
+			let href = newslist.items[i].link
+			
+			document.querySelector('h5.title'+i).innerHTML = title
+			document.querySelector('p.des'+i).innerHTML = des
+			document.querySelector('small.time'+i).innerHTML = time	
+			document.getElementById('link'+i).href = href	
+		}
+	})
+}
 </script>
 
 </body>

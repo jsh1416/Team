@@ -59,9 +59,9 @@ public class ApiService {
 	        }
 
 	        if(type.equals("correct"))	// 관련도순
-	        	apiURL = "https://openapi.naver.com/v1/search/news.json?sort=sim&display=10&query=" + text;   
+	        	apiURL = "https://openapi.naver.com/v1/search/news.json?sort=sim&display=5&query=" + text;   
 	        else if(type.equals("latest"))	// 최신순
-	        	apiURL = "https://openapi.naver.com/v1/search/news.json?sort=date&display=10&query=" + text;   
+	        	apiURL = "https://openapi.naver.com/v1/search/news.json?sort=date&display=5&query=" + text;   
 	        else
 	        	apiURL = "";
 	        	

@@ -42,6 +42,7 @@ public class HomeController {
 		mav.addObject("clubList", clubService.selectClubList());
 		
 		String clubName = liv;
+		mav.addObject("clubName", clubName);	// jsh 0701
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
 		
@@ -75,6 +76,7 @@ public class HomeController {
 		mav.addObject("clubList", clubService.selectClubList());
 		
 		String clubName = mu;
+		mav.addObject("clubName", clubName);	// jsh 0701
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
 		
@@ -108,6 +110,7 @@ public class HomeController {
 		mav.addObject("clubList", clubService.selectClubList());
 		
 		String clubName = "Manchester City";
+		mav.addObject("clubName", clubName);	// jsh 0701
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
 		
@@ -142,6 +145,7 @@ public class HomeController {
 		mav.addObject("clubList", clubService.selectClubList());
 		
 		String clubName = ch;
+		mav.addObject("clubName", clubName);	// jsh 0701
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
 		
@@ -177,6 +181,7 @@ public class HomeController {
 		
 		
 		String clubName = ar;
+		mav.addObject("clubName", clubName);	// jsh 0701
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
 
@@ -214,6 +219,7 @@ public class HomeController {
 		
 		
 		String clubName = tt;
+		mav.addObject("clubName", clubName);	// jsh 0701
 		ClubDTO selectedClub = clubService.selectColor(clubName);
 		mav.addObject("clubColor", selectedClub.getClubColor());
 
