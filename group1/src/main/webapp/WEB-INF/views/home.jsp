@@ -231,77 +231,7 @@ th {
 </div>
 </main>
 
-<script>
-// 유로 토너먼트 일정 띄우기 (현재시간과 경기시간 비교 통해서 출력) jsh 06.25
-let today = new Date(); 
-let RoundOf16 = new Date(2021, 06, 30, 4, 0, 0);  // 지남
-let QuarterFinal = new Date(2021, 07, 4, 4, 0, 0);
-let SemiFinal = new Date(2021, 07, 8, 4, 0, 0);
-let Final = new Date(2021, 07, 12, 4, 0, 0);
-let stage
-let title
 
-console.log(today > RoundOf16) 	  // T 
-console.log(today > QuarterFinal) // F 떠야함
-
-switch(true){ 
-case today < RoundOf16: 
-	stage = 4;			
-	title = "16강"
-	break;
-case today < QuarterFinal:
-	stage = 5;
-	title = "8강"
-	break;
-case today < SemiFinal:
-	stage = 6;
-	title = "준결승"
-	break;
-default:
-	stage = 7;
-	title = "결승"
-}
-
-
-
-$.ajax({
-	  headers: {'X-Auth-Token': 'c5798934a44c482a822a642801a9e298'}, 
-	  type: 'GET',
-	  url: 'https://api.football-data.org/v2/competitions/EC/matches?matchday=' + stage,
-	  dataType: 'json',
-	}).done(function(schedule) {
-		
-		document.getElementById('stageTitle').innerHTML = title
-		
-		for(let i=0; i < schedule.matches.length; i++){
-			const schedule_child = document.createElement('div')
-			
-			let korDate = new Date(schedule.matches[i].utcDate) // 한국 시간으로 변경
-			let strDate = korDate.toString()
-			
-			// 종료된 경기는 점수 표시
-			if(schedule.matches[i].status == "FINISHED" && schedule.matches[i].score.fullTime.homeTeam > schedule.matches[i].score.fullTime.awayTeam ){ 
-				// 홈팀 이겼을 때
-				var content = '<span class="winTeam">' + schedule.matches[i].homeTeam.name + '</span>' + ' vs ' + schedule.matches[i].awayTeam.name +
-				' ( ' + '<span class="winTeam">' + schedule.matches[i].score.fullTime.homeTeam + '</span>' + ' : ' + schedule.matches[i].score.fullTime.awayTeam + ' ) 종료'
-			}
-			else if(schedule.matches[i].status == "FINISHED" && schedule.matches[i].score.fullTime.homeTeam < schedule.matches[i].score.fullTime.awayTeam){
-				// 어웨이팀 이겼을 때
-				var content = schedule.matches[i].homeTeam.name + ' vs ' + '<span class="winTeam">' + schedule.matches[i].awayTeam.name  + '</span>' +
-				' ( ' + schedule.matches[i].score.fullTime.homeTeam+ ' : ' + '<span class="winTeam">' + schedule.matches[i].score.fullTime.awayTeam + '</span>'  + ' ) 종료'
-			}
-			else {
-				// 경기 전
-				var content = schedule.matches[i].homeTeam.name + ' vs ' + schedule.matches[i].awayTeam.name +
-			' ( ' + strDate.substring(0,10) + ', ' + strDate.substring(16,21) + ' )'
-			}
-			schedule_child.innerHTML = content
-			document.querySelector('div.schedule').appendChild(schedule_child) 
-		}
-
-		 
-	})
-</script>
 
 <script>
 //유로 관련 뉴스 띄우기 jsh
@@ -407,9 +337,6 @@ $.ajax({
 	})
 </script>
 
-<script>
-
-</script>
 
 <script>
 //조별 순위 리스트 기본 화면 jsh
