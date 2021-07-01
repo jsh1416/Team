@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="../header.jsp" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <!--  0630 bcg -->
@@ -52,6 +53,8 @@
 							<c:forEach var="dto" items="${mylist }">
 								<tr class="row100 body">
 									<td class="cell100 column1"><a href="${cpath }/board/read/${dto.idxBo}?type=${param.type }&search=${param.search }&vc=true">${dto.title}</a></td>
+									${fn:length(dto.title) gt 10 ? fn:substring(dto.title, 0, 10) : dto.title }
+									${fn:length(dto.title) gt 10 ? '...' : ''}</a></td>
 									<td class="cell100 column2">${ dto.viewCount}</td>
 									<td class="cell100 column3">${ dto.likeCount}</td>
 									<td class="cell100 column3">${ dto.writer}</td>

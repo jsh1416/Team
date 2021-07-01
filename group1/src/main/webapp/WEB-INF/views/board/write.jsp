@@ -77,8 +77,9 @@ input::placeholder {color:#FFFFFF;}
 					</div>
 
 			
-					<div class="table100-body js-pscroll">
-								<textarea style="resize: none;" rows="5" cols="164" name="content"  placeholder="내용을 입력하세요" required> </textarea>	
+					<div class="table100-body js-pscroll" style="overflow:auto;">
+								<textarea style="wrap=:hard;  white-space: pre-wrap; word-wrap: break-word; word-break: break-word;
+								resize: none;" rows="5" cols="164" name="content"  placeholder="내용을 입력하세요"  required> </textarea>	
 					
 					</div>
 					

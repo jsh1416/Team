@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 <%@ include file="scroll.jsp" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style>
 	.firstSection::before{
 		content: "";
@@ -251,21 +252,23 @@
 							<thead>
 								<tr class="row100 head" >
 									<th class="cell100 column1" style="background:${clubColor};"><button style="color: #FFFFFF;" id="newNumber" ><h6>Title</h6></button></th>
-									<th class="cell100 column2" style="background:${clubColor};"><button style="color: #FFFFFF;" id="viewNumber" ><h6>View</h6></button></th>
-									<th class="cell100 column3" style="background:${clubColor};"><button style="color: #FFFFFF;" id="likeNumber"><h6>Like</h6></button></th>
+									<th class="cell100 column2" style="background:${clubColor};"><a href="${cpath }/1?param=viewOrder#thirdPage" style="color: #FFFFFF;"><h6>View</h6></a></th>
+									<th class="cell100 column3" style="background:${clubColor};"><a href="${cpath }/1?param=likeOrder#thirdPage" style="color: #FFFFFF;"><h6>Like</h6></a></th>
 									<th class="cell100 column3" style="background:${clubColor};"><button style="color: #FFFFFF;" id="writer"><h6>Writer</h6></button></th>
-									<th class="cell100 column3" style="background:${clubColor};"><button style="color: #FFFFFF;" id="wdate"><h6>Date</h6></button></th>		
+									<th class="cell100 column3" style="background:${clubColor};"><a href="${cpath }/1?param=newOrder#thirdPage" style="color: #FFFFFF;"><h6>Date</h6></a></th>		
 								</tr>
 							</thead>
 						</table>
 					</div>
 
-					<div class="table100-body js-pscroll"   >
+					<div class="table100-body js-pscroll" style="margin-top:50px"  >
 							<table>
 							<tbody>
 							<c:forEach var="dto" items="${list }">
 								<tr class="row100 body">
-									<td class="cell100 column1 titleArea" ><a href="${cpath }/board/read/${dto.idxBo}?type=${param.type }&search=${param.search }&vc=true">${dto.title}</a></td>
+									<td class="cell100 column1 titleArea"><a href="${cpath }/board/read/${dto.idxBo}?type=${param.type }&search=${param.search }&vc=true">
+									${fn:length(dto.title) gt 10 ? fn:substring(dto.title, 0, 10) : dto.title }
+									${fn:length(dto.title) gt 10 ? '...' : ''}</a></td>
 									<td class="cell100 column2 viewCountArea">${ dto.viewCount}</td>
 									<td class="cell100 column3 likeCountArea">${ dto.likeCount}</td>
 									<td class="cell100 column3 likeCountArea">${ dto.writer}</td>

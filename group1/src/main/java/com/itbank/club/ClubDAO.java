@@ -31,6 +31,10 @@ public interface ClubDAO {
 	@Select("select * from EPLBoard where clubName='Arsenal' order by idxBo desc")
 	List<BoardDTO> selectArsenal();
 	
+	@Select("select * from EPLBoard where clubName='Tottenham' order by idxBo desc")
+	List<BoardDTO> selectTottenham();
+	
+	
 	@Select("select * from club where clubName= #{clubName}")
 	ClubDTO selectFanClub(String club);
 
@@ -46,8 +50,6 @@ public interface ClubDAO {
 	@Select("select point from winpoint where season = #{seasonArr}")
 	List<Integer> selectWinPoint(String seasonArr);
 
-	@Select("select * from EPLBoard where clubName='Tottenham' order by idxBo desc")
-	List<BoardDTO> selectTottenham();
 	
 	@Select("select count(*) from eplMember where club = 'Liverpool'")
 	int selectLivMemberNum();
@@ -69,4 +71,14 @@ public interface ClubDAO {
 
 	@Select("select count(*) from EPLmember")
 	int selectTotalMember();
+	
+	//ksj 정렬
+	@Select("select * from EPLBoard where clubName=#{clubName} order by likeCount desc")
+	List<BoardDTO> selectlike(String clubName);
+
+	@Select("select * from EPLBoard where clubName=#{clubName} order by viewCount desc")
+	List<BoardDTO> selectview(String clubName);
+
+	@Select("select * from EPLBoard where clubName=#{clubName} order by idxBo desc")
+	List<BoardDTO> selectNew(String clubName);
 }

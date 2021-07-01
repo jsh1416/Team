@@ -41,10 +41,9 @@ public class BoardService {
 	private final String uploadPath = "http://" +serverIP+ ":1234/";
 	
 	public List<BoardDTO> selectAll(HashMap<String, String> param) { // 전체 검색
-		boolean flag1 = false, flag2 = false;
+		boolean flag1 = false;
 		if(param != null) {
 			flag1 = param.size() == 2;
-//			flag2 = param.get("search").equals("") == false;
 		}
 		return (flag1 && param.get("search").equals("") == false) ? dao.selectSearch(param) : dao.selectAll();
 	}
@@ -52,9 +51,15 @@ public class BoardService {
 	public List<BoardDTO> selectView() {
 		return dao.selectView();
 	}
+	public List<BoardDTO> selectViewasc() {
+		return dao.selectViewasc();
+	}
 
 	public List<BoardDTO> selectNew() {
 		return dao.selectNew();
+	}
+	public List<BoardDTO> selectOld() {
+		return dao.selectOld();
 	}
 
 	public BoardDTO select(int idxBo) { // 글 읽기
@@ -170,6 +175,10 @@ public class BoardService {
 	public List<BoardDTO> selectLike() {
 		return dao.selectLike();
 	}
+	
+	public List<BoardDTO> selectLikeasc() {
+		return dao.selectLikeasc();
+	}
 
 	public List<BoardDTO> selectliv(HashMap<String, String> param) {
 		
@@ -257,6 +266,10 @@ public String upload(MultipartFile file) throws Exception {
 	public ClubDTO clubColor(String clubName) { //클럽닉네임을 받아서 dto를 셀렉트해서 값을 가져와서
 		return clubDAO.setColor(clubName); //클럽컬러를 세팅
 	}
+
+	
+
+
 
 
 

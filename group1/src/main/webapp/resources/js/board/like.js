@@ -1,6 +1,3 @@
-
-document.getElementById('likeBtn').addEventListener('click',doLike);
-
 function doLike(){
 	
 			const url = cpath + '/board/read/boardLike/' + idxBo + '/'
@@ -13,7 +10,10 @@ function doLike(){
 			
 			if(+text!=0) { 
 					swal('좋아요!','이 글이 좋아요!','success');
-					location.reload();
+					setTimeout(function() {
+						location.reload();
+
+						}, 2000);
 					console.log('I Like That! : ' + text)
 					
 				} else{

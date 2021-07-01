@@ -22,6 +22,9 @@ public interface BoardDAO {
 	@Select("select * from EPLBoard order by viewCount desc") //조회수순으로 정렬 
 	List<BoardDTO> selectView(); 
 	
+	@Select("select * from EPLBoard order by viewCount asc")
+	List<BoardDTO> selectViewasc();
+	
 	@Select("select * from EPLBoard where clubName='Liverpool' order by idxBo desc")//리버풀 페이지
 	List<BoardDTO> selectLiv();
 	
@@ -78,6 +81,9 @@ public interface BoardDAO {
     @Select("select * from EPLBoard order by likeCount desc")
 	List<BoardDTO> selectLike();
 
+    @Select("select * from EPLBoard order by likeCount asc")
+   	List<BoardDTO> selectLikeasc();
+    
     @Select("select * from EPLBoardLike where BoardIdx=#{boardIdx} and  LikeMember=#{likeMember}")
 	BoardLikeDTO selectLikeMember(BoardLikeDTO boardLike);
     
@@ -86,7 +92,10 @@ public interface BoardDAO {
 
     @Select("select * from EPLBoard order by wdate desc")
 	List<BoardDTO> selectNew();
-
+    
+    @Select("select * from EPLBoard order by wdate asc")
+    List<BoardDTO> selectOld();
+    
     @Insert("insert into eplboardlike (boardidx,likemember) values (#{boardIdx}, #{likeMember})")
 	int likeInsert(BoardLikeDTO ldto);
 
@@ -101,6 +110,10 @@ public interface BoardDAO {
 
     @Select("select * from Club where clubname= #{clubName}")
 	ClubDTO clubColor(String clubName);
+
+	
+
+	
 
 	
 

@@ -96,5 +96,20 @@ public class ClubService {
 		// TODO Auto-generated method stub
 		return clubDAO.selectTotalMember();
 	}
+	
+	
+	//0701 ksj
+	public List<BoardDTO> selectNew(String clubName) {
+		return clubDAO.selectNew(clubName);
+	}
+
+	public List<BoardDTO> selectlike(String clubName) {
+		
+		return clubDAO.selectlike(clubName);
+	}
+
+	public List<BoardDTO> selectview(String clubName) {
+		return clubDAO.selectview(clubName);
+	}
 
 }

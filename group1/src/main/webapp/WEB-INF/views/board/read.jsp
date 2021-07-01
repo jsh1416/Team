@@ -47,7 +47,8 @@
 						<thead>
 							<tr class="row100 head">
 								<th class="cell100 column1" style="background:${clubColor};">${dto.title}</th> <!-- 글제목 -->
-								<th class="cell100 column2" style="background:${clubColor};">조회:${dto.viewCount} 댓글: ${rc}</th> 
+								<th class="cell100 column2" style="background:${clubColor};">조회:${dto.viewCount}</th>
+								<th id="rCnt" class="cell100 column2" style="background:${clubColor};"></th> 
 								<th class="cell100 column5" style="background:${clubColor};">${dto.wdate}</th>
 								<th class="cell100 column5" style="background:${clubColor};">${dto.writer } </th> <!-- 글쓴이 -->
 							
@@ -63,11 +64,11 @@
 							<tr class="row100 body " style="">
 								<c:if test="${not empty dto.uploadFile }">
 								<div><img src="${dto.uploadFile }" width="100%" height="250px"></div>
-									<pre style="padding-left:15px; padding-top: 30px; min-height: 180px; text-align: left; ">${dto.content }</pre>
+								<pre style="white-space: pre-wrap; word-wrap: break-word; word-break: break-word; padding-left:15px; padding-top: 30px; min-height: 180px; text-align: left;  overflow-x: hidden ">${dto.content }</pre>
 								</c:if>
 								
 								<c:if test="${empty dto.uploadFile }">
-									<pre style="padding-left:15px; padding-top: 30px; min-height: 180px; text-align: left; ">${dto.content }</pre>
+								<pre style="white-space: pre-wrap; word-wrap: break-word; word-break: break-word; padding-left:15px; padding-top: 30px; min-height: 180px; text-align: left;  overflow-x: hidden">${dto.content }</pre>
 								</c:if>
 								
 							</tr>
@@ -220,7 +221,7 @@
 						callRplMCnt(replyMaxCnt)
 					}
 					// json의 수를 구하여 댓글수로 등록
-					$("#cnt").text("등록된 댓글 - " + replys.length)
+					$("#rCnt").text("댓글 : " + replys.length)
 					// 리스트를 조건에 따라 생성하도록 한다. 이 과정에서 대댓글 수(rc)를 계산한다.
 					// RlikeCheck는 코드 재사용을 위해 부여한 값이다. 0, 1
 					replys.forEach(function(reply){ 

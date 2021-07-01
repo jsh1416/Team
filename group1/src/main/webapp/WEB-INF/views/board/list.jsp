@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="../header.jsp" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script>
 // 	const cpath= '${cpath}';
 	const idxBo = '${dto.idxBo}';
@@ -60,9 +61,12 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column1"><button style="color: #FFFFFF;" id="newNumber" >최신</button></th>
-									<th class="cell100 column2"><button style="color: #FFFFFF;" id="viewNumber" >조회수</button></th>
-									<th class="cell100 column3"><button style="color: #FFFFFF;" id="likeNumber">추천수</button></th>
+									<th class="cell100 column1"><a value="${param.order}" id="newOder" href="${cpath }/board/?order=${param.order }" style="color: #FFFFFF;"
+									>최신
+									
+									</a></th>
+									<th class="cell100 column2"><a href="${cpath }/board/orderbyview" style="color: #FFFFFF;">조회수</a></th>
+									<th class="cell100 column3"><a href="${cpath }/board/orderbylike" style="color: #FFFFFF;">추천수</a></th>
 								</tr>
 							</thead>
 						</table>
@@ -73,7 +77,10 @@
 							<tbody>
 							<c:forEach var="dto" items="${list }">
 								<tr class="row100 body">
-									<td class="cell100 column1 titleArea"><a href="${cpath }/board/read/${dto.idxBo}?type=${param.type }&search=${param.search}&vc=true">${dto.title}</a></td>
+									<td class="cell100 column1 titleArea"><a href="${cpath }/board/read/${dto.idxBo}?type=${param.type }&search=${param.search}&vc=true">
+									${fn:length(dto.title) gt 10 ? fn:substring(dto.title, 0, 10) : dto.title }
+									${fn:length(dto.title) gt 10 ? '...' : ''}
+									</a></td>
 									<td class="cell100 column2 viewCountArea">${ dto.viewCount}</td>
 									<td class="cell100 column3 likeCountArea">${ dto.likeCount}</td>
 								</tr>

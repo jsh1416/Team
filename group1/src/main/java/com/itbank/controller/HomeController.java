@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.board.BoardDTO;
@@ -35,7 +36,7 @@ public class HomeController {
 	}
 	
 	@GetMapping("0")
-	public ModelAndView liv() {
+	public ModelAndView liv(@RequestParam(required = false) String param) {
 		ModelAndView mav = new ModelAndView(liv);
 		List<BoardDTO> list = clubService.selectliv();
 		mav.addObject("list",list);
@@ -65,11 +66,25 @@ public class HomeController {
 		mav.addObject("seasonArr", seasonArr);
 		// 0629 bcg end
 		
+		if(param!=null) {
+			switch (param) {
+			
+			case "newOrder":list=clubService.selectNew(clubName);
+				mav.addObject("list",list);
+			    return mav;
+			case "likeOrder":list=clubService.selectlike(clubName);
+				mav.addObject("list",list);
+			    return mav;   
+			case "viewOrder":list=clubService.selectview(clubName);
+				mav.addObject("list",list);
+			    return mav;       
+			}
+		}
 		return mav;
 	}
 	
 	@GetMapping("3")
-	public ModelAndView mu() {
+	public ModelAndView mu(@RequestParam(required = false) String param) {
 		ModelAndView mav = new ModelAndView("ManchesterUnited");
 		List<BoardDTO> list = clubService.selectMu();
 		mav.addObject("list",list);
@@ -98,12 +113,25 @@ public class HomeController {
 						
 		mav.addObject("seasonArr", seasonArr);
 		// 0629 bcg end
-				
+		if(param!=null) {
+			switch (param) {
+			
+			case "newOrder":list=clubService.selectNew(clubName);
+				mav.addObject("list",list);
+			    return mav;
+			case "likeOrder":list=clubService.selectlike(clubName);
+				mav.addObject("list",list);
+			    return mav;   
+			case "viewOrder":list=clubService.selectview(clubName);
+				mav.addObject("list",list);
+			    return mav;       
+			}
+		}
 		return mav;
 	}
 	
 	@GetMapping("2")
-	public ModelAndView mc() {
+	public ModelAndView mc(@RequestParam(required = false) String param) {
 		ModelAndView mav = new ModelAndView("ManchesterCity");
 		List<BoardDTO> list = clubService.selectMc();
 		mav.addObject("list",list);
@@ -132,13 +160,26 @@ public class HomeController {
 						
 				mav.addObject("seasonArr", seasonArr);
 				// 0629 bcg end
-				
-				
+		
+				if(param!=null) {
+					switch (param) {
+					
+					case "newOrder":list=clubService.selectNew(clubName);
+						mav.addObject("list",list);
+					    return mav;
+					case "likeOrder":list=clubService.selectlike(clubName);
+						mav.addObject("list",list);
+					    return mav;   
+					case "viewOrder":list=clubService.selectview(clubName);
+						mav.addObject("list",list);
+					    return mav;       
+					}
+				}
 		return mav;
 	}
 	
 	@GetMapping("1")
-	public ModelAndView che() {
+	public ModelAndView che(@RequestParam(required = false) String param) {
 		ModelAndView mav = new ModelAndView(ch);
 		List<BoardDTO> list = clubService.selectChelsea();
 		mav.addObject("list",list);
@@ -164,15 +205,27 @@ public class HomeController {
 			mav.addObject("point"+i, clubService.selectWinPoint(seasonArr[i]));
 						
 		}
-						
-		mav.addObject("seasonArr", seasonArr);
-		// 0629 bcg end
 		
+		mav.addObject("seasonArr", seasonArr);
+		if(param!=null) {
+			switch (param) {
+			
+			case "newOrder":list=clubService.selectNew(clubName);
+				mav.addObject("list",list);
+			    return mav;
+			case "likeOrder":list=clubService.selectlike(clubName);
+				mav.addObject("list",list);
+			    return mav;   
+			case "viewOrder":list=clubService.selectview(clubName);
+				mav.addObject("list",list);
+			    return mav;       
+			}
+		}
 		return mav;
 	}
 	
 	@GetMapping("4")
-	public ModelAndView ars() {
+	public ModelAndView ars(@RequestParam(required = false) String param) {
 		ModelAndView mav = new ModelAndView(ar);
 		List<BoardDTO> list = clubService.selectArsenal();
 		mav.addObject("list",list);
@@ -193,7 +246,6 @@ public class HomeController {
 		int year = cal.get(cal.YEAR); 
 		String[] seasonArr = new String[5];
 						
-						
 		for(int i = 0 ; i < seasonArr.length ; i++) {
 			seasonArr[i] =  Integer.toString(year-(5-i))  + "/" +  Integer.toString(year-(4-i));
 							
@@ -204,13 +256,28 @@ public class HomeController {
 		mav.addObject("seasonArr", seasonArr);
 		// 0629 bcg end
 		
+		System.out.println("param======="+param);
+		if(param!=null) {
+			switch (param) {
+			
+			case "newOrder":list=clubService.selectNew(clubName);
+				mav.addObject("list",list);
+			    return mav;
+			case "likeOrder":list=clubService.selectlike(clubName);
+				mav.addObject("list",list);
+			    return mav;   
+			case "viewOrder":list=clubService.selectview(clubName);
+				mav.addObject("list",list);
+			    return mav;       
+			}
+		}
 		return mav;
 	}
 	
 	
 	// 0630 토트넘 추가
 	@GetMapping("5")
-	public ModelAndView spurs() {
+	public ModelAndView spurs(@RequestParam(required = false) String param) {
 		ModelAndView mav = new ModelAndView(tt);
 		List<BoardDTO> list = clubService.selectTottenham();
 		mav.addObject("list",list);
@@ -242,6 +309,20 @@ public class HomeController {
 		mav.addObject("seasonArr", seasonArr);
 		// 0629 bcg end
 		
+		if(param!=null) {
+			switch (param) {
+			
+			case "newOrder":list=clubService.selectNew(clubName);
+				mav.addObject("list",list);
+			    return mav;
+			case "likeOrder":list=clubService.selectlike(clubName);
+				mav.addObject("list",list);
+			    return mav;   
+			case "viewOrder":list=clubService.selectview(clubName);
+				mav.addObject("list",list);
+			    return mav;       
+			}
+		}
 		return mav;
 	}
 	// 팀 별 jsp 게시판글만 view생성 06.25 ksj

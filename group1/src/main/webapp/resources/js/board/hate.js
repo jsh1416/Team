@@ -1,5 +1,3 @@
-document.getElementById('hateBtn').addEventListener('click',dohate);
-
 function dohate(){
 	
 	const url = cpath + '/board/read/boardHate/' + idxBo + '/'
@@ -10,9 +8,12 @@ function dohate(){
 .then(resp=> resp.text())
 .then(text => { 
 	
-	if(+text!=0) { 
+	if(text!=0) { 
 			swal('싫어요!','이 글이 싫어요!','success');
-			location.reload();
+			setTimeout(function() {
+				location.reload();
+
+				}, 2000);
 			console.log('I hate That! : ' + text)
 			
 		} else{
